@@ -16,10 +16,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
     @ManyToOne
-    @JoinTable(name = "CLIENT",
-            joinColumns = @JoinColumn(name = "orderId"),
-            inverseJoinColumns = @JoinColumn(name = "ClientId")
-    )
+    @JoinColumn(name = "ClientId")
     private Client client;
     @ManyToOne()
     @JoinColumn(name = "AddressId")
