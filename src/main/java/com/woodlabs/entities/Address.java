@@ -18,11 +18,23 @@ public class Address {
     @Column
     private String street;
     @Column
-    private Integer buidling;
+    private Integer building;
     @Column
     private Integer apartments;
 
     public Address() {
+    }
+
+    public Address(Integer id) {
+        this.id=id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCountry() {
@@ -57,12 +69,12 @@ public class Address {
         this.street = street;
     }
 
-    public Integer getBuidling() {
-        return buidling;
+    public Integer getBuilding() {
+        return building;
     }
 
-    public void setBuidling(Integer buidling) {
-        this.buidling = buidling;
+    public void setBuilding(Integer buidling) {
+        this.building = buidling;
     }
 
     public Integer getApartments() {

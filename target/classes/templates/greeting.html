@@ -6,5 +6,12 @@
 </head>
 <body>
     <p th:text="'Hello, ' + ${name} + '!'"/>
+    <form action="/action_page" method="get">
+        First parameter:<br>
+
+        <input type="text" name="lastname" value="param">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>

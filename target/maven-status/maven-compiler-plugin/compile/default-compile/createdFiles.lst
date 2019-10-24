@@ -1,0 +1,15 @@
+com\woodlabs\entities\repositories\ProductRepository.class
+com\woodlabs\entities\repositories\ClientRepository.class
+com\woodlabs\Application.class
+com\woodlabs\entities\enums\PaymentStatus.class
+com\woodlabs\entities\Product.class
+com\woodlabs\entities\enums\OrderStatus.class
+com\woodlabs\entities\Order.class
+com\woodlabs\entities\controllers\MainController.class
+com\woodlabs\entities\enums\DeliveryMethod.class
+com\woodlabs\entities\enums\ProductCategory.class
+com\woodlabs\entities\enums\PaymentMethod.class
+com\woodlabs\entities\Client.class
+com\woodlabs\entities\repositories\OrderRepository.class
+com\woodlabs\entities\repositories\AddressRepository.class
+com\woodlabs\entities\Address.class

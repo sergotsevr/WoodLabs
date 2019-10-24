@@ -9,28 +9,32 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @ManyToOne
     @JoinTable(name = "CLIENT",
-            joinColumns = @JoinColumn(name = "ORDER_ID"),
+            joinColumns = @JoinColumn(name = "ID"),
             inverseJoinColumns = @JoinColumn(name = "CLIENT_ID")
     )
     private Client client;
-    @Column
-    private String address;
+    @ManyToOne
+    @JoinTable(name = "ADDRESS",
+            joinColumns = @JoinColumn(name = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "ID")
+    )
+    private Address address;
     @Column
     private PaymentMethod paymentMethod;
     @Column
     private DeliveryMethod deliveryMethod;
-    /*@ElementCollection
-    @CollectionTable(name ="goods" , joinColumns=@JoinColumn(name="goods_id"))
-    @Column
-    private List<Integer> goods;*/
+    @ElementCollection
+    @CollectionTable(name = "Goods", joinColumns = @JoinColumn(name = "ID"))
+    @Column(name = "goods")
+    private List<Integer> goods;
     @Column
     private PaymentStatus paymentStatus;
     @Column
@@ -55,11 +59,11 @@ public class Order {
         this.client = client;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
