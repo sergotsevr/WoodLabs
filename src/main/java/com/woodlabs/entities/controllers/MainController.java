@@ -42,8 +42,8 @@ public class MainController {
         Order order = new Order();
         Order order2 = new Order();
         order.setAddress(address);
-        order.setId(1);
-        order2.setId(2);
+        order.setOrderId(1);
+        order2.setOrderId(2);
         order2.setAddress(address);
         orderRepository.save(order);
         orderRepository.save(order2);

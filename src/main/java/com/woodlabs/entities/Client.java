@@ -9,7 +9,7 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int clientId;
     @Column
     private String firstName;
     @Column
@@ -34,12 +34,12 @@ public class Client {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setClientId(int id) {
+        this.clientId = clientId;
     }
 
     public String getFirstName() {

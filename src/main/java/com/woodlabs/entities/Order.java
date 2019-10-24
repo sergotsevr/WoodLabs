@@ -14,25 +14,22 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int orderId;
     @ManyToOne
     @JoinTable(name = "CLIENT",
-            joinColumns = @JoinColumn(name = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "CLIENT_ID")
+            joinColumns = @JoinColumn(name = "orderId"),
+            inverseJoinColumns = @JoinColumn(name = "ClientId")
     )
     private Client client;
-    @ManyToOne
-    @JoinTable(name = "ADDRESS",
-            joinColumns = @JoinColumn(name = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "ID")
-    )
+    @ManyToOne()
+    @JoinColumn(name = "AddressId")
     private Address address;
     @Column
     private PaymentMethod paymentMethod;
     @Column
     private DeliveryMethod deliveryMethod;
     @ElementCollection
-    @CollectionTable(name = "Goods", joinColumns = @JoinColumn(name = "ID"))
+    @CollectionTable(name = "Goods", joinColumns = @JoinColumn(name = "ORDER_ID"))
     @Column(name = "goods")
     private List<Integer> goods;
     @Column
@@ -43,12 +40,12 @@ public class Order {
     public Order() {
     }
 
-    public int getId() {
-        return id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public Client getClient() {
