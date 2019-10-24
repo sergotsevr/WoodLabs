@@ -1,4 +1,4 @@
-package com.woodlabs.entities;
+package com.woodlabs.entities.enums;
 
 public enum OrderStatus {
     NOT_PAID("not paid"),

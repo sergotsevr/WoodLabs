@@ -1,5 +1,10 @@
 package com.woodlabs.entities;
 
+import com.woodlabs.entities.enums.DeliveryMethod;
+import com.woodlabs.entities.enums.OrderStatus;
+import com.woodlabs.entities.enums.PaymentMethod;
+import com.woodlabs.entities.enums.PaymentStatus;
+
 import javax.persistence.*;
 import java.util.List;
 
