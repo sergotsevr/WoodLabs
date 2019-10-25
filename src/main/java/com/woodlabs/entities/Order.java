@@ -26,16 +26,24 @@ public class Order {
     @Column
     private DeliveryMethod deliveryMethod;
 
-    @OneToMany
-    @JoinTable(name = "PRODUCT",
+    @ManyToMany
+    @JoinTable(name = "ordersProduct",
             joinColumns = @JoinColumn(name = "ORDERS_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID")
+            inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> goodsList;
     @Column
     private PaymentStatus paymentStatus;
     @Column
     private OrderStatus orderStatus;
+
+    public List<Product> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<Product> goodsList) {
+        this.goodsList = goodsList;
+    }
 
     public Order() {
     }

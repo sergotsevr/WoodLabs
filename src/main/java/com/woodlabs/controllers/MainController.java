@@ -4,6 +4,7 @@ import com.woodlabs.entities.Address;
 import com.woodlabs.entities.Client;
 import com.woodlabs.entities.Order;
 import com.woodlabs.entities.Product;
+import com.woodlabs.entities.enums.ProductCategory;
 import com.woodlabs.repositories.AddressRepository;
 import com.woodlabs.repositories.ClientRepository;
 import com.woodlabs.repositories.OrderRepository;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -29,14 +32,23 @@ public class MainController {
     private ClientRepository clientRepository;
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        Product product = new Product();
-        product.setName("ohaio");
-        productRepository.save(product);
+
         model.addAttribute("name", name);
         return "greeting";
     }
     @GetMapping("/action_page")
     public String addOdrer(@RequestParam(name = "param",required = false) String name, Model model){
+
+        Product product = new Product();
+        product.setName("butter");
+        product.setPrice(344);
+        product.setProductCategory(ProductCategory.GROCERY);
+        product.setQuantityInStock(500);
+        product.setVolume(3);
+        product.setWeight(500);
+        productRepository.save(product);
+        List <Product> productList = new ArrayList<>();
+        productList.add(product);
         Client client = new Client();
         client.setDateOfBirth(LocalDate.now());
         client.setEmail("ElizabethWilliams@guts.com");
@@ -53,6 +65,7 @@ public class MainController {
         addressRepository.save(address);
         Order order = new Order();
         //Order order2 = new Order();
+        order.setGoodsList(productList);
         order.setClient(client);
         order.setAddress(address);
         /*order.setOrderId(1);
