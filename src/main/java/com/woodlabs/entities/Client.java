@@ -20,8 +20,8 @@ public class Client {
     private String email;
     @Column
     private String password;
-   // @Column
-   // private Address address;
+    // @Column
+    // private Address address;
 
     public Client() {
     }

@@ -26,7 +26,7 @@ public class Address {
     }
 
     public Address(Integer addressId) {
-        this.addressId=addressId;
+        this.addressId = addressId;
     }
 
     public int getAddressId() {

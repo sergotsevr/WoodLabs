@@ -4,11 +4,9 @@ import com.woodlabs.entities.Address;
 import com.woodlabs.entities.Client;
 import com.woodlabs.entities.Order;
 import com.woodlabs.entities.Product;
-import com.woodlabs.entities.enums.ProductCategory;
 import com.woodlabs.repositories.AddressRepository;
 import com.woodlabs.repositories.ClientRepository;
 import com.woodlabs.repositories.OrderRepository;
-import com.woodlabs.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,33 +20,26 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    @Autowired
-    private ProductRepository productRepository;
+
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
     private ClientRepository clientRepository;
+
     @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
 
         model.addAttribute("name", name);
         return "greeting";
     }
-    @GetMapping("/action_page")
-    public String addOdrer(@RequestParam(name = "param",required = false) String name, Model model){
 
-        Product product = new Product();
-        product.setName("butter");
-        product.setPrice(344);
-        product.setProductCategory(ProductCategory.GROCERY);
-        product.setQuantityInStock(500);
-        product.setVolume(3);
-        product.setWeight(500);
-        productRepository.save(product);
-        List <Product> productList = new ArrayList<>();
-        productList.add(product);
+    @GetMapping("/action_page")
+    public String addOdrer(@RequestParam(name = "param", required = false) String name, Model model) {
+
+
+        List<Product> productList = new ArrayList<>();
         Client client = new Client();
         client.setDateOfBirth(LocalDate.now());
         client.setEmail("ElizabethWilliams@guts.com");
