@@ -1,13 +1,13 @@
-package com.woodlabs.entities.controllers;
+package com.woodlabs.controllers;
 
 import com.woodlabs.entities.Address;
 import com.woodlabs.entities.Client;
 import com.woodlabs.entities.Order;
 import com.woodlabs.entities.Product;
-import com.woodlabs.entities.repositories.AddressRepository;
-import com.woodlabs.entities.repositories.ClientRepository;
-import com.woodlabs.entities.repositories.OrderRepository;
-import com.woodlabs.entities.repositories.ProductRepository;
+import com.woodlabs.repositories.AddressRepository;
+import com.woodlabs.repositories.ClientRepository;
+import com.woodlabs.repositories.OrderRepository;
+import com.woodlabs.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

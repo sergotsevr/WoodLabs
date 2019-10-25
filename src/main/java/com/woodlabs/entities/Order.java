@@ -25,10 +25,13 @@ public class Order {
     private PaymentMethod paymentMethod;
     @Column
     private DeliveryMethod deliveryMethod;
-    @ElementCollection
-    @CollectionTable(name = "Goods", joinColumns = @JoinColumn(name = "ORDER_ID"))
-    @Column(name = "goods")
-    private List<Integer> goods;
+
+    @OneToMany
+    @JoinTable(name = "PRODUCT",
+            joinColumns = @JoinColumn(name = "ORDERS_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID")
+    )
+    private List<Product> goodsList;
     @Column
     private PaymentStatus paymentStatus;
     @Column

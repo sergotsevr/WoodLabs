@@ -1,4 +1,4 @@
-package com.woodlabs.entities.repositories;
+package com.woodlabs.repositories;
 
 import com.woodlabs.entities.Order;
 import org.springframework.data.repository.CrudRepository;
