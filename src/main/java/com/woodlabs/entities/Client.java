@@ -20,7 +20,8 @@ public class Client {
     private String email;
     @Column
     private String password;
-    @Column
+    @OneToOne
+    @JoinColumn(name = "AddressId")
     private Address address;
 
     public Client() {
