@@ -30,6 +30,8 @@ public class MainController {
 
     @Autowired
     ProductService productService;
+
+
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 
@@ -54,7 +56,7 @@ public class MainController {
         model.addAttribute("name", name);*/
         return "greeting";
     }
-    @GetMapping("/action_page")
+    @GetMapping("/add")
     public String addOdrer(@RequestParam Map<String,String> allRequestParams, Model model){
 
 /*

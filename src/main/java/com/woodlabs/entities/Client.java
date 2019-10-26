@@ -20,8 +20,8 @@ public class Client {
     private String email;
     @Column
     private String password;
-   // @Column
-   // private Address address;
+    @Column
+    private Address address;
 
     public Client() {
     }
@@ -82,11 +82,11 @@ public class Client {
         this.password = password;
     }
 
-   /* public Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
     public void setAddress(Address address) {
         this.address = address;
-    }*/
+    }
 }

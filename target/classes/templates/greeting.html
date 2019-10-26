@@ -6,8 +6,12 @@
 </head>
 <body>
     <p th:text="'Hello, ' + ${name} + '!'"/>
-    <form action="/action_page" method="get">
-        First parameter:<br>
+    <form action="/product/add" method="get">
+        First name :<br>
+
+        <input type="text" name="firstName" value="param">
+        <br><br>
+        Last name :<br>
 
         <input type="text" name="lastname" value="param">
         <br><br>
