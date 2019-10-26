@@ -10,11 +10,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProductService {
+
     @Autowired
     private ProductRepository productRepository;
 
     public Product add(ProductDto productDto) {
         Product product = Mapper.toProduct(productDto);
+        productRepository.save(product);
         return product;
     }
 }

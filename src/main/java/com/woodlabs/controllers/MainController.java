@@ -2,6 +2,7 @@ package com.woodlabs.controllers;
 
 import com.woodlabs.entities.Address;
 import com.woodlabs.entities.Client;
+import com.woodlabs.entities.DTO.ProductDto;
 import com.woodlabs.entities.Order;
 import com.woodlabs.entities.Product;
 import com.woodlabs.entities.enums.ProductCategory;
@@ -9,6 +10,8 @@ import com.woodlabs.repositories.AddressRepository;
 import com.woodlabs.repositories.ClientRepository;
 import com.woodlabs.repositories.OrderRepository;
 import com.woodlabs.repositories.ProductRepository;
+import com.woodlabs.services.ProductService;
+import com.woodlabs.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,23 +25,43 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    @Autowired
+   /* @Autowired
     private ProductRepository productRepository;
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientRepository clientRepository;*/
+    @Autowired
+    ProductService productService;
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 
-        model.addAttribute("name", name);
+        Product product = new Product();
+        product.setName("cereals");
+        product.setPrice(343);
+        product.setProductCategory(ProductCategory.GROCERY);
+        product.setQuantityInStock(23432);
+        product.setVolume(324);
+        product.setWeight(234);
+        ProductDto productDto = Mapper.toProductDto(product);
+
+        productService.add(productDto);
+       /* Product product = new Product();
+        product.setName("butter");
+        product.setPrice(344);
+        product.setProductCategory(ProductCategory.GROCERY);
+        product.setQuantityInStock(500);
+        product.setVolume(3);
+        product.setWeight(500);
+        productRepository.save(product);
+        model.addAttribute("name", name);*/
         return "greeting";
     }
     @GetMapping("/action_page")
     public String addOdrer(@RequestParam(name = "param",required = false) String name, Model model){
-
+/*
         Product product = new Product();
         product.setName("butter");
         product.setPrice(344);
@@ -69,10 +92,10 @@ public class MainController {
         order.setClient(client);
         order.setAddress(address);
         /*order.setOrderId(1);
-        order2.setOrderId(2);*/
+        order2.setOrderId(2);
         //order2.setAddress(address);
         orderRepository.save(order);
-        //orderRepository.save(order2);
+        //orderRepository.save(order2);*/
         return "congrat";
     }
 
