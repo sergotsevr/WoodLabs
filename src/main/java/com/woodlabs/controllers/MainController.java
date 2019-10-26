@@ -16,23 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
+@RequestMapping(path = "/product")
 public class MainController {
 
-   /* @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private ClientRepository clientRepository;*/
     @Autowired
     ProductService productService;
     @GetMapping("/greeting")
@@ -60,7 +55,8 @@ public class MainController {
         return "greeting";
     }
     @GetMapping("/action_page")
-    public String addOdrer(@RequestParam(name = "param",required = false) String name, Model model){
+    public String addOdrer(@RequestParam Map<String,String> allRequestParams, Model model){
+
 /*
         Product product = new Product();
         product.setName("butter");
