@@ -8,9 +8,7 @@ import com.woodlabs.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -22,7 +20,7 @@ public class MainController {
 
     @Autowired
     ProductService productService;
-    @GetMapping("/add")
+    @PostMapping("/add")
     public ModelAndView add(@RequestParam Map<String,String> allRequestParams, Model model) {
         ProductDto productDto = new ProductDto();
         productDto.setName(allRequestParams.get("name"));
@@ -48,11 +46,19 @@ public class MainController {
         model.addAttribute("productList", productList);
         return new ModelAndView("allProduct", (Map<String, Product>) model);
     }
+    @GetMapping("/delete")
+    public String delete(@RequestParam Integer id, Model model){
+        ProductDto productDto = new ProductDto();
+        productDto.setProductId(id);
+        productService.delete(productDto);
+        return "congrat";
+    }
+
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 
 
-        return "greeting";
+        return "delete";
     }
     @GetMapping("/addOdrer")
     public String addOdrer(@RequestParam Map<String,String> allRequestParams, Model model){
