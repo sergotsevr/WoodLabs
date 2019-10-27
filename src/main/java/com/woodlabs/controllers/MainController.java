@@ -54,18 +54,33 @@ public class MainController {
         return "congrat";
     }
 
+    @PostMapping("/update")
+    public ModelAndView update(@RequestParam Map<String,String> allRequestParams, Model model) {
+        ProductDto productDto = new ProductDto();
+        productDto.setProductId(Integer.parseInt(allRequestParams.get("id")));
+        productDto.setName(allRequestParams.get("name"));
+        productDto.setPrice(Integer.parseInt(allRequestParams.get("price")));
+        productDto.setProductCategory(ProductCategory.valueOf(allRequestParams.get("productCategory")));
+        productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
+        productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
+        productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
+        Product product = productService.add(productDto);
+        model.addAttribute("product", product);
+        return new ModelAndView("product", (Map<String, Product>) model);
+    }
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 
 
-        return "delete";
+        return "update";
     }
-    @GetMapping("/addOdrer")
-    public String addOdrer(@RequestParam Map<String,String> allRequestParams, Model model){
-
-
-        return "congrat";
+    @GetMapping("/update")
+    public String update(@RequestParam String str, Model model) {
+        return "update";
     }
+    @GetMapping("/add")
+    public String add(@RequestParam String str, Model model) {
 
-
+        return "update";
+    }
 }
