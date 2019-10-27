@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -31,14 +32,21 @@ public class MainController {
         productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
         productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
         Product product = productService.add(productDto);
-        model.addAttribute("id", product.getProductId());
-        return new ModelAndView("product", (Map<String, Integer>) model);
+        model.addAttribute("product", product);
+        return new ModelAndView("product", (Map<String, Product>) model);
     }
 
     @GetMapping("/find")
     public String find (@RequestParam(name="id") Integer id, Model model){
         model.addAttribute("product", productService.findById(id));
         return "Product" ;
+    }
+
+    @GetMapping("/findAll")
+    public ModelAndView findAll(@RequestParam Map<String,String> allRequestParams, Model model) {
+        List<ProductDto> productList = productService.findAll();
+        model.addAttribute("productList", productList);
+        return new ModelAndView("allProduct", (Map<String, Product>) model);
     }
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {

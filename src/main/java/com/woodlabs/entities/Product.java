@@ -87,17 +87,17 @@ public class Product {
     public String toString(){
         String product = "ID - ";
         product = product.concat(this.productId.toString());
-        product = product.concat("навание - ");
+        product = product.concat(" навание - ");
         product = product.concat(this.name);
-        product = product.concat("цена - ");
+        product = product.concat(" цена - ");
         product = product.concat(this.price.toString());
-        product = product.concat("категория - ");
+        product = product.concat(" категория - ");
         product = product.concat(this.productCategory.toString());
-        product = product.concat("остаток на склае - ");
+        product = product.concat(" остаток на склае - ");
         product = product.concat(this.quantityInStock.toString());
-        product = product.concat("объем - ");
+        product = product.concat(" объем - ");
         product = product.concat(this.volume.toString());
-        product = product.concat("вес - ");
+        product = product.concat(" вес - ");
         product = product.concat(this.weight.toString());
         return product;
     }

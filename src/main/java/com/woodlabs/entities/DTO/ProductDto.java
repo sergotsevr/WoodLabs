@@ -4,7 +4,7 @@ import com.woodlabs.entities.enums.ProductCategory;
 
 public class ProductDto {
 
-    private int productId;
+    private Integer productId;
     private String name;
     private Integer price;
     private ProductCategory productCategory;
@@ -29,7 +29,7 @@ public class ProductDto {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
@@ -79,5 +79,24 @@ public class ProductDto {
 
     public void setQuantityInStock(Integer quantityInStock) {
         this.quantityInStock = quantityInStock;
+    }
+
+    @Override
+    public String toString(){
+        String product = "ID - ";
+        product = product.concat(this.productId.toString());
+        product = product.concat(" навание - ");
+        product = product.concat(this.name);
+        product = product.concat(" цена - ");
+        product = product.concat(this.price.toString());
+        product = product.concat(" категория - ");
+        product = product.concat(this.productCategory.toString());
+        product = product.concat(" остаток на склае - ");
+        product = product.concat(this.quantityInStock.toString());
+        product = product.concat(" объем - ");
+        product = product.concat(this.volume.toString());
+        product = product.concat(" вес - ");
+        product = product.concat(this.weight.toString());
+        return product;
     }
 }
