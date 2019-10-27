@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class MainController {
     @Autowired
     ProductService productService;
     @GetMapping("/add")
-    public String add(@RequestParam Map<String,String> allRequestParams, Model model) {
+    public ModelAndView add(@RequestParam Map<String,String> allRequestParams, Model model) {
         ProductDto productDto = new ProductDto();
         productDto.setName(allRequestParams.get("name"));
         productDto.setPrice(Integer.parseInt(allRequestParams.get("price")));
@@ -29,10 +30,16 @@ public class MainController {
         productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
         productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
         productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
-        productService.add(productDto);
-        return "congrat";
+        Product product = productService.add(productDto);
+        model.addAttribute("id", product.getProductId());
+        return new ModelAndView("product", (Map<String, Integer>) model);
     }
 
+    @GetMapping("/find")
+    public String find (@RequestParam(name="id") Integer id, Model model){
+        model.addAttribute("product", productService.findById(id));
+        return "Product" ;
+    }
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 
@@ -42,7 +49,7 @@ public class MainController {
     @GetMapping("/addOdrer")
     public String addOdrer(@RequestParam Map<String,String> allRequestParams, Model model){
 
-        
+
         return "congrat";
     }
 

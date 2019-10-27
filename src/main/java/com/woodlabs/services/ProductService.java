@@ -18,10 +18,10 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public ProductDto add(ProductDto productDto) {
+    public Product add(ProductDto productDto) {
         Product product = Mapper.toProduct(productDto);
-        productRepository.save(product);
-        return productDto;
+        Product product1 = productRepository.save(product);
+        return product1;
     }
 
     public void delete(ProductDto productDto) {

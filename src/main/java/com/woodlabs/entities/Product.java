@@ -10,7 +10,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int productId;
+    private Integer productId;
     @Column
     private String name;
     @Column
@@ -27,11 +27,11 @@ public class Product {
     public Product() {
     }
 
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
@@ -81,5 +81,24 @@ public class Product {
 
     public void setQuantityInStock(Integer quantityInStock) {
         this.quantityInStock = quantityInStock;
+    }
+
+    @Override
+    public String toString(){
+        String product = "ID - ";
+        product = product.concat(this.productId.toString());
+        product = product.concat("навание - ");
+        product = product.concat(this.name);
+        product = product.concat("цена - ");
+        product = product.concat(this.price.toString());
+        product = product.concat("категория - ");
+        product = product.concat(this.productCategory.toString());
+        product = product.concat("остаток на склае - ");
+        product = product.concat(this.quantityInStock.toString());
+        product = product.concat("объем - ");
+        product = product.concat(this.volume.toString());
+        product = product.concat("вес - ");
+        product = product.concat(this.weight.toString());
+        return product;
     }
 }
