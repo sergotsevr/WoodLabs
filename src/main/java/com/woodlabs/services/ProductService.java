@@ -43,7 +43,7 @@ public class ProductService {
             dtoList.add(Mapper.toProductDto(product));
         }
         if (dtoList.isEmpty()) {
-            System.out.println("OperationStage list is empty");
+            System.out.println("Product list is empty");
         }
         return dtoList;
     }
@@ -53,7 +53,7 @@ public class ProductService {
         if (product.isPresent()) {
             return Mapper.toProductDto(product.get());
         }
-        System.out.println("No OperationStage with id= " + id);
+        System.out.println("No product with id = " + id);
         return null;
 
     }
