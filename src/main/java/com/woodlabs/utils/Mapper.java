@@ -6,7 +6,10 @@ import com.woodlabs.entities.Product;
 public class Mapper {
     public static Product toProduct(ProductDto productDto) {
         Product product = new Product();
-        product.setProductId(productDto.getProductId());
+        try {
+            product.setProductId(productDto.getProductId());
+        }
+        catch (NullPointerException e){}
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
         product.setProductCategory(productDto.getProductCategory());

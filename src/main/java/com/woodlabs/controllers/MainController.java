@@ -72,9 +72,9 @@ public class MainController {
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 
 
-        return "update";
+        return "main";
     }
-    @GetMapping("/update")
+   /* @GetMapping("/update")
     public String update(@RequestParam String str, Model model) {
         return "update";
     }
@@ -82,5 +82,5 @@ public class MainController {
     public String add(@RequestParam String str, Model model) {
 
         return "update";
-    }
+    }*/
 }
