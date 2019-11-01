@@ -4,33 +4,47 @@ import com.woodlabs.DTO.ProductDto;
 import com.woodlabs.entities.Product;
 import com.woodlabs.entities.enums.ProductCategory;
 import com.woodlabs.services.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.constraints.Digits;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping(path = "/product")
+@Slf4j
 public class MainController {
 
     @Autowired
     ProductService productService;
     @PostMapping("/add")
     public ModelAndView add(@RequestParam Map<String,String> allRequestParams, Model model) {
-        ProductDto productDto = new ProductDto();
-        productDto.setName(allRequestParams.get("name"));
-        productDto.setPrice(Integer.parseInt(allRequestParams.get("price")));
-        productDto.setProductCategory(ProductCategory.valueOf(allRequestParams.get("productCategory")));
-        productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
-        productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
-        productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
-        Product product = productService.add(productDto);
-        model.addAttribute("product", product);
-        return new ModelAndView("product", (Map<String, Product>) model);
+        try {
+            ProductDto productDto = new ProductDto();
+            productDto.setName(allRequestParams.get("name"));
+            String price = allRequestParams.get("price");
+            productDto.setPrice(Integer.parseInt(price));
+            productDto.setProductCategory(ProductCategory.valueOf(allRequestParams.get("productCategory")));
+            productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
+            productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
+            productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
+            Product product = productService.add(productDto);
+            model.addAttribute("product", product);
+            return new ModelAndView("product", (Map<String, Product>) model);
+        }
+        catch (TransactionSystemException e){
+            log.warn("attempt to add product with incorrect field");
+        }
+        catch (NumberFormatException e){
+            log.warn("attempt to add product with incorrect digital format field");
+        }
+        return new ModelAndView("main");
     }
 
     @GetMapping("/find")

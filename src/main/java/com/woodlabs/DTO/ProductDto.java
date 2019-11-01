@@ -2,12 +2,12 @@ package com.woodlabs.DTO;
 
 import com.woodlabs.entities.enums.ProductCategory;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 public class ProductDto {
 
     private Integer productId;
-    @NotNull
     private String name;
     private Integer price;
     private ProductCategory productCategory;
