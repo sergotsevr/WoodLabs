@@ -30,12 +30,13 @@ public class ClientController {
         clientDto.setEmail("ElizabethWilliams@guts.com");
         clientDto.setFirstName("Jack");
         clientDto.setLastName("Ripper");
-        clientService.add(clientDto);
         Address address = new Address();
         address.setApartments(14);
         address.setBuilding(23);
         address.setStreet("Second st.");
-        clientDto.setAddress(addressRepository.save(address));
+        address=addressRepository.save(address);
+        clientDto.setAddress(address);
+        clientService.add(clientDto);
         return "congrat";
     }
 }
