@@ -26,6 +26,7 @@ public class Order {
     @Column
     private DeliveryMethod deliveryMethod;
 
+    // replace List to Collection
     @ManyToMany
     @JoinTable(name = "ordersProduct",
             joinColumns = @JoinColumn(name = "ORDERS_ID"),

@@ -5,10 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-    <p th:text="'Hello, ' + ${name} + '!'"/>
+    <p th:text="'You are going to add new product'"/>
     <form action="/product/add" method="post">
         Name:<br>
-        <input type="text" name="name" value="param">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+        <input type="text" name="name" value="param" th:field="name">
         <br><br>
         Price:<br>
         <input type="text" name="price" value="param">

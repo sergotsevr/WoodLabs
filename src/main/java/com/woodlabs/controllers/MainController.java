@@ -1,10 +1,9 @@
 package com.woodlabs.controllers;
 
-import com.woodlabs.entities.DTO.ProductDto;
+import com.woodlabs.DTO.ProductDto;
 import com.woodlabs.entities.Product;
 import com.woodlabs.entities.enums.ProductCategory;
 import com.woodlabs.services.ProductService;
-import com.woodlabs.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

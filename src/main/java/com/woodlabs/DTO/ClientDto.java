@@ -1,4 +1,4 @@
-package com.woodlabs.entities.DTO;
+package com.woodlabs.DTO;
 
 import java.time.LocalDate;
 

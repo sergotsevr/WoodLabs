@@ -1,5 +1,6 @@
 package com.woodlabs.entities.enums;
 
+
 public enum ProductCategory {
     ELECTRIC("electric"),
     GROCERY("grocery");
