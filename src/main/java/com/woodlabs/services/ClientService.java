@@ -1,6 +1,7 @@
 package com.woodlabs.services;
 
-import com.woodlabs.repositories.ProductRepository;
+import com.woodlabs.entities.Client;
+import com.woodlabs.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class ClientService {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ClientRepository ClientRepository;
+
 
 }
