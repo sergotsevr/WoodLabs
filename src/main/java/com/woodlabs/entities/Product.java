@@ -22,8 +22,8 @@ public class Product {
     @Digits(integer = 10, fraction = 0)
     @NotNull
     private Integer price;
-   /* @OneToMany
-    @JoinColumn(name = "ProductCategoryId")
+
+    /*@JoinColumn(name = "Product_Category_Id")
     private ProductCategory productCategory;*/
     @Column
     @Digits(integer = 10, fraction = 0)
