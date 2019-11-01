@@ -16,7 +16,7 @@ import java.util.Optional;
 @Component
 @Transactional
 @Slf4j
-public class ProductService {
+public class ProductServiceImpl {
 
     @Autowired
     private ProductRepository productRepository;
