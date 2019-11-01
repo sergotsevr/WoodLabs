@@ -22,7 +22,10 @@ public class ClientController {
     AddressRepository addressRepository;
     @Autowired
     ClientService clientService;
-
+    @GetMapping
+    public String main(){
+        return "clientMain";
+    }
     @GetMapping("test")
     public String test( Model model) {
         ClientDto clientDto = new ClientDto();

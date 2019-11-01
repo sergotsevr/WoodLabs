@@ -1,10 +1,9 @@
 package com.woodlabs.dto;
 
-import com.woodlabs.entities.enums.ProductCategory;
+import com.woodlabs.entities.ProductCategory;
+import lombok.Data;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-
+@Data
 public class ProductDto {
 
     private Integer productId;
@@ -25,62 +24,6 @@ public class ProductDto {
         this.productCategory = productCategory;
         this.weight = weight;
         this.volume = volume;
-        this.quantityInStock = quantityInStock;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
-
-    public Integer getVolume() {
-        return volume;
-    }
-
-    public void setVolume(Integer volume) {
-        this.volume = volume;
-    }
-
-    public Integer getQuantityInStock() {
-        return quantityInStock;
-    }
-
-    public void setQuantityInStock(Integer quantityInStock) {
         this.quantityInStock = quantityInStock;
     }
 

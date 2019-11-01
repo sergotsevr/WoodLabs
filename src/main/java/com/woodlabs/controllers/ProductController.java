@@ -2,7 +2,7 @@ package com.woodlabs.controllers;
 
 import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Product;
-import com.woodlabs.entities.enums.ProductCategory;
+import com.woodlabs.services.ProductCategoryService;
 import com.woodlabs.services.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class ProductController {
             productDto.setName(allRequestParams.get("name"));
             String price = allRequestParams.get("price");
             productDto.setPrice(Integer.parseInt(price));
-            productDto.setProductCategory(ProductCategory.valueOf(allRequestParams.get("productCategory")));
+            productDto.setProductCategory(ProductCategoryService.findByName(allRequestParams.get("productCategory")));
             productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
             productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
             productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
@@ -86,7 +86,7 @@ public class ProductController {
             productDto.setProductId(Integer.parseInt(allRequestParams.get("id")));
             productDto.setName(allRequestParams.get("name"));
             productDto.setPrice(Integer.parseInt(allRequestParams.get("price")));
-            productDto.setProductCategory(ProductCategory.valueOf(allRequestParams.get("productCategory")));
+            productDto.setProductCategory(ProductCategoryService.findByName(allRequestParams.get("productCategory")));
             productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
             productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
             productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));

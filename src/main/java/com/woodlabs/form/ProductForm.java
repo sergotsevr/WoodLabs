@@ -1,6 +1,6 @@
 package com.woodlabs.form;
 
-import com.woodlabs.entities.enums.ProductCategory;
+import com.woodlabs.entities.ProductCategory;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
