@@ -1,6 +1,6 @@
 package com.woodlabs.services;
 
-import com.woodlabs.DTO.ProductDto;
+import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Product;
 import com.woodlabs.repositories.ProductRepository;
 import com.woodlabs.utils.Mapper;

@@ -1,6 +1,6 @@
 package com.woodlabs.controllers;
 
-import com.woodlabs.DTO.ProductDto;
+import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Product;
 import com.woodlabs.entities.enums.ProductCategory;
 import com.woodlabs.services.ProductService;
@@ -18,7 +18,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(path = "/product")
 @Slf4j
-public class MainController {
+public class ProductController {
 
     @Autowired
     ProductService productService;
@@ -94,13 +94,4 @@ public class MainController {
 
         return "main";
     }
-   /* @GetMapping("/update")
-    public String update(@RequestParam String str, Model model) {
-        return "update";
-    }
-    @GetMapping("/add")
-    public String add(@RequestParam String str, Model model) {
-
-        return "update";
-    }*/
 }

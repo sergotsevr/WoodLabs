@@ -1,6 +1,6 @@
 package com.woodlabs.utils;
 
-import com.woodlabs.DTO.ProductDto;
+import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Product;
 
 public class Mapper {
