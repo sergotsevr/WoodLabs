@@ -4,7 +4,8 @@ public enum PaymentMethod {
     CARD("card"),
     CASH("cash");
     private final String paymentMethod;
-    private PaymentMethod(String paymentMethod){
-        this.paymentMethod=paymentMethod;
+
+    private PaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }
