@@ -1,5 +1,7 @@
 package com.woodlabs.dto;
 
+import com.woodlabs.entities.Address;
+
 import java.time.LocalDate;
 
 public class ClientDto {
@@ -10,6 +12,7 @@ public class ClientDto {
     private LocalDate dateOfBirth;
     private String email;
     private String password;
+    private Address address;
 
     public ClientDto() {
     }
@@ -69,5 +72,13 @@ public class ClientDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
