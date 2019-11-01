@@ -25,7 +25,6 @@ hs_err_pid*
 .project
 .settings/
 target/
-target/*
 */target/*
 */target/**
 *.kotlin_module

@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.constraints.Digits;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +22,9 @@ public class MainController {
 
     @Autowired
     ProductService productService;
+
     @PostMapping("/add")
-    public ModelAndView add(@RequestParam Map<String,String> allRequestParams, Model model) {
+    public ModelAndView add(@RequestParam Map<String, String> allRequestParams, Model model) {
         try {
             ProductDto productDto = new ProductDto();
             productDto.setName(allRequestParams.get("name"));
@@ -37,30 +37,29 @@ public class MainController {
             Product product = productService.add(productDto);
             model.addAttribute("product", product);
             return new ModelAndView("product", (Map<String, Product>) model);
-        }
-        catch (TransactionSystemException e){
+        } catch (TransactionSystemException e) {
             log.warn("attempt to add product with incorrect field");
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             log.warn("attempt to add product with incorrect digital format field");
         }
         return new ModelAndView("main");
     }
 
     @GetMapping("/find")
-    public String find (@RequestParam(name="id") Integer id, Model model){
+    public String find(@RequestParam(name = "id") Integer id, Model model) {
         model.addAttribute("product", productService.findById(id));
-        return "Product" ;
+        return "Product";
     }
 
     @GetMapping("/findAll")
-    public ModelAndView findAll(@RequestParam Map<String,String> allRequestParams, Model model) {
+    public ModelAndView findAll(@RequestParam Map<String, String> allRequestParams, Model model) {
         List<ProductDto> productList = productService.findAll();
         model.addAttribute("productList", productList);
         return new ModelAndView("allProduct", (Map<String, Product>) model);
     }
+
     @GetMapping("/delete")
-    public String delete(@RequestParam Integer id, Model model){
+    public String delete(@RequestParam Integer id, Model model) {
         ProductDto productDto = new ProductDto();
         productDto.setProductId(id);
         productService.delete(productDto);
@@ -68,21 +67,29 @@ public class MainController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(@RequestParam Map<String,String> allRequestParams, Model model) {
-        ProductDto productDto = new ProductDto();
-        productDto.setProductId(Integer.parseInt(allRequestParams.get("id")));
-        productDto.setName(allRequestParams.get("name"));
-        productDto.setPrice(Integer.parseInt(allRequestParams.get("price")));
-        productDto.setProductCategory(ProductCategory.valueOf(allRequestParams.get("productCategory")));
-        productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
-        productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
-        productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
-        Product product = productService.add(productDto);
-        model.addAttribute("product", product);
-        return new ModelAndView("product", (Map<String, Product>) model);
+    public ModelAndView update(@RequestParam Map<String, String> allRequestParams, Model model) {
+        try {
+            ProductDto productDto = new ProductDto();
+            productDto.setProductId(Integer.parseInt(allRequestParams.get("id")));
+            productDto.setName(allRequestParams.get("name"));
+            productDto.setPrice(Integer.parseInt(allRequestParams.get("price")));
+            productDto.setProductCategory(ProductCategory.valueOf(allRequestParams.get("productCategory")));
+            productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
+            productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
+            productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
+            Product product = productService.add(productDto);
+            model.addAttribute("product", product);
+            return new ModelAndView("product", (Map<String, Product>) model);
+        } catch (TransactionSystemException e) {
+            log.warn("attempt to update product with incorrect field");
+        } catch (NumberFormatException e) {
+            log.warn("attempt to update product with incorrect digital format field");
+        }
+        return new ModelAndView("main");
     }
+
     @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
 
 
         return "main";
