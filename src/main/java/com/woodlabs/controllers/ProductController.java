@@ -23,7 +23,7 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
-    
+
     @PostMapping("/add")
     public ModelAndView add(@RequestParam Map<String, String> allRequestParams, Model model) {
         try {
@@ -48,8 +48,13 @@ public class ProductController {
 
     @GetMapping("/find")
     public String find(@RequestParam(name = "id") Integer id, Model model) {
-        model.addAttribute("product", productService.findById(id));
-        return "Product";
+        try {
+            model.addAttribute("product", productService.findById(id));
+            return "Product";
+        }
+        catch (Exception e){
+            return "main";
+        }
     }
 
     @GetMapping("/findAll")
@@ -61,10 +66,15 @@ public class ProductController {
 
     @GetMapping("/delete")
     public String delete(@RequestParam Integer id, Model model) {
-        ProductDto productDto = new ProductDto();
-        productDto.setProductId(id);
-        productService.delete(productDto);
-        return "congrat";
+        try {
+            ProductDto productDto = new ProductDto();
+            productDto.setProductId(id);
+            productService.delete(productDto);
+            return "congrat";
+        }
+        catch (Exception e){
+            return "main";
+        }
     }
 
     @PostMapping("/update")
