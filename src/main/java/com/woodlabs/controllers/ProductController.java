@@ -3,6 +3,7 @@ package com.woodlabs.controllers;
 import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Product;
 import com.woodlabs.entities.enums.ProductCategory;
+import com.woodlabs.services.ProductService;
 import com.woodlabs.services.ProductServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ import java.util.Map;
 public class ProductController {
 
     @Autowired
-    ProductServiceImpl productService;
-
+    ProductService productService;
+    
     @PostMapping("/add")
     public ModelAndView add(@RequestParam Map<String, String> allRequestParams, Model model) {
         try {
