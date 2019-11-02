@@ -3,6 +3,7 @@ package com.woodlabs.services;
 import com.woodlabs.dto.ClientDto;
 import com.woodlabs.entities.Client;
 import com.woodlabs.repositories.ClientRepository;
+import com.woodlabs.utils.Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-
+@Transactional
 @Component
 @Slf4j
 public class ClientServiceImpl implements ClientService {
@@ -25,8 +26,13 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto add(ClientDto clientDto) {
-        Client client;
-        try {
+        System.out.println(clientDto);
+        Client client = modelMapper.map(clientDto, Client.class);
+        Client saved = clientRepository.save(client);
+        ClientDto dto = modelMapper.map(saved, ClientDto.class);
+        return dto;
+       // Client client;
+      /*  try {
             client = convertToEntity(clientDto);
             Client saved = clientRepository.save(client);
             ClientDto dto = modelMapper.map(saved, ClientDto.class);
@@ -35,7 +41,7 @@ public class ClientServiceImpl implements ClientService {
             e.printStackTrace();
         }
        log.warn("error adding client {}", clientDto);
-       return null;
+       return null;*/
     }
 
     @Override
@@ -53,7 +59,12 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto update(ClientDto clientDto) {
-        Client client;
+        System.out.println(clientDto);
+        Client client = modelMapper.map(clientDto, Client.class);
+        Client saved = clientRepository.save(client);
+        ClientDto dto = modelMapper.map(saved, ClientDto.class);
+        return dto;
+       /* Client client;
         try {
             client = convertToEntity(clientDto);
             Client saved = clientRepository.save(client);
@@ -63,7 +74,7 @@ public class ClientServiceImpl implements ClientService {
             e.printStackTrace();
         }
         log.warn("error updating client {}", clientDto);
-        return null;
+        return null;*/
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.woodlabs.controllers;
 
+import com.woodlabs.dto.AddressDto;
 import com.woodlabs.dto.ClientDto;
 import com.woodlabs.entities.Address;
 import com.woodlabs.repositories.AddressRepository;
+import com.woodlabs.services.AddressService;
 import com.woodlabs.services.ClientService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +22,11 @@ import java.time.LocalDate;
 public class ClientController {
 
     @Autowired
-    AddressRepository addressRepository;
+    AddressService addressService;
     @Autowired
     ClientService clientService;
+    @Autowired
+    private ModelMapper modelMapper;
     @GetMapping
     public String main(){
         return "clientMain";
@@ -33,13 +38,14 @@ public class ClientController {
         clientDto.setEmail("ElizabethWilliams@guts.com");
         clientDto.setFirstName("Jack");
         clientDto.setLastName("Ripper");
-        Address address = new Address();
-        address.setApartments(14);
-        address.setBuilding(23);
-        address.setStreet("Second st.");
-        address=addressRepository.save(address);
+        AddressDto addressDto = new AddressDto();
+        addressDto.setApartments(14);
+        addressDto.setBuilding(23);
+        addressDto.setStreet("Second st.");
+        addressDto=addressService.add(addressDto);
+        Address address = modelMapper.map(addressDto, Address.class);
         clientDto.setAddress(address);
-        clientService.add(clientDto);
+        clientDto = clientService.add(clientDto);
         clientDto.setEmail("boombom");
         clientService.update(clientDto);
         return "congrat";
