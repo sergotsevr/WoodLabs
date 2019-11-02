@@ -53,26 +53,14 @@ public class ClientController {
         characteristicD = characteristicsService.add(characteristicD);
         characteristic2D = characteristicsService.add(characteristic2D);
         List<Characteristics> cha = new LinkedList<>();
+        productCategoryDto = categoryService.add(productCategoryDto);
+        productCategoryDto.setCharacteristics(cha);
         cha.add(modelMapper.map(characteristicD, Characteristics.class));
         cha.add(modelMapper.map(characteristic2D, Characteristics.class));
         productCategoryDto.setCharacteristics(cha);
         productCategoryDto.setName("main");
-        categoryService.add(productCategoryDto);
-        /*ClientDto clientDto = new ClientDto();
-        clientDto.setDateOfBirth(LocalDate.now());
-        clientDto.setEmail("ElizabethWilliams@guts.com");
-        clientDto.setFirstName("Jack");
-        clientDto.setLastName("Ripper");
-        AddressDto addressDto = new AddressDto();
-        addressDto.setApartments(14);
-        addressDto.setBuilding(23);
-        addressDto.setStreet("Second st.");
-        addressDto=addressService.add(addressDto);
-        Address address = modelMapper.map(addressDto, Address.class);
-        clientDto.setAddress(address);
-        clientDto = clientService.add(clientDto);
-        clientDto.setEmail("boombom");
-        clientService.update(clientDto);*/
+        categoryService.update(productCategoryDto);
+
         return "congrat";
     }
 }

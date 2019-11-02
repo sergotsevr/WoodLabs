@@ -17,8 +17,8 @@ public class ProductCategory {
     private String name;
     @Column
     private Integer parentId;
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "productCategory")
+    @OneToMany()
+    @JoinColumn()
     private List<Characteristics> characteristics;
     @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "product_id")
