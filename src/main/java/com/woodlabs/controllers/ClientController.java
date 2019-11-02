@@ -49,17 +49,15 @@ public class ClientController {
         CharacteristicsDto characteristicD = new CharacteristicsDto();
         characteristicD.setCharacteristic("Volume");
         CharacteristicsDto characteristic2D = new CharacteristicsDto();
-        characteristicD.setCharacteristic("price");
-       /* cha.add(characteristicD);
-        cha.add(characteristic2D);*/
+        characteristic2D.setCharacteristic("price");
         characteristicD = characteristicsService.add(characteristicD);
         characteristic2D = characteristicsService.add(characteristic2D);
-       /* List<Characteristics> cha = new LinkedList<>();
+        List<Characteristics> cha = new LinkedList<>();
         cha.add(modelMapper.map(characteristicD, Characteristics.class));
         cha.add(modelMapper.map(characteristic2D, Characteristics.class));
         productCategoryDto.setCharacteristics(cha);
         productCategoryDto.setName("main");
-        categoryService.add(productCategoryDto);*/
+        categoryService.add(productCategoryDto);
         /*ClientDto clientDto = new ClientDto();
         clientDto.setDateOfBirth(LocalDate.now());
         clientDto.setEmail("ElizabethWilliams@guts.com");
