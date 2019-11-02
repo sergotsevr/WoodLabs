@@ -40,6 +40,8 @@ public class ClientController {
         address=addressRepository.save(address);
         clientDto.setAddress(address);
         clientService.add(clientDto);
+        clientDto.setEmail("boombom");
+        clientService.update(clientDto);
         return "congrat";
     }
 }

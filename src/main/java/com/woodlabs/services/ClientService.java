@@ -2,34 +2,12 @@ package com.woodlabs.services;
 
 import com.woodlabs.dto.ClientDto;
 import com.woodlabs.entities.Client;
-import com.woodlabs.repositories.ClientRepository;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import java.util.List;
 
-import java.text.ParseException;
-
-@Component
-public class ClientService {
-
-    @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
-    private ClientRepository clientRepository;
-
-    public ClientDto add(ClientDto clientDto) {
-        Client client = null;
-        try {
-            client = convertToEntity(clientDto);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Client saved = clientRepository.save(client);
-       ClientDto dto = modelMapper.map(saved, ClientDto.class);
-       return dto;
-    }
-    private Client convertToEntity(ClientDto clientDto) throws ParseException {
-        Client client = modelMapper.map(clientDto, Client.class);
-        return client;
-    }
+public interface ClientService {
+    public ClientDto add(ClientDto clientDto);
+    public void delete(ClientDto clientDto);
+    public ClientDto update(ClientDto clientDto);
+    public List<ClientDto> findAll();
+    public ClientDto findById(Integer id);
 }
