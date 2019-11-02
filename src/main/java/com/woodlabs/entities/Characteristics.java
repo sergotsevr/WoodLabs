@@ -14,9 +14,7 @@ public class Characteristics {
     private Integer characteristicsId;
     @Column
     private String characteristic;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "product_Category_Id")
     ProductCategory productCategory;
-
-
 }
