@@ -20,7 +20,7 @@ public class ProductCategory {
     @OneToMany()
     @JoinColumn()
     private List<Characteristics> characteristics;
-    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     Product product;
 }
