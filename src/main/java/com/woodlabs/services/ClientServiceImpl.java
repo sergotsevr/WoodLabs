@@ -31,17 +31,6 @@ public class ClientServiceImpl implements ClientService {
         Client saved = clientRepository.save(client);
         ClientDto dto = modelMapper.map(saved, ClientDto.class);
         return dto;
-       // Client client;
-      /*  try {
-            client = convertToEntity(clientDto);
-            Client saved = clientRepository.save(client);
-            ClientDto dto = modelMapper.map(saved, ClientDto.class);
-            return dto;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-       log.warn("error adding client {}", clientDto);
-       return null;*/
     }
 
     @Override
@@ -64,17 +53,6 @@ public class ClientServiceImpl implements ClientService {
         Client saved = clientRepository.save(client);
         ClientDto dto = modelMapper.map(saved, ClientDto.class);
         return dto;
-       /* Client client;
-        try {
-            client = convertToEntity(clientDto);
-            Client saved = clientRepository.save(client);
-            ClientDto dto = modelMapper.map(saved, ClientDto.class);
-            return dto;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        log.warn("error updating client {}", clientDto);
-        return null;*/
     }
 
     @Override
@@ -84,7 +62,8 @@ public class ClientServiceImpl implements ClientService {
             List<Client> found = clientRepository.findAll();
             List<ClientDto> dto = new LinkedList<>();
             for (Client client:found) {
-                dto.add(modelMapper.map(found, ClientDto.class));
+                log.info(client.getClientId().toString());
+                dto.add(modelMapper.map(client, ClientDto.class));
             }
             return dto;
         } catch (Exception e) {
