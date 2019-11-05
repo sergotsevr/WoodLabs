@@ -33,12 +33,5 @@ public class ClientDto {
     public ClientDto() {
     }
 
-    public ClientDto(int clientId, String firstName, String lastName, LocalDate dateOfBirth, String email, String password) {
-        this.clientId = clientId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.password = password;
-    }
+
 }

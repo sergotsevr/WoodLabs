@@ -19,11 +19,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(path = "/client")
@@ -46,10 +50,24 @@ public class ClientController {
         model.addAttribute("clients", clients);
         return "clientMain";
     }
-
+    @PostMapping("/update")
+    public String update(@RequestParam Map<String, String> allRequestParams, Model model){
+        ClientDto clientDto = new ClientDto();
+        clientDto.setClientId(Integer.parseInt(allRequestParams.get("id")));
+        clientDto.setFirstName(allRequestParams.get("FirstName"));
+        clientDto.setLastName(allRequestParams.get("LastName"));
+        clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
+        clientDto.setEmail(allRequestParams.get("email"));
+        clientDto.setPassword(allRequestParams.get("Password"));
+        clientService.update(clientDto);
+        model.addAttribute("client", clientDto);
+        return "clientUpdate";
+    }
     @GetMapping("test")
     public String test( Model model) {
-        ClientDto clientDto = new ClientDto();
+        ClientDto clientDto = clientService.findById(227);
+        model.addAttribute("client", clientDto);
+       /* ClientDto clientDto = new ClientDto();
         clientDto.setEmail("Gut@man.ru");
         AddressDto address = new AddressDto();
         address.setApartments(12);
@@ -64,7 +82,7 @@ public class ClientController {
         clientDto.setFirstName("John");
         clientDto.setLastName("Man");
         clientDto.setPassword("1234");
-        clientService.update(clientDto);
+        clientService.update(clientDto);*/
         /*
         ProductCategoryDto productCategoryDto = new ProductCategoryDto();
         CharacteristicsDto characteristicD = new CharacteristicsDto();
@@ -82,6 +100,6 @@ public class ClientController {
         productCategoryDto.setName("main");
         categoryService.update(productCategoryDto);
 */
-        return "congrat";
+        return "clientUpdate";
     }
 }
