@@ -1,6 +1,8 @@
 package com.woodlabs.entities;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -9,6 +11,8 @@ import java.time.LocalDate;
 @Entity
 @Table
 @Data
+@Transactional
+@Slf4j
 public class Client {
 
     @Id
@@ -24,9 +28,10 @@ public class Client {
     private String email;
     @Column
     private String password;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AddressId")
     private Address address;
+
 
     public Client() {
     }

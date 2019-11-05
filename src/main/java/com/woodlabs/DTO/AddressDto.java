@@ -14,6 +14,14 @@ public class AddressDto {
 
     @Override
     public String toString(){
-        return addressId.toString();
+        String address = "ID - ";
+        address = address.concat(addressId.toString());
+        address.concat(" Country - " + country);
+        address.concat(" City - " + city);
+        address.concat(" Zip code - " + zipCode);
+        address.concat(" Street - " + street);
+        address.concat(" Building - " + building);
+        address.concat(" Apartments - " + apartments);
+        return address;
     }
 }

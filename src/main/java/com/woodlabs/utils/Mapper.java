@@ -1,9 +1,21 @@
 package com.woodlabs.utils;
 
+import com.woodlabs.dto.AddressDto;
+import com.woodlabs.dto.ClientDto;
 import com.woodlabs.dto.ProductDto;
+import com.woodlabs.entities.Address;
+import com.woodlabs.entities.Client;
 import com.woodlabs.entities.Product;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.remoting.rmi.RmiClientInterceptorUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Mapper {
+
+
+
     public static Product toProduct(ProductDto productDto) {
         Product product = new Product();
         try {
@@ -29,5 +41,55 @@ public class Mapper {
         productDto.setVolume(product.getVolume());
         productDto.setQuantityInStock(product.getQuantityInStock());
         return productDto;
+    }
+    public static ClientDto toClientDto(Client client) {
+        ClientDto clientDto = new ClientDto();
+        clientDto.setClientId(client.getClientId());
+        clientDto.setFirstName(client.getFirstName());
+        clientDto.setLastName(client.getLastName());
+        clientDto.setDateOfBirth(client.getDateOfBirth());
+        clientDto.setEmail(client.getEmail());
+        clientDto.setPassword(client.getPassword());
+        if (client.getAddress()!=null) {
+            AddressDto addressDto = toAddressDto(client.getAddress());
+            clientDto.setAddressDto(addressDto);
+        }
+        return clientDto;
+    }
+    public static Client toClient(ClientDto clientDto) {
+        Client client = new Client();
+        client.setClientId(clientDto.getClientId());
+        client.setFirstName(clientDto.getFirstName());
+        client.setLastName(clientDto.getLastName());
+        client.setDateOfBirth(clientDto.getDateOfBirth());
+        client.setEmail(clientDto.getEmail());
+        client.setPassword(clientDto.getPassword());
+        if (clientDto.getAddressDto()!=null) {
+            Address address = toAddress(clientDto.getAddressDto());
+            client.setAddress(address);
+        }
+        return client;
+    }
+    public static AddressDto toAddressDto(Address address) {
+        AddressDto addressDto = new AddressDto();
+        addressDto.setAddressId(address.getAddressId());
+        addressDto.setCountry(address.getCountry());
+        addressDto.setCity(address.getCity());
+        addressDto.setZipCode(address.getZipCode());
+        addressDto.setStreet(address.getStreet());
+        addressDto.setBuilding(address.getBuilding());
+        addressDto.setApartments(address.getApartments());
+        return addressDto;
+    }
+    public static Address toAddress(AddressDto addressDto) {
+        Address address = new Address();
+        address.setAddressId(addressDto.getAddressId());
+        address.setCountry(addressDto.getCountry());
+        address.setCity(addressDto.getCity());
+        address.setZipCode(addressDto.getZipCode());
+        address.setStreet(addressDto.getStreet());
+        address.setBuilding(addressDto.getBuilding());
+        address.setApartments(addressDto.getApartments());
+        return address;
     }
 }

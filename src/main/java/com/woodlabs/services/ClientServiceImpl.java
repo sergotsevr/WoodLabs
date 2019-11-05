@@ -3,6 +3,7 @@ package com.woodlabs.services;
 import com.woodlabs.dto.ClientDto;
 import com.woodlabs.entities.Client;
 import com.woodlabs.repositories.ClientRepository;
+import com.woodlabs.utils.Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,14 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService {
 
     @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
     private ClientRepository clientRepository;
 
     @Override
     public ClientDto add(ClientDto clientDto) {
         System.out.println(clientDto);
-        Client client = modelMapper.map(clientDto, Client.class);
+        Client client = Mapper.toClient(clientDto);
         Client saved = clientRepository.save(client);
-        ClientDto dto = modelMapper.map(saved, ClientDto.class);
+        ClientDto dto = Mapper.toClientDto(saved);
         return dto;
     }
 
@@ -37,20 +36,20 @@ public class ClientServiceImpl implements ClientService {
     public void delete(ClientDto clientDto) {
         Client client;
         try {
-            client = convertToEntity(clientDto);
+            client = Mapper.toClient(clientDto);
             clientRepository.delete(client);
             return;
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
-        log.warn("error deleting client {}", clientDto);
+        catch (Exception e) {
+            log.warn("error deleting client {}", clientDto);
+        }
     }
 
     @Override
     public ClientDto update(ClientDto clientDto) {
-        Client client = modelMapper.map(clientDto, Client.class);
+        Client client = Mapper.toClient(clientDto);
         Client saved = clientRepository.save(client);
-        ClientDto dto = modelMapper.map(saved, ClientDto.class);
+        ClientDto dto = Mapper.toClientDto(client);
         return dto;
     }
 
@@ -61,7 +60,7 @@ public class ClientServiceImpl implements ClientService {
             List<Client> found = clientRepository.findAll();
             List<ClientDto> dto = new LinkedList<>();
             for (Client client : found) {
-                dto.add(modelMapper.map(client, ClientDto.class));
+                dto.add(Mapper.toClientDto(client));
             }
             return dto;
         } catch (Exception e) {
@@ -75,8 +74,9 @@ public class ClientServiceImpl implements ClientService {
     @Transactional(readOnly = true)
     public ClientDto findById(Integer id) {
         try {
-            Optional<Client> client = clientRepository.findById(id);
-            ClientDto dto = modelMapper.map(client, ClientDto.class);
+            Optional<Client> clientOptional = clientRepository.findById(id);
+            Client client = clientOptional.isPresent() ? clientOptional.get():null;
+            ClientDto dto = Mapper.toClientDto(client);
             return dto;
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,8 +85,4 @@ public class ClientServiceImpl implements ClientService {
         return null;
     }
 
-    private Client convertToEntity(ClientDto clientDto) throws ParseException {
-        Client client = modelMapper.map(clientDto, Client.class);
-        return client;
-    }
 }

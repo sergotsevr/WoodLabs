@@ -1,11 +1,12 @@
 package com.woodlabs.dto;
 
-import com.woodlabs.entities.Address;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 
 @Data
+@Slf4j
 public class ClientDto {
 
     private Integer clientId;
@@ -15,6 +16,19 @@ public class ClientDto {
     private String email;
     private String password;
     private AddressDto addressDto;
+
+    public String getAddressId(){
+        try {
+            if (addressDto.getAddressId() != null) {
+                addressDto.getAddressId();
+                return addressDto.getAddressId().toString();
+            }
+        }
+       catch (Exception e){
+           return "address is not specified";
+        }
+        return "address is not specified";
+    }
 
     public ClientDto() {
     }
