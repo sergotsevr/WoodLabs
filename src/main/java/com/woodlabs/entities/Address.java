@@ -8,7 +8,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int addressId;
+    private Integer addressId;
     @Column
     private String country;
     @Column

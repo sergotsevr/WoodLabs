@@ -59,7 +59,7 @@ public class ClientController {
         address.setStreet("451 av");
         address = addressService.add(address);
         clientDto = clientService.add(clientDto);
-        //clientDto.setAddressDto(address);
+        clientDto.setAddressDto(address);
         clientDto.setDateOfBirth(LocalDate.now());
         clientDto.setFirstName("John");
         clientDto.setLastName("Man");

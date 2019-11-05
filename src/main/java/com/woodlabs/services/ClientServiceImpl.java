@@ -3,7 +3,6 @@ package com.woodlabs.services;
 import com.woodlabs.dto.ClientDto;
 import com.woodlabs.entities.Client;
 import com.woodlabs.repositories.ClientRepository;
-import com.woodlabs.utils.Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+
 @Transactional
 @Component
 @Slf4j
@@ -48,7 +48,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto update(ClientDto clientDto) {
-        System.out.println(clientDto);
         Client client = modelMapper.map(clientDto, Client.class);
         Client saved = clientRepository.save(client);
         ClientDto dto = modelMapper.map(saved, ClientDto.class);
@@ -61,8 +60,7 @@ public class ClientServiceImpl implements ClientService {
         try {
             List<Client> found = clientRepository.findAll();
             List<ClientDto> dto = new LinkedList<>();
-            for (Client client:found) {
-                log.info(client.getClientId().toString());
+            for (Client client : found) {
                 dto.add(modelMapper.map(client, ClientDto.class));
             }
             return dto;

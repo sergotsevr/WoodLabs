@@ -20,13 +20,13 @@
         </thead>
         <tbody>
         <tr th:each="client : ${clients}">
-            <th  th:utext="${client.getClientId()}"></th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>some@email</td>
-            <td>password1234</td>
-            <td>address</td>
+            <th  th:utext="${client.getClientId()}"/>
+            <td th:utext="${client.getFirstName()}"/>
+            <td th:utext="${client.getLastName()}"/>
+            <td th:utext="${client.getDateOfBirth()}"/>
+            <td th:utext="${client.getEmail()}"/>
+            <td th:utext="${client.getPassword()}"/>
+            <td th:utext="${client.getAddressDto()}"/>
         </tr>
         </tbody>
     </table>
