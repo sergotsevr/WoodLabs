@@ -6,6 +6,7 @@ import com.woodlabs.dto.ClientDto;
 import com.woodlabs.dto.ProductCategoryDto;
 import com.woodlabs.entities.Address;
 import com.woodlabs.entities.Characteristics;
+import com.woodlabs.entities.Client;
 import com.woodlabs.entities.ProductCategory;
 import com.woodlabs.repositories.AddressRepository;
 import com.woodlabs.services.AddressService;
@@ -40,11 +41,31 @@ public class ClientController {
     @Autowired
     private ModelMapper modelMapper;
     @GetMapping
-    public String main(){
+    public String main(Model model){
+        List<ClientDto> clients = clientService.findAll();
+        model.addAttribute("clients", clients);
         return "clientMain";
     }
+
     @GetMapping("test")
     public String test( Model model) {
+        ClientDto clientDto = new ClientDto();
+        clientDto.setEmail("Gut@man.ru");
+        AddressDto address = new AddressDto();
+        address.setApartments(12);
+        address.setBuilding(45);
+        address.setCity("LA");
+        address.setCountry("UD");
+        address.setStreet("451 av");
+        address = addressService.add(address);
+        clientDto = clientService.add(clientDto);
+        clientDto.setAddressDto(address);
+        clientDto.setDateOfBirth(LocalDate.now());
+        clientDto.setFirstName("John");
+        clientDto.setLastName("Man");
+        clientDto.setPassword("1234");
+        clientService.update(clientDto);
+        /*
         ProductCategoryDto productCategoryDto = new ProductCategoryDto();
         CharacteristicsDto characteristicD = new CharacteristicsDto();
         characteristicD.setCharacteristic("Volume");
@@ -60,7 +81,7 @@ public class ClientController {
         productCategoryDto.setCharacteristics(cha);
         productCategoryDto.setName("main");
         categoryService.update(productCategoryDto);
-
+*/
         return "congrat";
     }
 }

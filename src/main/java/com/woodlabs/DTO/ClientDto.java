@@ -14,7 +14,7 @@ public class ClientDto {
     private LocalDate dateOfBirth;
     private String email;
     private String password;
-    private Address address;
+    private AddressDto addressDto;
 
     public ClientDto() {
     }
