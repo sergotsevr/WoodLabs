@@ -51,6 +51,33 @@ public class ClientController {
         model.addAttribute("clients", clients);
         return "clientMain";
     }
+    @PostMapping("/create")
+    public String create(@RequestParam Map<String, String> allRequestParams, Model model){
+        if (Util.isNumeric(allRequestParams.get("id"))) {
+            ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
+            if (clientDto!=null) {
+                log.warn("client with id = {} already exists", allRequestParams.get("id"));
+                return "clientMain";
+            }
+        }
+        ClientDto clientDto = new ClientDto();
+        clientDto.setFirstName(allRequestParams.get("FirstName"));
+        clientDto.setLastName(allRequestParams.get("LastName"));
+        clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
+        clientDto.setEmail(allRequestParams.get("email"));
+        clientDto.setPassword(allRequestParams.get("Password"));
+        try {
+            AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
+            clientDto = clientService.add(clientDto);
+            clientDto.setAddressDto(addressDto);
+        }
+        catch (NumberFormatException e){
+            log.info("attempt to write incorrect addressId for client = {}", clientDto);
+        }
+        clientService.add(clientDto);
+        model.addAttribute("client", clientDto);
+        return "clientMain";
+    }
     @PostMapping("/update")
     public String update(@RequestParam Map<String, String> allRequestParams, Model model){
         if (Util.isNumeric(allRequestParams.get("id"))) {
@@ -72,20 +99,10 @@ public class ClientController {
                 }
                 clientService.update(clientDto);
                 model.addAttribute("client", clientDto);
-                return "clientUpdate";
+                return "clientMain";
             }
         }
-        ClientDto clientDto = new ClientDto();
-        clientDto.setClientId(Integer.parseInt(allRequestParams.get("id")));
-        clientDto.setFirstName(allRequestParams.get("FirstName"));
-        clientDto.setLastName(allRequestParams.get("LastName"));
-        clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
-        clientDto.setEmail(allRequestParams.get("email"));
-        clientDto.setPassword(allRequestParams.get("Password"));
-        //clientDto.setAddressId(Integer.parseInt(allRequestParams.get("AddressId")));
-        clientService.update(clientDto);
-        model.addAttribute("client", clientDto);
-        return "clientUpdate";
+        return "clientMain";
     }
     @GetMapping("test")
     public String test( Model model) {
@@ -124,6 +141,6 @@ public class ClientController {
         productCategoryDto.setName("main");
         categoryService.update(productCategoryDto);
 */
-        return "clientUpdate";
+        return "clientCreate";
     }
 }
