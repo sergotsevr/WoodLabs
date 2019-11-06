@@ -77,8 +77,11 @@ public class CategoryServiceImpl implements CategoryService {
     public ProductCategoryDto findById(Integer id) {
         try {
             Optional<ProductCategory> productCategory = productCategoryRepository.findById(id);
-            ProductCategoryDto dto = modelMapper.map(productCategory, ProductCategoryDto.class);
-            return dto;
+            if (productCategory.isPresent()) {
+                ProductCategory productCategory1 = productCategory.get();
+                ProductCategoryDto dto = modelMapper.map(productCategory1, ProductCategoryDto.class);
+                return dto;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

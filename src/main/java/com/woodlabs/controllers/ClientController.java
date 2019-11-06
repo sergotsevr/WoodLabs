@@ -13,6 +13,7 @@ import com.woodlabs.services.AddressService;
 import com.woodlabs.services.CategoryService;
 import com.woodlabs.services.CharacteristicsService;
 import com.woodlabs.services.ClientService;
+import com.woodlabs.utils.Util;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,28 @@ public class ClientController {
     }
     @PostMapping("/update")
     public String update(@RequestParam Map<String, String> allRequestParams, Model model){
+        if (Util.isNumeric(allRequestParams.get("id"))) {
+            ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
+            if (clientDto!=null) {
+                clientDto.setClientId(Integer.parseInt(allRequestParams.get("id")));
+                clientDto.setFirstName(allRequestParams.get("FirstName"));
+                clientDto.setLastName(allRequestParams.get("LastName"));
+                clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
+                clientDto.setEmail(allRequestParams.get("email"));
+                clientDto.setPassword(allRequestParams.get("Password"));
+                try {
+                    AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
+                    clientDto = clientService.update(clientDto);
+                    clientDto.setAddressDto(addressDto);
+                }
+                catch (NumberFormatException e){
+                    log.warn("attempt to write incorrect addressId for client = {}", clientDto);
+                }
+                clientService.update(clientDto);
+                model.addAttribute("client", clientDto);
+                return "clientUpdate";
+            }
+        }
         ClientDto clientDto = new ClientDto();
         clientDto.setClientId(Integer.parseInt(allRequestParams.get("id")));
         clientDto.setFirstName(allRequestParams.get("FirstName"));
@@ -59,6 +82,7 @@ public class ClientController {
         clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
         clientDto.setEmail(allRequestParams.get("email"));
         clientDto.setPassword(allRequestParams.get("Password"));
+        //clientDto.setAddressId(Integer.parseInt(allRequestParams.get("AddressId")));
         clientService.update(clientDto);
         model.addAttribute("client", clientDto);
         return "clientUpdate";

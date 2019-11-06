@@ -87,8 +87,11 @@ public class AddressServiceImpl implements AddressService{
     public AddressDto findById(Integer id) {
         try {
             Optional<Address> address = addressRepository.findById(id);
-            AddressDto dto = modelMapper.map(address, AddressDto.class);
-            return dto;
+            if(address.isPresent()) {
+                Address address1 = address.get();
+                AddressDto dto = modelMapper.map(address1, AddressDto.class);
+                return dto;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

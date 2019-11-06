@@ -3,6 +3,7 @@ package com.woodlabs.dto;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 
 @Data
@@ -26,6 +27,18 @@ public class ClientDto {
         }
        catch (Exception e){
            return "address is not specified";
+        }
+        return "address is not specified";
+    }
+    public String setAddressId(Integer id){
+        try {
+            if (addressDto.getAddressId() != null) {
+                addressDto.setAddressId(id);
+                return addressDto.getAddressId().toString();
+            }
+        }
+        catch (Exception e){
+            return "address is not specified";
         }
         return "address is not specified";
     }

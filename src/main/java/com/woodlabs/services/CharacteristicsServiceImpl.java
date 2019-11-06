@@ -76,9 +76,11 @@ public class CharacteristicsServiceImpl implements CharacteristicsService {
     @Transactional(readOnly = true)
     public CharacteristicsDto findById(Integer id) {
         try {
-            Optional<Characteristics> Characteristics = characteristicsRepository.findById(id);
-            CharacteristicsDto dto = modelMapper.map(Characteristics, CharacteristicsDto.class);
-            return dto;
+            Optional<Characteristics> characteristics = characteristicsRepository.findById(id);
+            if (characteristics.isPresent()) {
+                CharacteristicsDto dto = modelMapper.map(characteristics.get(), CharacteristicsDto.class);
+                return dto;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

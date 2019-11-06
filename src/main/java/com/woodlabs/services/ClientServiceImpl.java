@@ -75,9 +75,12 @@ public class ClientServiceImpl implements ClientService {
     public ClientDto findById(Integer id) {
         try {
             Optional<Client> clientOptional = clientRepository.findById(id);
-            Client client = clientOptional.isPresent() ? clientOptional.get():null;
-            ClientDto dto = Mapper.toClientDto(client);
-            return dto;
+            if(clientOptional.isPresent()){
+                Client client = clientOptional.get();
+                ClientDto dto = Mapper.toClientDto(client);
+                return dto;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

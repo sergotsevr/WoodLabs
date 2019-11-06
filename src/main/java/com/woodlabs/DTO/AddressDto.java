@@ -12,7 +12,7 @@ public class AddressDto {
     private Integer building;
     private Integer apartments;
 
-    @Override
+  /*  @Override
     public String toString(){
         String address = "ID - ";
         address = address.concat(addressId.toString());
@@ -23,5 +23,5 @@ public class AddressDto {
         address.concat(" Building - " + building);
         address.concat(" Apartments - " + apartments);
         return address;
-    }
+    }*/
 }
