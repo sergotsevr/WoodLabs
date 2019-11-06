@@ -48,7 +48,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public ProductCategoryDto update(ProductCategoryDto productCategoryDto) {
-        System.out.println(productCategoryDto);
         ProductCategory productCategory = modelMapper.map(productCategoryDto, ProductCategory.class);
         ProductCategory saved = productCategoryRepository.save(productCategory);
         ProductCategoryDto dto = modelMapper.map(saved, ProductCategoryDto.class);

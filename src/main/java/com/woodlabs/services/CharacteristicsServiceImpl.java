@@ -48,7 +48,6 @@ public class CharacteristicsServiceImpl implements CharacteristicsService {
 
     @Override
     public CharacteristicsDto update(CharacteristicsDto CharacteristicsDto) {
-        System.out.println(CharacteristicsDto);
         Characteristics Characteristics = modelMapper.map(CharacteristicsDto, Characteristics.class);
         Characteristics saved = characteristicsRepository.save(Characteristics);
         CharacteristicsDto dto = modelMapper.map(saved, CharacteristicsDto.class);

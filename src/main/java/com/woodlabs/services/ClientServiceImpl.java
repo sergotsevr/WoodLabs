@@ -25,7 +25,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto add(ClientDto clientDto) {
-        System.out.println(clientDto);
         Client client = Mapper.toClient(clientDto);
         Client saved = clientRepository.save(client);
         ClientDto dto = Mapper.toClientDto(saved);
