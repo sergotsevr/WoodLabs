@@ -21,27 +21,27 @@
         <tbody>
             <form action="/client/update" method="post">
                     <th  utext="${client.getClientId()}">
-                        <input type="text" name="id"  th:utext="${client.getClientId()}"></input>
+                        <input type="text" name="id"  th:value="${client.getClientId()}"></input>
                     </th>
                     <td>
-                        <input type="text" name="FirstName"  th:utext="${client.getFirstName()}"></input>
+                        <input type="text" name="FirstName"  th:value="${client.getFirstName()}"></input>
                     </td>
                     <td utext="${client.getLastName()}">
-                        <input type="text" name="LastName" value="${client.getLastName()}">
+                        <input type="text" name="LastName" th:value="${client.getLastName()}">
                     </td>
                     <td utext="${client.getDateOfBirth()}">
-                        <input type="date" name="DateOfBirth" value="${client.getDateOfBirth()}">
+                        <input type="date" name="DateOfBirth" th:value="${client.getDateOfBirth()}">
                     </td>
                     <td utext="${client.getEmail()}">
-                        <input type="email" name="email" value="${client.getEmail()}">
+                        <input type="email" name="email" th:value="${client.getEmail()}">
                     </td>
                     <td utext="${client.getPassword()}">
-                        <input type="text" name="Password" value="${client.getPassword()}">
+                        <input type="text" name="Password" th:value="${client.getPassword()}">
                     </td>
                     <td utext="${client.getAddressId()}">
-                        <div utext="${client.getAddressId()}"></div>
+                        <input type="text" name="Address Id" th:value="${client.getAddressId()}">
                     </td>
-                <br><br>
+                    <br><br>
                 <input type="submit" value="Update">
             </form>
         </tbody>
