@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class ClientController {
         return "clientMain";
     }
     @PostMapping("/create")
-    public String create(@RequestParam Map<String, String> allRequestParams, Model model){
+    public String create(@RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model){
         if (Util.isNumeric(allRequestParams.get("id"))) {
             ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
             if (clientDto!=null) {
@@ -76,7 +77,7 @@ public class ClientController {
         }
         clientService.add(clientDto);
         model.addAttribute("client", clientDto);
-        return "clientMain";
+        return "redirect:";
     }
     @PostMapping("/update")
     public String update(@RequestParam Map<String, String> allRequestParams, Model model){
@@ -99,10 +100,10 @@ public class ClientController {
                 }
                 clientService.update(clientDto);
                 model.addAttribute("client", clientDto);
-                return "clientMain";
+                return "redirect:";
             }
         }
-        return "clientMain";
+        return "clientUpdate";
     }
     @GetMapping("test")
     public String test( Model model) {
