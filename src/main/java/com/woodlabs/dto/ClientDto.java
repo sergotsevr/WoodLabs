@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Data
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 public class ClientDto {
 
     private Integer clientId;
+    @NotBlank
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;

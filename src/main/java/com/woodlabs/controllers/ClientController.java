@@ -19,6 +19,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,12 +48,14 @@ public class ClientController {
     CharacteristicsService characteristicsService;
     @Autowired
     private ModelMapper modelMapper;
+
     @GetMapping
     public String main(Model model){
         List<ClientDto> clients = clientService.findAll();
         model.addAttribute("clients", clients);
         return "clientMain";
     }
+
     @PostMapping("/create")
     public String create(@RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model){
         if (Util.isNumeric(allRequestParams.get("id"))) {
@@ -79,32 +83,47 @@ public class ClientController {
         model.addAttribute("client", clientDto);
         return "redirect:";
     }
-    @PostMapping("/update")
-    public String update(@RequestParam Map<String, String> allRequestParams, Model model){
-        if (Util.isNumeric(allRequestParams.get("id"))) {
-            ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
-            if (clientDto!=null) {
-                clientDto.setClientId(Integer.parseInt(allRequestParams.get("id")));
-                clientDto.setFirstName(allRequestParams.get("FirstName"));
-                clientDto.setLastName(allRequestParams.get("LastName"));
-                clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
-                clientDto.setEmail(allRequestParams.get("email"));
-                clientDto.setPassword(allRequestParams.get("Password"));
-                try {
-                    AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
-                    clientDto = clientService.update(clientDto);
-                    clientDto.setAddressDto(addressDto);
-                }
-                catch (NumberFormatException e){
-                    log.warn("attempt to write incorrect addressId for client = {}", clientDto);
-                }
-                clientService.update(clientDto);
-                model.addAttribute("client", clientDto);
-                return "redirect:";
-            }
-        }
+
+    @GetMapping("/clientUpdate")
+    public String updateView(@RequestParam Integer id, Model model) {
+        ClientDto clientDto = clientService.findById(id);
+        model.addAttribute("client", clientDto);
         return "clientUpdate";
     }
+
+    @PostMapping("/update")
+    public String update(@Valid ClientDto updatedDto, BindingResult result, Model model){
+//        if (Util.isNumeric(allRequestParams.get("id"))) {
+        if (result.hasErrors()) {
+            model.addAttribute("client", updatedDto);
+            return "clientUpdate";
+        }
+        ClientDto clientDto = clientService.findById(updatedDto.getClientId());
+        if (clientDto!=null) {
+            clientDto.setFirstName(updatedDto.getFirstName());
+//            clientDto.setClientId(Integer.parseInt(allRequestParams.get("id")));
+//            clientDto.setFirstName(allRequestParams.get("FirstName"));
+//            clientDto.setLastName(allRequestParams.get("LastName"));
+//            clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
+//            clientDto.setEmail(allRequestParams.get("email"));
+//            clientDto.setPassword(allRequestParams.get("Password"));
+//            try {
+//                AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
+//                clientDto = clientService.update(clientDto);
+//                clientDto.setAddressDto(addressDto);
+//            }
+//            catch (NumberFormatException e){
+//                log.warn("attempt to write incorrect addressId for client = {}", clientDto);
+//            }
+            clientService.update(clientDto);
+            model.addAttribute("client", clientDto);
+            return "redirect:";
+        }
+    //}
+        return "clientUpdate";
+    }
+
+
     @GetMapping("test")
     public String test( Model model) {
         ClientDto clientDto = clientService.findById(227);

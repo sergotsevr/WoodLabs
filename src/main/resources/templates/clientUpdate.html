@@ -19,18 +19,22 @@
         </tr>
         </thead>
         <tbody>
-            <form action="/client/update" method="post">
+            <form th:action="@{/client/update}" method="post" th:object="${client}">
                     <th  utext="${client.getClientId()}">
                         <input type="text" name="id"  th:value="${client.getClientId()}"></input>
                     </th>
                     <td>
-                        <input type="text" name="FirstName"  th:value="${client.getFirstName()}"></input>
+                        <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" />
+
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></span>
+                        <input type="text" name="FirstName" th:field="*{firstName}"/>
                     </td>
                     <td utext="${client.getLastName()}">
                         <input type="text" name="LastName" th:value="${client.getLastName()}">
                     </td>
-                    <td utext="${client.getDateOfBirth()}">
-                        <input type="date" name="DateOfBirth" th:value="${client.getDateOfBirth()}">
+                    <td>
+                        <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="text-danger"></span>
+                        <input type="text" th:field="*{dateOfBirth}"/>
                     </td>
                     <td utext="${client.getEmail()}">
                         <input type="email" name="email" th:value="${client.getEmail()}">
