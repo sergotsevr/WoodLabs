@@ -100,7 +100,12 @@ public class AddressServiceImpl implements AddressService{
     }
 
     private Address convertToEntity(AddressDto addressDto) throws ParseException {
-        Address address = modelMapper.map(addressDto, Address.class);
-        return address;
+        try {
+            Address address = modelMapper.map(addressDto, Address.class);
+            return address;
+        }
+        catch (Exception e){
+            return null;
+        }
     }
 }

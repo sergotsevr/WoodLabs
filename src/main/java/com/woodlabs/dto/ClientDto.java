@@ -1,7 +1,10 @@
 package com.woodlabs.dto;
 
+import com.woodlabs.services.AddressService;
+import com.woodlabs.utils.Util;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotBlank;
@@ -20,6 +23,7 @@ public class ClientDto {
     private String password;
     private AddressDto addressDto;
 
+
     public String getAddressId(){
         try {
             if (addressDto.getAddressId() != null) {
@@ -34,15 +38,13 @@ public class ClientDto {
     }
     public String setAddressId(Integer id){
         try {
-            if (addressDto.getAddressId() != null) {
-                addressDto.setAddressId(id);
+                addressDto = Util.findAddress(id);
                 return addressDto.getAddressId().toString();
-            }
         }
         catch (Exception e){
             return "address is not specified";
         }
-        return "address is not specified";
+
     }
 
     public ClientDto() {

@@ -1,6 +1,8 @@
 package com.woodlabs.services;
 
+import com.woodlabs.dto.AddressDto;
 import com.woodlabs.dto.ClientDto;
+import com.woodlabs.entities.Address;
 import com.woodlabs.entities.Client;
 import com.woodlabs.repositories.ClientRepository;
 import com.woodlabs.utils.Mapper;
@@ -19,10 +21,12 @@ import java.util.Optional;
 @Component
 @Slf4j
 public class ClientServiceImpl implements ClientService {
-
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private ClientRepository clientRepository;
-
+    @Autowired
+    private AddressService addressService;
     @Override
     public ClientDto add(ClientDto clientDto) {
         Client client = Mapper.toClient(clientDto);
@@ -47,8 +51,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDto update(ClientDto clientDto) {
         Client client = Mapper.toClient(clientDto);
+        AddressDto addressDto =addressService.update(clientDto.getAddressDto());
+        client.setAddress(modelMapper.map(addressDto, Address.class));
         Client saved = clientRepository.save(client);
-        ClientDto dto = Mapper.toClientDto(client);
+        ClientDto dto = Mapper.toClientDto(saved);
         return dto;
     }
 

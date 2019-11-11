@@ -1,5 +1,6 @@
 package com.woodlabs.entities;
 
+
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,30 @@ public class Client {
     @JoinColumn(name = "AddressId")
     private Address address;
 
+    public String setAddressId(Integer id){
+        try {
+            if (address.getAddressId() != null) {
+                address.setAddressId(id);
+                return address.getAddressId().toString();
+            }
+        }
+        catch (Exception e){
+            return "address is not specified";
+        }
+        return "address is not specified";
+    }
 
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
+    }
+    public void setClientId(String clientId) {
+        try {
+            this.clientId = Integer.parseInt(clientId);
+        }
+        catch (Exception e){
+
+        }
+    }
     public Client() {
     }
 

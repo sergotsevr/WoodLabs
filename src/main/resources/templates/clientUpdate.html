@@ -17,16 +17,17 @@
             <th>password</th>
             <th>address</th>
         </tr>
+
         </thead>
         <tbody>
             <form th:action="@{/client/update}" method="post" th:object="${client}">
+                <fieldset>
                     <th  utext="${client.getClientId()}">
-                        <input type="text" name="id"  th:value="${client.getClientId()}"></input>
+                        <input type="text" name="clientId"  th:value="${client.getClientId()}"></input>
                     </th>
                     <td>
+                        <td:errors path="firstName" cssClass="error"/>
                         <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" />
-
-                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></span>
                         <input type="text" name="FirstName" th:field="*{firstName}"/>
                     </td>
                     <td utext="${client.getLastName()}">
@@ -42,11 +43,12 @@
                     <td utext="${client.getPassword()}">
                         <input type="text" name="Password" th:value="${client.getPassword()}">
                     </td>
-                    <td utext="${client.getAddressId()}">
-                        <input type="text" name="AddressId" th:value="${client.getAddressId()}">
+                    <td>
+                        <input type="text" name="addressId" th:value="${client.getAddressId()}">
                     </td>
                     <br><br>
                 <input type="submit" value="Update">
+                </fieldset>
             </form>
         </tbody>
     </table>
