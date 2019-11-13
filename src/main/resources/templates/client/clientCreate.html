@@ -20,33 +20,17 @@
         <label for="dateOfBirth">Enter birthdate:</label>
         <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth">
     </div>
-    <table class="table table-hover table-inverse">
-        <thead>
-        <tr>
-
-
-            <th>email</th>
-            <th>password</th>
-            <th>address</th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-
-
-        <td >
-            <input type="email" name="email">
-        </td>
-        <td >
-            <input type="text" name="Password" >
-        </td>
-        <td>
-            <input type="text" name="addressId" >
-        </td>
-        </tbody>
-    </table>
-    <input type="submit" value="Create">
+    <div class="form-group  col-3">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+               placeholder="Enter email" name="email" th:value>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group col-3">
+        <label for="exampleInputPassword1" >Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" th:value>
+    </div>
+    <input type="submit" class="btn btn-primary col-3" value="Create">
 </form>
 </body>
 </html>
