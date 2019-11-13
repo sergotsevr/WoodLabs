@@ -9,19 +9,18 @@
 
         <div class="col-xs-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-                <a class="navbar-brand" href="../client/">Admin console</a>
+                <a class="navbar-brand" href="../address/">Admin console</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Client</a>
+                            <a class="nav-link" href="../client">Client</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../address">Address</a>
+                            <a class="nav-link" href="#">Address</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Products</a>
@@ -33,31 +32,37 @@
                 </div>
             </nav>
         </div>
-        <a class="btn btn-dark"  href="create" role="button">Add new client</a>
+        <a class="btn btn-dark"  href="address/create" role="button">Add new address</a>
         <table class="table table-hover table-inverse">
             <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>dateOfBirth</th>
-                <th>email</th>
-                <th>address</th>
+                <th>Address Id</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Zip Code</th>
+                <th>Street</th>
+                <th>Building</th>
+                <th>Apartments</th>
                 <th>delete</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="client : ${clients}">
+            <tr th:each="address : ${addresses}">
                 <td>
-                    <a th:href="@{clientUpdate(id=${client.getClientId()})}">
-                        <span th:text="${client.getFirstName()}"/>
+                    <a th:href="@{addressUpdate(id=${address.getAddressId()})}">
+                        <span th:text="${address.getAddressId()}"/>
                     </a>
                 </td>
-                <td th:utext="${client.getLastName()}"/>
-                <td th:utext="${client.getDateOfBirth()}"/>
-                <td th:utext="${client.getEmail()}"/>
-                <td th:utext="${client.getAddressId()}"/>
+                <td th:utext="${address.getCountry()}"/>
+                <td th:utext="${address.getCity()}"/>
+                <td th:utext="${address.getCountry()}"/>
+                <td th:utext="${address.getZipCode()}"/>
+                <td th:utext="${address.getStreet()}"/>
+                <td th:utext="${address.getBuilding()}"/>
+                <td th:utext="${address.getApartments()}"/>
+                <td th:utext="${address.getAddressId()}"/>
                 <td >
-                    <a th:href="@{delete(id=${client.getClientId()})}">
+                    <a th:href="@{delete(id=${address.getaddressId()})}">
                         <span>
                             delete
                         </span>

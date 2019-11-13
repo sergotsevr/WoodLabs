@@ -48,28 +48,32 @@ public class ClientController {
     CharacteristicsService characteristicsService;
     @Autowired
     private ModelMapper modelMapper;
+
     @GetMapping("/test")
-    public String tet(Model model){
+    public String tet(Model model) {
         List<ClientDto> clients = clientService.findAll();
         model.addAttribute("clients", clients);
         return "test/test";
     }
+
     @GetMapping
-    public String main(Model model){
+    public String main(Model model) {
         List<ClientDto> clients = clientService.findAll();
         model.addAttribute("clients", clients);
         return "client/clientMain";
     }
+
     @GetMapping("/create")
-    public String create(){
+    public String create() {
         return "client/clientCreate";
     }
+
     @PostMapping("/create")
-    public String create( ClientDto updatedDto,@RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model){
+    public String create(ClientDto updatedDto, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
 
         if (Util.isNumeric(allRequestParams.get("id"))) {
             ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
-            if (clientDto!=null) {
+            if (clientDto != null) {
                 log.warn("client with id = {} already exists", allRequestParams.get("id"));
                 return "client/clientMain";
             }
@@ -85,8 +89,7 @@ public class ClientController {
             AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
             updatedDto = clientService.add(updatedDto);
             updatedDto.setAddressDto(addressDto);
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             log.info("attempt to write incorrect addressId for client = {}", updatedDto);
         }
         clientService.add(updatedDto);
@@ -102,7 +105,7 @@ public class ClientController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid ClientDto updatedDto, @RequestParam Map<String, String> allRequestParams, BindingResult result, Model model){
+    public String update(@Valid ClientDto updatedDto, @RequestParam Map<String, String> allRequestParams, BindingResult result, Model model) {
 
         //if (Util.isNumeric(allRequestParams.get("clientId"))) {
 
@@ -113,24 +116,24 @@ public class ClientController {
             return "client/clientUpdate";
         }
         ClientDto clientDto = clientService.findById(updatedDto.getClientId());
-        if (clientDto!=null) {
+        if (clientDto != null) {
             try {
                 AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("addressId")));
                 updatedDto.setAddressDto(addressDto);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 log.info(clientDto.toString());
                 log.info("attempt to update client with wrong addressID");
             }
             clientService.update(updatedDto);
             model.addAttribute("client", clientDto);
             return "redirect:";
-            }
-     //   }
+        }
+        //   }
         return "client/clientUpdate";
     }
+
     @GetMapping("/delete")
-    public String delete(Integer id){
+    public String delete(Integer id) {
         ClientDto clientDto = new ClientDto();
         clientDto.setClientId(id);
         clientService.delete(clientDto);
