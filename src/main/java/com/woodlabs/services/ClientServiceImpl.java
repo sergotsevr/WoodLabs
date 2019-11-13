@@ -50,9 +50,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto update(ClientDto clientDto) {
+        try {
+            if (addressService.findById(Integer.parseInt(clientDto.getAddressId())) != null) {
+                clientDto.setAddressDto(addressService.findById(Integer.parseInt(clientDto.getAddressId())));
+            }
+        }
+        catch (NumberFormatException e){
+            log.warn("wrong id = {}", clientDto.getAddressId());
+        }
         Client client = Mapper.toClient(clientDto);
-        AddressDto addressDto =addressService.update(clientDto.getAddressDto());
-        client.setAddress(modelMapper.map(addressDto, Address.class));
         Client saved = clientRepository.save(client);
         ClientDto dto = Mapper.toClientDto(saved);
         return dto;

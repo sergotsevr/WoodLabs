@@ -94,7 +94,7 @@ public class ClientController {
 
     @PostMapping("/update")
     public String update(@Valid ClientDto updatedDto, @RequestParam Map<String, String> allRequestParams, BindingResult result, Model model){
-        System.err.println(allRequestParams.get("addressId"));
+
         //if (Util.isNumeric(allRequestParams.get("clientId"))) {
 
         if (result.hasErrors()) {
@@ -105,6 +105,14 @@ public class ClientController {
         }
         ClientDto clientDto = clientService.findById(updatedDto.getClientId());
         if (clientDto!=null) {
+            try {
+                AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("addressId")));
+                updatedDto.setAddressDto(addressDto);
+            }
+            catch (Exception e){
+                log.info(clientDto.toString());
+                log.info("attempt to update client with wrong addressID");
+            }
             clientService.update(updatedDto);
             model.addAttribute("client", clientDto);
             return "redirect:";

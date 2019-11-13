@@ -21,13 +21,11 @@
         </thead>
         <tbody>
             <form th:action="@{/client/update}" method="post" th:object="${client}">
-                <fieldset>
                     <th  utext="${client.getClientId()}">
                         <input type="text" name="clientId"  th:value="${client.getClientId()}"></input>
                     </th>
                     <td>
-                        <td:errors path="firstName" cssClass="error"/>
-                        <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" />
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{companyName}"></p>
                         <input type="text" name="FirstName" th:field="*{firstName}"/>
                     </td>
                     <td utext="${client.getLastName()}">
@@ -48,7 +46,6 @@
                     </td>
                     <br><br>
                 <input type="submit" value="Update">
-                </fieldset>
             </form>
         </tbody>
     </table>

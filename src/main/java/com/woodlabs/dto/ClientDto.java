@@ -27,24 +27,14 @@ public class ClientDto {
     public String getAddressId(){
         try {
             if (addressDto.getAddressId() != null) {
-                addressDto.getAddressId();
                 return addressDto.getAddressId().toString();
             }
         }
        catch (Exception e){
+            e.printStackTrace();
            return "address is not specified";
         }
         return "address is not specified";
-    }
-    public String setAddressId(Integer id){
-        try {
-                addressDto = Util.findAddress(id);
-                return addressDto.getAddressId().toString();
-        }
-        catch (Exception e){
-            return "address is not specified";
-        }
-
     }
 
     public ClientDto() {
