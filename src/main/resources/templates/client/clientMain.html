@@ -37,8 +37,8 @@
                 <th>Last Name</th>
                 <th>dateOfBirth</th>
                 <th>email</th>
-                <th>password</th>
                 <th>address</th>
+                <th>delete</th>
             </tr>
             </thead>
             <tbody>
@@ -51,8 +51,8 @@
                 <td th:utext="${client.getLastName()}"/>
                 <td th:utext="${client.getDateOfBirth()}"/>
                 <td th:utext="${client.getEmail()}"/>
-                <td th:utext="${client.getPassword()}"/>
                 <td th:utext="${client.getAddressId()}"/>
+                <td th:href="@{clientDelete(id=${client.getClientId()})}">
             </tr>
             </tbody>
         </table>

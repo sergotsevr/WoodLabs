@@ -60,9 +60,12 @@ public class ClientController {
         model.addAttribute("clients", clients);
         return "client/clientMain";
     }
-
+    @GetMapping("/create")
+    public String create(){
+        return "client/clientCreate";
+    }
     @PostMapping("/create")
-    public String create(@RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model){
+    public String create( ClientDto updatedDto,@RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model){
 
         if (Util.isNumeric(allRequestParams.get("id"))) {
             ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
@@ -71,6 +74,7 @@ public class ClientController {
                 return "client/clientMain";
             }
         }
+        updatedDto.getFirstName();
         ClientDto clientDto = new ClientDto();
         clientDto.setFirstName(allRequestParams.get("FirstName"));
         clientDto.setLastName(allRequestParams.get("LastName"));
@@ -125,12 +129,11 @@ public class ClientController {
      //   }
         return "client/clientUpdate";
     }
-
-
-   /* @GetMapping("test")
-    public String test( Model model) {
-        ClientDto clientDto = clientService.findById(227);
-        model.addAttribute("client", clientDto);
-        return "clientCreate";
-    }*/
+    @GetMapping("/delete")
+    public String delete(Integer id){
+        ClientDto clientDto = new ClientDto();
+        clientDto.setClientId(id);
+        clientService.delete(clientDto);
+        return "redirect:";
+    }
 }

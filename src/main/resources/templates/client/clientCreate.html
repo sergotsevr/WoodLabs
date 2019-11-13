@@ -3,44 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <table class="table table-hover table-inverse">
-        <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>dateOfBirth</th>
-            <th>email</th>
-            <th>password</th>
-            <th>address</th>
-        </tr>
-        </thead>
-        <tbody>
-            <form action="/client/create" method="post">
-                    <td>
-                        <input type="text" name="FirstName"  th:value="${client.getFirstName()}"></input>
-                    </td>
-                    <td utext="${client.getLastName()}">
-                        <input type="text" name="LastName" th:value="${client.getLastName()}">
-                    </td>
-                    <td utext="${client.getDateOfBirth()}">
-                        <input type="date" name="DateOfBirth" th:value="${client.getDateOfBirth()}">
-                    </td>
-                    <td utext="${client.getEmail()}">
-                        <input type="email" name="email" th:value="${client.getEmail()}">
-                    </td>
-                    <td utext="${client.getPassword()}">
-                        <input type="text" name="Password" th:value="${client.getPassword()}">
-                    </td>
-                    <td utext="${client.getAddressId()}">
-                        <input type="text" name="AddressId" th:value="${client.getAddressId()}">
-                    </td>
-                    <br><br>
-                <input type="submit" value="Create">
-            </form>
-        </tbody>
-    </table>
+<form th:action="@{/admin/client/create}" method="post">
+
+        <div class="form-group col-3">
+            <label for="firstName">First name</label>
+            <input class="form-control" id="firstName" name="firstName" rows="3" placeholder="Enter your first name" th:value></input>
+        </div>
+    <div class="form-group col-3">
+        <label for="lastName">Last name</label>
+        <input class="form-control" id="lastName" name="lastName" rows="3" placeholder="Enter your last name" ></input>
+    </div>
+    <div class="form-group  col-3">
+        <label for="dateOfBirth">Enter birthdate:</label>
+        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" >
+    </div>
+    <div class="form-group  col-3">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+               placeholder="Enter email" name="email" th:value>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group col-3">
+        <label for="exampleInputPassword1" >Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" th:value>
+    </div>
+    <input type="submit" value="Create">
+</form>
 </body>
 </html>
