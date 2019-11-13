@@ -26,15 +26,17 @@ public class ClientDto {
 
     public String getAddressId(){
         try {
-            if (addressDto.getAddressId() != null) {
+            if (addressDto != null){
                 return addressDto.getAddressId().toString();
             }
+            else {
+                return "address is not specified";
+            }
         }
-       catch (Exception e){
-            e.printStackTrace();
-           return "address is not specified";
-        }
-        return "address is not specified";
+       catch (Exception e) {
+           e.printStackTrace();
+           return "error searching address";
+       }
     }
 
     public ClientDto() {
