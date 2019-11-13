@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(path = "/client")
+@RequestMapping(path = "/admin/client")
 @Slf4j
 public class ClientController {
 
@@ -48,12 +48,17 @@ public class ClientController {
     CharacteristicsService characteristicsService;
     @Autowired
     private ModelMapper modelMapper;
-
+    @GetMapping("/test")
+    public String tet(Model model){
+        List<ClientDto> clients = clientService.findAll();
+        model.addAttribute("clients", clients);
+        return "test/test";
+    }
     @GetMapping
     public String main(Model model){
         List<ClientDto> clients = clientService.findAll();
         model.addAttribute("clients", clients);
-        return "clientMain";
+        return "client/clientMain";
     }
 
     @PostMapping("/create")
@@ -63,7 +68,7 @@ public class ClientController {
             ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
             if (clientDto!=null) {
                 log.warn("client with id = {} already exists", allRequestParams.get("id"));
-                return "clientMain";
+                return "client/clientMain";
             }
         }
         ClientDto clientDto = new ClientDto();
@@ -89,7 +94,7 @@ public class ClientController {
     public String updateView(@RequestParam Integer id, Model model) {
         ClientDto clientDto = clientService.findById(id);
         model.addAttribute("client", clientDto);
-        return "clientUpdate";
+        return "client/clientUpdate";
     }
 
     @PostMapping("/update")
@@ -101,7 +106,7 @@ public class ClientController {
             model.addAttribute("client", updatedDto);
             log.warn(result.getAllErrors().toString());
             model.addAttribute(result);
-            return "clientUpdate";
+            return "client/clientUpdate";
         }
         ClientDto clientDto = clientService.findById(updatedDto.getClientId());
         if (clientDto!=null) {
@@ -118,47 +123,14 @@ public class ClientController {
             return "redirect:";
             }
      //   }
-        return "clientUpdate";
+        return "client/clientUpdate";
     }
 
 
-    @GetMapping("test")
+   /* @GetMapping("test")
     public String test( Model model) {
         ClientDto clientDto = clientService.findById(227);
         model.addAttribute("client", clientDto);
-       /* ClientDto clientDto = new ClientDto();
-        clientDto.setEmail("Gut@man.ru");
-        AddressDto address = new AddressDto();
-        address.setApartments(12);
-        address.setBuilding(45);
-        address.setCity("LA");
-        address.setCountry("UD");
-        address.setStreet("451 av");
-        address = addressService.add(address);
-        clientDto = clientService.add(clientDto);
-        clientDto.setAddressDto(address);
-        clientDto.setDateOfBirth(LocalDate.now());
-        clientDto.setFirstName("John");
-        clientDto.setLastName("Man");
-        clientDto.setPassword("1234");
-        clientService.update(clientDto);*/
-        /*
-        ProductCategoryDto productCategoryDto = new ProductCategoryDto();
-        CharacteristicsDto characteristicD = new CharacteristicsDto();
-        characteristicD.setCharacteristic("Volume");
-        CharacteristicsDto characteristic2D = new CharacteristicsDto();
-        characteristic2D.setCharacteristic("price");
-        characteristicD = characteristicsService.add(characteristicD);
-        characteristic2D = characteristicsService.add(characteristic2D);
-        List<Characteristics> cha = new LinkedList<>();
-        productCategoryDto = categoryService.add(productCategoryDto);
-        productCategoryDto.setCharacteristics(cha);
-        cha.add(modelMapper.map(characteristicD, Characteristics.class));
-        cha.add(modelMapper.map(characteristic2D, Characteristics.class));
-        productCategoryDto.setCharacteristics(cha);
-        productCategoryDto.setName("main");
-        categoryService.update(productCategoryDto);
-*/
         return "clientCreate";
-    }
+    }*/
 }

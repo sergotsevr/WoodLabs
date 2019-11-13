@@ -59,7 +59,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/findAll")
+    @GetMapping("/")
     public ModelAndView findAll(@RequestParam Map<String, String> allRequestParams, Model model) {
         List<ProductDto> productList = productService.findAll();
         model.addAttribute("productList", productList);
@@ -99,10 +99,5 @@ public class ProductController {
             log.warn("attempt to update product with incorrect digital format field");
         }
         return new ModelAndView("main");
-    }
-
-    @GetMapping("/")
-    public String greeting() {
-        return "main2";
     }
 }
