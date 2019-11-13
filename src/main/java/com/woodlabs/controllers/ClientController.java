@@ -75,22 +75,22 @@ public class ClientController {
             }
         }
         updatedDto.getFirstName();
-        ClientDto clientDto = new ClientDto();
+        /*ClientDto clientDto = new ClientDto();
         clientDto.setFirstName(allRequestParams.get("FirstName"));
         clientDto.setLastName(allRequestParams.get("LastName"));
         clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
         clientDto.setEmail(allRequestParams.get("email"));
-        clientDto.setPassword(allRequestParams.get("Password"));
+        clientDto.setPassword(allRequestParams.get("Password"));*/
         try {
             AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
-            clientDto = clientService.add(clientDto);
-            clientDto.setAddressDto(addressDto);
+            updatedDto = clientService.add(updatedDto);
+            updatedDto.setAddressDto(addressDto);
         }
         catch (NumberFormatException e){
-            log.info("attempt to write incorrect addressId for client = {}", clientDto);
+            log.info("attempt to write incorrect addressId for client = {}", updatedDto);
         }
-        clientService.add(clientDto);
-        model.addAttribute("client", clientDto);
+        clientService.add(updatedDto);
+        model.addAttribute("client", updatedDto);
         return "redirect:";
     }
 
