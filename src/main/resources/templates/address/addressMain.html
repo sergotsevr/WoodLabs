@@ -49,7 +49,7 @@
             <tbody>
             <tr th:each="address : ${addresses}">
                 <td>
-                    <a th:href="@{addressUpdate(id=${address.getAddressId()})}">
+                    <a th:href="@{/admin/address/update(id=${address.getAddressId()})}">
                         <span th:text="${address.getAddressId()}"/>
                     </a>
                 </td>

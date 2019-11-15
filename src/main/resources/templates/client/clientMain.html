@@ -48,7 +48,7 @@
             <tbody>
             <tr th:each="client : ${clients}">
                 <td>
-                    <a th:href="@{clientUpdate(id=${client.getClientId()})}">
+                    <a th:href="@{/admin/client/clientUpdate(id=${client.getClientId()})}">
                         <span th:text="${client.getFirstName()}"/>
                     </a>
                 </td>
