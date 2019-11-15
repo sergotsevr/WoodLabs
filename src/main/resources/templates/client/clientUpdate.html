@@ -57,9 +57,14 @@
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                    placeholder="Enter email" name="email" th:value="${client.getEmail()}">
         </div>
+        <div class="form-group  col-3">
+            <label for="exampleInputEmail1">Address Id</label>
+            <input type="AddressId" class="form-control" id="AddressId"
+                   placeholder="AddressId" name="AddressId" th:value="${client.getAddressId()}">
+        </div>
         <div class="form-group col-3">
             <label for="exampleInputPassword1" >Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" th:value>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" th:value="${client.getPassword()}">
         </div>
         <input type="submit" class="btn btn-primary col-3" value="update user"></input>
     </form>

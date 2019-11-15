@@ -113,7 +113,7 @@ public class ClientController {
         ClientDto clientDto = clientService.findById(updatedDto.getClientId());
         if (clientDto != null) {
             try {
-                AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("addressId")));
+                AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
                 updatedDto.setAddressDto(addressDto);
             } catch (Exception e) {
                 log.info(clientDto.toString());
