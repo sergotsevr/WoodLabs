@@ -1,12 +1,9 @@
 package com.woodlabs.dto;
 
-import com.woodlabs.services.AddressService;
-import com.woodlabs.utils.Util;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
@@ -18,6 +15,7 @@ public class ClientDto {
     @NotBlank
     private String firstName;
     private String lastName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
     private String email;
     private String password;

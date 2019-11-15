@@ -41,7 +41,6 @@ public class ClientServiceImpl implements ClientService {
         try {
             client = Mapper.toClient(clientDto);
             clientRepository.delete(client);
-            return;
         }
         catch (Exception e) {
             log.warn("error deleting client {}", clientDto);
@@ -67,18 +66,20 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional(readOnly = true)
     public List<ClientDto> findAll() {
+        List<ClientDto> dto = null;
+
         try {
+            dto = new LinkedList<>();
             List<Client> found = clientRepository.findAll();
-            List<ClientDto> dto = new LinkedList<>();
             for (Client client : found) {
                 dto.add(Mapper.toClientDto(client));
             }
-            return dto;
         } catch (Exception e) {
             e.printStackTrace();
+            log.warn("error finding all clients");
         }
-        log.warn("error finding all clients");
-        return null;
+
+        return dto;
     }
 
     @Override

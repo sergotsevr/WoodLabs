@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Slf4j
 @Component
 public class AddressServiceImpl implements AddressService{

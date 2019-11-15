@@ -33,7 +33,7 @@ public class AddressController {
     }
     @GetMapping("/create")
     public String create() {
-        return "address/clientCreate";
+        return "address/addressCreate";
     }
 
     @PostMapping("/create")

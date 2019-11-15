@@ -7,33 +7,30 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<form th:action="@{/admin/address/create}" method="post" th:object="${address}">
-    <div class="form-group col-3">
-        <label for="addressId">First name</label>
-        <input class="form-control" id="addressId" name="addressId" rows="3" placeholder="addressId" ></input>
-    </div>
-    <div class="form-group col-3">
-        <label for="city">Last name</label>
-        <input class="form-control" id="city" name="city" rows="3" placeholder="country"></input>
-    </div>
-    <div class="form-group col-3">
-        <label for="zipCode">Last name</label>
-        <input class="form-control" id="zipCode" name="zipCode" rows="3" placeholder="country"></input>
-    </div>
-    <div class="form-group col-3">
-        <label for="street">Last name</label>
-        <input class="form-control" id="street" name="street" rows="3" placeholder="country"></input>
-    </div>
-    <div class="form-group col-3">
-        <label for="building">Last name</label>
-        <input class="form-control" id="building" name="building" rows="3" placeholder="country"></input>
-    </div>
-    <div class="form-group col-3">
-        <label for="apartments">Last name</label>
-        <input class="form-control" id="apartments" name="apartments" rows="3" placeholder="country"></input>
-    </div>
-
-    <input type="submit" class="btn btn-primary col-3" value="Create">
-</form>
+    <form th:action="@{/admin/client/create}" method="post" th:object="${client}">
+        <div class="form-group col-3">
+            <label for="firstName">First name</label>
+            <input class="form-control" id="firstName" name="firstName" rows="3" placeholder="Enter your first name" th:value></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="lastName">Last name</label>
+            <input class="form-control" id="lastName" name="lastName" rows="3" placeholder="Enter your last name" th:value></input>
+        </div>
+            <div class="form-group  col-3">
+                <label for="dateOfBirth">Enter birthdate:</label>
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" th:value>
+            </div>
+        <div class="form-group  col-3">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter email" name="email" th:value>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group col-3">
+            <label for="exampleInputPassword1" >Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" th:value>
+        </div>
+        <input type="submit" class="btn btn-primary col-3" value="Log On"></input>
+    </form>
 </body>
 </html>
