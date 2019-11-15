@@ -79,6 +79,7 @@ public class ClientController {
             }
         }
         updatedDto.getFirstName();
+
         try {
             AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
             updatedDto = clientService.add(updatedDto);

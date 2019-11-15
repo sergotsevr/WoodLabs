@@ -57,7 +57,7 @@
                 <td th:utext="${client.getEmail()}"/>
                 <td th:utext="${client.getAddressId()}"/>
                 <td >
-                    <a th:href="@{client/delete(id=${client.getClientId()})}">
+                    <a th:href="@{/admin/client/delete(id=${client.getClientId()})}">
                         <span>
                             delete
                         </span>
