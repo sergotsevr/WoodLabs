@@ -79,12 +79,6 @@ public class ClientController {
             }
         }
         updatedDto.getFirstName();
-        /*ClientDto clientDto = new ClientDto();
-        clientDto.setFirstName(allRequestParams.get("FirstName"));
-        clientDto.setLastName(allRequestParams.get("LastName"));
-        clientDto.setDateOfBirth(LocalDate.parse(allRequestParams.get("DateOfBirth")));
-        clientDto.setEmail(allRequestParams.get("email"));
-        clientDto.setPassword(allRequestParams.get("Password"));*/
         try {
             AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
             updatedDto = clientService.add(updatedDto);

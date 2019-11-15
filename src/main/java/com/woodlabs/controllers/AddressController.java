@@ -43,11 +43,14 @@ public class AddressController {
             AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("addressId")));
             if (addressDto != null) {
                 log.warn("client with id = {} already exists", allRequestParams.get("id"));
-                return "address/addressMain";
+            }
+            else {
+                addressService.add(updatedDto);
             }
         }
-        addressService.add(updatedDto);
-        model.addAttribute("address", updatedDto);
+        else {
+            addressService.add(updatedDto);
+        }
         return "redirect:";
     }
 }

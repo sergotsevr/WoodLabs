@@ -17,10 +17,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="../client">Client</a>
+                            <a class="nav-link" href="./client">Client</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Address</a>
+                            <a class="nav-link active" href="#">Address</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Products</a>
@@ -62,7 +62,7 @@
                 <td th:utext="${address.getApartments()}"/>
                 <td th:utext="${address.getAddressId()}"/>
                 <td >
-                    <a th:href="@{delete(id=${address.getaddressId()})}">
+                    <a th:href="@{delete(id=${address.getAddressId()})}">
                         <span>
                             delete
                         </span>
