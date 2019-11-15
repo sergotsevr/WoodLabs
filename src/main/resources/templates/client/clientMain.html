@@ -21,7 +21,7 @@
                             <a class="nav-link active" href="#">Client</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./address">Address</a>
+                            <a class="nav-link" href="../address">Address</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Products</a>
@@ -57,7 +57,7 @@
                 <td th:utext="${client.getEmail()}"/>
                 <td th:utext="${client.getAddressId()}"/>
                 <td >
-                    <a th:href="@{delete(id=${client.getClientId()})}">
+                    <a th:href="@{client/delete(id=${client.getClientId()})}">
                         <span>
                             delete
                         </span>

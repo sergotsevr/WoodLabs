@@ -25,6 +25,13 @@ public class AddressController {
     @Autowired
     AddressService addressService;
 
+    @GetMapping("/delete")
+    public String delete(Integer id) {
+        AddressDto addressDto = new AddressDto();
+        addressDto.setAddressId(id);
+        addressService.delete(addressDto);
+        return "redirect:";
+    }
     @GetMapping
     public String main(Model model) {
         List<AddressDto> addressDtos = addressService.findAll();
