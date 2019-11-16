@@ -19,7 +19,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/client">Client</a>
+                    <a class="nav-link " href="/admin/client">Client</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/address">Address</a>
@@ -34,7 +34,9 @@
         </div>
     </nav>
 </div>
+
 <div class="container">
+    <button class="btn btn-primary col-3" onclick="window.location='/admin/client'">Cancel</button>
     <form th:action="@{/admin/client/update}" method="post" th:object="${client}">
         <div class="form-group col-3">
             <label for="clientId">Id</label>
