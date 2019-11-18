@@ -34,6 +34,7 @@
     </nav>
 </div>
 <div class="container">
+    <button class="btn btn-primary col-3" onclick="window.location='/admin/address'">Cancel</button>
     <form th:action="@{/admin/address/create}" method="post" th:object="${address}">
         <div class="form-group col-3">
             <label for="country">Country</label>
