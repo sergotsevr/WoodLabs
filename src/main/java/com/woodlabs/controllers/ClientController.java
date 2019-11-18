@@ -61,13 +61,20 @@ public class ClientController {
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(@Valid @ModelAttribute("client") ClientDto updatedDto, BindingResult result, Model model) {
+        model.addAttribute("client", new ClientDto());
         return "client/clientCreate";
     }
 
     @PostMapping("/create")
-    public String create(ClientDto updatedDto, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
+    public String create(@Valid @ModelAttribute("client") ClientDto updatedDto, BindingResult result, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
 
+        if (result.hasErrors()) {
+            model.addAttribute("client", updatedDto);
+            log.warn(result.getAllErrors().toString());
+            model.addAttribute(result);
+            return "client/clientCreate";
+        }
         if (Util.isNumeric(allRequestParams.get("id"))) {
             ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
             if (clientDto != null) {
