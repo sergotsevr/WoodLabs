@@ -44,23 +44,27 @@
         </div>
         <div class="form-group col-3">
             <label for="firstName">First name</label>
-            <input class="form-control" id="firstName" name="firstName" rows="3"  th:value="${client.getFirstName()}"></input>
+            <input class="form-control" id="firstName" name="firstName" rows="3"  th:value="${client.getFirstName()}"/>
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger">Name Error</span>
         </div>
         <div class="form-group col-3">
             <label for="lastName">Last name</label>
-            <input class="form-control" id="lastName" name="lastName" rows="3"  th:value="${client.getLastName()}"></input>
+            <input class="form-control" id="lastName" name="lastName" rows="3"  th:value="${client.getLastName()}"/>
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger">Name Error</span>
         </div>
         <div class="form-group  col-3">
             <label for="dateOfBirth">Enter birthdate:</label>
-            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" th:value="${client.getDateOfBirth()}">
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" th:value="${client.getDateOfBirth()}"/>
+            <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="text-danger">Name Error</span>
         </div>
         <div class="form-group  col-3">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Enter email" name="email" th:value="${client.getEmail()}">
+                   placeholder="Enter email" name="email" th:value="${client.getEmail()}"/>
+            <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="text-danger">Name Error</span>
         </div>
         <div class="form-group  col-3">
-            <label for="exampleInputEmail1">Address Id</label>
+            <label for="AddressId">Address Id</label>
             <input type="AddressId" class="form-control" id="AddressId"
                    placeholder="AddressId" name="AddressId" th:value="${client.getAddressId()}">
         </div>

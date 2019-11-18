@@ -20,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
@@ -100,9 +97,7 @@ public class ClientController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid ClientDto updatedDto, @RequestParam Map<String, String> allRequestParams, BindingResult result, Model model) {
-
-        //if (Util.isNumeric(allRequestParams.get("clientId"))) {
+    public String update(@Valid @ModelAttribute("client") ClientDto updatedDto, BindingResult result, @RequestParam Map<String, String> allRequestParams, Model model) {
 
         if (result.hasErrors()) {
             model.addAttribute("client", updatedDto);

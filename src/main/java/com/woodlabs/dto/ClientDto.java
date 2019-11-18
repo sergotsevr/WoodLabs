@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
@@ -12,15 +12,16 @@ import java.time.LocalDate;
 public class ClientDto {
 
     private Integer clientId;
-    @NotBlank
+    @Size(min = 2, max = 100)
     private String firstName;
+    @Size(min = 3, max = 100)
     private String lastName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+    @Email
     private String email;
     private String password;
     private AddressDto addressDto;
-
 
     public String getAddressId(){
         try {
