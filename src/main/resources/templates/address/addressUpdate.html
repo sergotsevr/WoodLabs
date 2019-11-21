@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WoodLab</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="col-xs-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="/admin">Admin console</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/client">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/address">Address</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Product category</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <button class="btn btn-primary col-3" onclick="window.location='/admin/address'">Cancel</button>
+    <form th:action="@{/admin/address/update}" method="post" th:object="${address}">
+        <div class="form-group col-3">
+            <label for="addressId">Id</label>
+            <input class="form-control" id="addressId" name="addressId" rows="3" placeholder="country" th:value="${address.getAddressId()}" readonly></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="country">Country</label>
+            <input class="form-control" id="country" name="country" rows="3" placeholder="country" th:value="${address.getCountry()}" ></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="city">City</label>
+            <input class="form-control" id="city" name="city" rows="3" placeholder="city" th:value="${address.getCity()}"></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="zipCode">Zip Code</label>
+            <input class="form-control" id="zipCode" name="zipCode" rows="3" placeholder="zipCode" th:value="${address.getZipCode()}"></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="street">street</label>
+            <input class="form-control" id="street" name="street" rows="3" placeholder="street" th:value="${address.getStreet()}"></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="building">building</label>
+            <input class="form-control" id="building" name="building" rows="3" placeholder="building" th:value="${address.getBuilding()}"></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="apartments">apartments</label>
+            <input class="form-control" id="apartments" name="apartments" rows="3" placeholder="apartments" th:value="${address.getApartments()}"></input>
+        </div>
+
+        <input type="submit" class="btn btn-primary col-3" value="Create">
+    </form>
+</div>
+</body>
+</html>

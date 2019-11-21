@@ -28,15 +28,15 @@ public class Address {
     private Integer apartments;
 
     @Override
-    public String toString(){
-        String address = "ID - ";
-        address = address.concat(addressId.toString());
-        address.concat(" Country - " + country);
-        address.concat(" City - " + city);
-        address.concat(" Zip code - " + zipCode);
-        address.concat(" Street - " + street);
-        address.concat(" Building - " + building);
-        address.concat(" Apartments - " + apartments);
-        return address;
+    public String toString() {
+        return "Address{" +
+                "addressId=" + addressId +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", zipCode=" + zipCode +
+                ", street='" + street + '\'' +
+                ", building=" + building +
+                ", apartments=" + apartments +
+                '}';
     }
 }

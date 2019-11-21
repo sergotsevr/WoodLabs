@@ -2,6 +2,7 @@ package com.woodlabs.controllers;
 
 import com.woodlabs.dto.AddressDto;
 import com.woodlabs.dto.ClientDto;
+import com.woodlabs.entities.Address;
 import com.woodlabs.services.AddressService;
 import com.woodlabs.utils.Util;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +59,19 @@ public class AddressController {
         else {
             addressService.add(updatedDto);
         }
+        return "redirect:";
+    }
+
+    @GetMapping("/update")
+    public String update(@RequestParam Integer addressId, Model model) {
+        AddressDto addressDto = addressService.findById(addressId);
+        model.addAttribute("address", addressDto);
+        return "address/addressUpdate";
+    }
+
+    @PostMapping("/update")
+    public String update(AddressDto updatedDto, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
+            addressService.add(updatedDto);
         return "redirect:";
     }
 }

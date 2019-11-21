@@ -46,7 +46,8 @@ public class AddressServiceImpl implements AddressService{
             addressRepository.delete(address);
             return;
         } catch (ParseException e) {
-            e.printStackTrace();
+
+            log.error("Error while removing adress", e);
         }
         log.warn("error deleting Address {}", addressDto);
     }
