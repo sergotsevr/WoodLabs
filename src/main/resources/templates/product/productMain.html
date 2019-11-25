@@ -7,54 +7,58 @@
 </head>
 <body>
 
-        <div class="col-xs-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-                <a class="navbar-brand" href="../product/">Admin console</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<div class="col-xs-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="/admin">Admin console</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Product category</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                <li class="nav-item">
+                    <a class="nav-link " href="/admin/client">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/address">Address</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Product category</a>
+                </li>
+            </ul>
         </div>
+    </nav>
+</div>
+
         <table class="table table-hover table-inverse">
             <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>dateOfBirth</th>
-                <th>email</th>
-                <th>address</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>ProductCategory</th>
+                <th>Weight</th>
+                <th>Volume</th>
+                <th>QuantityInStock</th>
                 <th>delete</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="product : ${products}">
                 <td>
-                    <a th:href="@{productUpdate(id=${product.getproductId()})}">
-                        <span th:text="${product.getFirstName()}"/>
+                    <a th:href="@{productUpdate(id=${product.getProductId()})}">
+                        <span th:text="${product.getName()}"/>
                     </a>
                 </td>
-                <td th:utext="${product.getName()}"/>
                 <td th:utext="${product.getPrice()}"/>
                 <td th:utext="${product.getProductCategory()}"/>
                 <td th:utext="${product.getWeight()}"/>
                 <td th:utext="${product.getVolume()}"/>
                 <td th:utext="${product.getQuantityInStock()}"/>
-                <td th:href="@{productDelete(id=${product.getproductId()})}">
+                <td th:href="@{productDelete(id=${product.getProductId()})}">
             </tr>
             </tbody>
         </table>

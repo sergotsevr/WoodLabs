@@ -62,8 +62,8 @@ public class ProductController {
     @GetMapping("/")
     public ModelAndView findAll(@RequestParam Map<String, String> allRequestParams, Model model) {
         List<ProductDto> productList = productService.findAll();
-        model.addAttribute("productList", productList);
-        return new ModelAndView("allProduct", (Map<String, Product>) model);
+        model.addAttribute("products", productList);
+        return new ModelAndView("product/productMain", (Map<String, Product>) model);
     }
 
     @GetMapping("/delete")
