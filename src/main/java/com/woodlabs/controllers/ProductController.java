@@ -19,12 +19,24 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(path = "/product")
+@RequestMapping(path = "/admin/product")
 @Slf4j
 public class ProductController {
 
     @Autowired
     ProductService productService;
+
+    @GetMapping("/create")
+    public String create(Model model){
+        return "product/productCreate";
+    }
+
+    @GetMapping("/")
+    public ModelAndView main(Model model){
+        List<ProductDto> productList = productService.findAll();
+        model.addAttribute("products", productList);
+        return new ModelAndView("product/productMain", (Map<String, Product>) model);
+    }
 
     @PostMapping("/add")
     public ModelAndView add(@RequestParam Map<String, String> allRequestParams, Model model) {
@@ -59,12 +71,6 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/")
-    public ModelAndView findAll(@RequestParam Map<String, String> allRequestParams, Model model) {
-        List<ProductDto> productList = productService.findAll();
-        model.addAttribute("products", productList);
-        return new ModelAndView("product/productMain", (Map<String, Product>) model);
-    }
 
     @GetMapping("/delete")
     public String delete(@RequestParam Integer id, Model model) {
@@ -72,10 +78,10 @@ public class ProductController {
             ProductDto productDto = new ProductDto();
             productDto.setProductId(id);
             productService.delete(productDto);
-            return "congrat";
+            return "redirect:";
         }
         catch (Exception e){
-            return "main";
+            return "redirect:";
         }
     }
 

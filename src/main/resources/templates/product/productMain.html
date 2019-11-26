@@ -58,7 +58,13 @@
                 <td th:utext="${product.getWeight()}"/>
                 <td th:utext="${product.getVolume()}"/>
                 <td th:utext="${product.getQuantityInStock()}"/>
-                <td th:href="@{productDelete(id=${product.getProductId()})}">
+                <td>
+                    <a th:href="@{/admin/product/delete(id=${product.getProductId()})}">
+                        <span>
+                            delete
+                        </span>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
