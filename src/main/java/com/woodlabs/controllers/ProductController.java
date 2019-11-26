@@ -31,7 +31,7 @@ public class ProductController {
         return "product/productCreate";
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ModelAndView main(Model model){
         List<ProductDto> productList = productService.findAll();
         model.addAttribute("products", productList);
