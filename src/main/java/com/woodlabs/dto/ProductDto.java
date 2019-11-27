@@ -31,7 +31,7 @@ public class ProductDto {
     @Override
     public String toString(){
         String product = "ID - ";
-        //product = product.concat(this.productId.toString());
+        product = product.concat(this.productId.toString());
         product = product.concat(" навание - ");
         product = product.concat(this.name);
         product = product.concat(" цена - ");
