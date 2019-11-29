@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="col-xs-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="/admin">Admin console</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/admin/client">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/address">Address</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/admin/product">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Product category</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<a class="btn  btn-outline-secondary"  href="/admin/product/create" role="button">Add new product</a>
+<table class="table table-hover table-inverse">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Parent Id</th>
+        <th>ProductCategory</th>
+        <th>Weight</th>
+        <th>Volume</th>
+        <th>QuantityInStock</th>
+        <th>delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="productCategory : ${productCategories}">
+        <td>
+            <a th:href="@{productCategoryUpdate(id=${productCategory.getProductCategoryId()})}">
+                <span th:text="${productCategory.getName()}"/>
+            </a>
+        </td>
+        <td th:utext="${productCategory.getParentId()}"/>
+        <td th:utext="${product.getProductCategory()}"/>
+        <td th:utext="${product.getWeight()}"/>
+        <td th:utext="${product.getVolume()}"/>
+        <td th:utext="${product.getQuantityInStock()}"/>
+        <td>
+            <a th:href="@{/admin/product/delete(id=${product.getProductId()})}">
+                        <span>
+                            delete
+                        </span>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

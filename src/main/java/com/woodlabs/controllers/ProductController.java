@@ -28,7 +28,8 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
-
+    @Autowired
+    ProductCategoryService productCategoryService;
     @GetMapping("/create")
     public String create(Model model){
         return "product/productCreate";
@@ -75,7 +76,7 @@ public class ProductController {
             productDto.setName(allRequestParams.get("name"));
             String price = allRequestParams.get("price");
             productDto.setPrice(Integer.parseInt(price));
-            productDto.setProductCategory(ProductCategoryService.findByName(allRequestParams.get("productCategory")));
+            productDto.setProductCategory(productCategoryService.findByName(allRequestParams.get("productCategory")));
             productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
             productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
             productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
@@ -122,7 +123,7 @@ public class ProductController {
             productDto.setProductId(Integer.parseInt(allRequestParams.get("id")));
             productDto.setName(allRequestParams.get("name"));
             productDto.setPrice(Integer.parseInt(allRequestParams.get("price")));
-            productDto.setProductCategory(ProductCategoryService.findByName(allRequestParams.get("productCategory")));
+            productDto.setProductCategory(productCategoryService.findByName(allRequestParams.get("productCategory")));
             productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
             productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
             productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
