@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WoodLab</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="col-xs-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="/admin">Admin console</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/client">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/address">Address</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/product">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Product category</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <button class="btn btn-primary col-3" onclick="window.location='/admin/product'">Cancel</button>
+    <form th:action="@{/admin/product/create}" method="post" th:object="${product}">
+        <div class="form-group col-3">
+            <label for="name">name</label>
+            <input class="form-control" id="name" name="name" rows="3" placeholder="name" ></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="price">price</label>
+            <input class="form-control" id="price" name="price" rows="3" placeholder="price"></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="productCategory">productCategory</label>
+            <input class="form-control" id="productCategory" name="productCategory" rows="3" placeholder="productCategory"></input>
+        </div>
+        <input type="submit" class="btn btn-primary col-3" value="Create">
+    </form>
+</div>
+</body>
+</html>
