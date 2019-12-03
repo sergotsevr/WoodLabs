@@ -6,10 +6,13 @@ import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Address;
 import com.woodlabs.entities.Client;
 import com.woodlabs.entities.Product;
+import com.woodlabs.entities.ProductCategory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.remoting.rmi.RmiClientInterceptorUtils;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
 
 @Component
 public class Mapper {
@@ -28,6 +31,12 @@ public class Mapper {
         product.setWeight(productDto.getWeight());
         product.setVolume(productDto.getVolume());
         product.setQuantityInStock(productDto.getQuantityInStock());
+
+        if (productDto.getCategoryId() != null) {
+            ProductCategory productCategory = new ProductCategory();
+            productCategory.setProductCategoryId(productDto.getCategoryId());
+            product.setProductCategory(Arrays.asList(productCategory));
+        }
         return product;
     }
 

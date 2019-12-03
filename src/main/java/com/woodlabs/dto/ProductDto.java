@@ -13,6 +13,7 @@ public class ProductDto {
     private Integer weight;
     private Integer volume;
     private Integer quantityInStock;
+    private Integer categoryId;
 
     public ProductDto() {
     }

@@ -32,6 +32,9 @@ public class ProductController {
     ProductCategoryService productCategoryService;
     @GetMapping("/create")
     public String create(Model model){
+        model.addAttribute("product", new ProductDto());
+
+        model.addAttribute("categories", productCategoryService.findAll());
         return "product/productCreate";
     }
     @PostMapping("/create")

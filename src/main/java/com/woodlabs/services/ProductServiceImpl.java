@@ -2,6 +2,8 @@ package com.woodlabs.services;
 
 import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Product;
+import com.woodlabs.entities.ProductCategory;
+import com.woodlabs.repositories.ProductCategoryRepository;
 import com.woodlabs.repositories.ProductRepository;
 import com.woodlabs.utils.Mapper;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -20,9 +23,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductCategoryRepository productCategoryRepository;
+
     @Override
     public Product add(ProductDto productDto) {
         Product product = Mapper.toProduct(productDto);
+        if (productDto.getCategoryId() != null) {
+            ProductCategory productCategory = productCategoryRepository.findById(productDto.getCategoryId()).get();
+            product.setProductCategory(Arrays.asList(productCategory));
+        }
         Product product1 = productRepository.save(product);
         return product1;
     }
@@ -30,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(ProductDto productDto) {
         Product product = Mapper.toProduct(productDto);
-        productRepository.delete(product);
+        productRepository.deleteById(product.getProductId());
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Component
@@ -47,7 +48,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     public List<ProductCategoryDto> findAll() {
-        return null;
+        return productCategoryRepository.findAll().stream().map(e -> modelMapper.map(e, ProductCategoryDto.class)).collect(Collectors.toList());
     }
 
     @Override
