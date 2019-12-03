@@ -1,6 +1,7 @@
 package com.woodlabs.entities;
 
 
+import com.woodlabs.entities.enums.Role;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table
@@ -32,6 +34,11 @@ public class Client {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AddressId")
     private Address address;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "client_clientId"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
     public String setAddressId(Integer id){
         try {
@@ -67,6 +74,5 @@ public class Client {
         this.email = email;
         this.password = password;
     }
-
 
 }

@@ -1,8 +1,9 @@
-package com.woodlabs.services;
+package com.woodlabs.services.implementation;
 
 import com.woodlabs.dto.CharacteristicsDto;
 import com.woodlabs.entities.Characteristics;
 import com.woodlabs.repositories.CharacteristicsRepository;
+import com.woodlabs.services.interfaces.CharacteristicsService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.woodlabs.controllers;
 
 import com.woodlabs.dto.ProductCategoryDto;
-import com.woodlabs.services.ProductCategoryService;
+import com.woodlabs.services.interfaces.ProductCategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

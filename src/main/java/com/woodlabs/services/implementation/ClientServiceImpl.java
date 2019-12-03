@@ -1,10 +1,10 @@
-package com.woodlabs.services;
+package com.woodlabs.services.implementation;
 
-import com.woodlabs.dto.AddressDto;
 import com.woodlabs.dto.ClientDto;
-import com.woodlabs.entities.Address;
 import com.woodlabs.entities.Client;
 import com.woodlabs.repositories.ClientRepository;
+import com.woodlabs.services.interfaces.AddressService;
+import com.woodlabs.services.interfaces.ClientService;
 import com.woodlabs.utils.Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;

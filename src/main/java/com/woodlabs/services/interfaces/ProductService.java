@@ -1,4 +1,4 @@
-package com.woodlabs.services;
+package com.woodlabs.services.interfaces;
 
 import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Product;

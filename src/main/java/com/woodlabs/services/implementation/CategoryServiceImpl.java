@@ -1,8 +1,9 @@
-package com.woodlabs.services;
+package com.woodlabs.services.implementation;
 
 import com.woodlabs.dto.ProductCategoryDto;
 import com.woodlabs.entities.ProductCategory;
 import com.woodlabs.repositories.ProductCategoryRepository;
+import com.woodlabs.services.interfaces.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

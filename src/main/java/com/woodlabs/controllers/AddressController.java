@@ -1,9 +1,7 @@
 package com.woodlabs.controllers;
 
 import com.woodlabs.dto.AddressDto;
-import com.woodlabs.dto.ClientDto;
-import com.woodlabs.entities.Address;
-import com.woodlabs.services.AddressService;
+import com.woodlabs.services.interfaces.AddressService;
 import com.woodlabs.utils.Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

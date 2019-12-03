@@ -1,8 +1,9 @@
-package com.woodlabs.services;
+package com.woodlabs.services.implementation;
 
 import com.woodlabs.dto.AddressDto;
 import com.woodlabs.entities.Address;
 import com.woodlabs.repositories.AddressRepository;
+import com.woodlabs.services.interfaces.AddressService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @Transactional
 @Slf4j
 @Component
-public class AddressServiceImpl implements AddressService{
+public class AddressServiceImpl implements AddressService {
     @Autowired
     private ModelMapper modelMapper;
     @Autowired

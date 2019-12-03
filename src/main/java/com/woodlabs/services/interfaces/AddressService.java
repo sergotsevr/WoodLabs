@@ -1,4 +1,4 @@
-package com.woodlabs.services;
+package com.woodlabs.services.interfaces;
 
 import com.woodlabs.dto.AddressDto;
 import com.woodlabs.entities.Address;

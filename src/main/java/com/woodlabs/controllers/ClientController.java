@@ -1,18 +1,11 @@
 package com.woodlabs.controllers;
 
 import com.woodlabs.dto.AddressDto;
-import com.woodlabs.dto.CharacteristicsDto;
 import com.woodlabs.dto.ClientDto;
-import com.woodlabs.dto.ProductCategoryDto;
-import com.woodlabs.entities.Address;
-import com.woodlabs.entities.Characteristics;
-import com.woodlabs.entities.Client;
-import com.woodlabs.entities.ProductCategory;
-import com.woodlabs.repositories.AddressRepository;
-import com.woodlabs.services.AddressService;
-import com.woodlabs.services.CategoryService;
-import com.woodlabs.services.CharacteristicsService;
-import com.woodlabs.services.ClientService;
+import com.woodlabs.services.interfaces.AddressService;
+import com.woodlabs.services.interfaces.CategoryService;
+import com.woodlabs.services.interfaces.CharacteristicsService;
+import com.woodlabs.services.interfaces.ClientService;
 import com.woodlabs.utils.Util;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -22,11 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
