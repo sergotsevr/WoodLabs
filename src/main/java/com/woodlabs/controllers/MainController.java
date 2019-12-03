@@ -28,7 +28,8 @@ public class MainController {
     }
 
     @GetMapping("/registration")
-    public String Registration(){
+    public String Registration(Model model){
+        model.addAttribute("client", new ClientDto());
         return "login/registration";
     }
     @PostMapping("/registration" )

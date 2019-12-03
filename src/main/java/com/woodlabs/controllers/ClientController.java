@@ -2,6 +2,7 @@ package com.woodlabs.controllers;
 
 import com.woodlabs.dto.AddressDto;
 import com.woodlabs.dto.ClientDto;
+import com.woodlabs.entities.enums.Role;
 import com.woodlabs.services.interfaces.AddressService;
 import com.woodlabs.services.interfaces.CategoryService;
 import com.woodlabs.services.interfaces.CharacteristicsService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +75,7 @@ public class ClientController {
             }
         }
         updatedDto.getFirstName();
-
+        updatedDto.setRoles(Collections.singleton(Role.USER));
         try {
             AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
             updatedDto = clientService.add(updatedDto);
