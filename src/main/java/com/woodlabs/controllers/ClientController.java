@@ -83,6 +83,7 @@ public class ClientController {
         } catch (NumberFormatException e) {
             log.info("attempt to write incorrect addressId for client = {}", updatedDto);
         }
+        updatedDto.setActive(true);
         clientService.add(updatedDto);
         model.addAttribute("client", updatedDto);
         return "redirect:";

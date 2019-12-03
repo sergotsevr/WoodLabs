@@ -34,7 +34,7 @@ public class Client {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AddressId")
     private Address address;
-
+    private boolean active;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "client_clientId"))
     @Enumerated(EnumType.STRING)

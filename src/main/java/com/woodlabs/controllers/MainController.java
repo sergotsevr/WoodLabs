@@ -1,17 +1,25 @@
 package com.woodlabs.controllers;
 
+import com.woodlabs.dto.AddressDto;
 import com.woodlabs.dto.ClientDto;
 import com.woodlabs.entities.Client;
 import com.woodlabs.entities.enums.Role;
+import com.woodlabs.services.interfaces.AddressService;
 import com.woodlabs.services.interfaces.ClientService;
 import com.woodlabs.utils.Mapper;
+import com.woodlabs.utils.Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -21,6 +29,8 @@ import java.util.Map;
 public class MainController {
     @Autowired
     ClientService clientService;
+    @Autowired
+    AddressService addressService;
 
     @GetMapping("/")
     public String main(){
@@ -33,16 +43,33 @@ public class MainController {
         return "login/registration";
     }
     @PostMapping("/registration" )
-    public String addClient(Client client, Map<String, Object> model){
-        ClientDto clientFromDb = clientService.findById(client.getClientId());
-        if (clientFromDb!=null){
-            model.put("message", "user exists");
-            return "login/registration";
-        }
-        ClientDto clientDto = Mapper.toClientDto(client);
-        clientDto.setRoles(Collections.singleton(Role.ADMIN));
-        clientService.add(clientDto);
+    public String addClient(@Valid @ModelAttribute("client") ClientDto updatedDto, BindingResult result, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
 
-        return "redirect:/login/login";
+        if (result.hasErrors()) {
+            model.addAttribute("client", updatedDto);
+            log.warn(result.getAllErrors().toString());
+            model.addAttribute(result);
+            return "client/clientCreate";
+        }
+        if (Util.isNumeric(allRequestParams.get("id"))) {
+            ClientDto clientDto = clientService.findById(Integer.parseInt(allRequestParams.get("id")));
+            if (clientDto != null) {
+                log.warn("client with id = {} already exists", allRequestParams.get("id"));
+                return "client/clientMain";
+            }
+        }
+        updatedDto.getFirstName();
+        updatedDto.setRoles(Collections.singleton(Role.USER));
+        try {
+            AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
+            updatedDto = clientService.add(updatedDto);
+            updatedDto.setAddressDto(addressDto);
+        } catch (NumberFormatException e) {
+            log.info("attempt to write incorrect addressId for client = {}", updatedDto);
+        }
+        updatedDto.setActive(true);
+        clientService.add(updatedDto);
+        model.addAttribute("client", updatedDto);
+        return "rederict:";
     }
 }

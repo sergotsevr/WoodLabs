@@ -25,6 +25,7 @@ public class ClientDto {
     private String password;
     private AddressDto addressDto;
     private Set<Role> roles;
+    private boolean active;
     public String getAddressId(){
         try {
             if (addressDto != null){
