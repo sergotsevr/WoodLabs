@@ -53,12 +53,12 @@
                         <span th:text="${address.getAddressId()}"/>
                     </a>
                 </td>
-                <td th:utext="${address.getCountry()}"/>
-                <td th:utext="${address.getCity()}"/>
-                <td th:utext="${address.getZipCode()}"/>
-                <td th:utext="${address.getStreet()}"/>
-                <td th:utext="${address.getBuilding()}"/>
-                <td th:utext="${address.getApartments()}"/>
+                <td th:text="${address.getCountry()}"/>
+                <td th:text="${address.getCity()}"/>
+                <td th:text="${address.getZipCode()}"/>
+                <td th:text="${address.getStreet()}"/>
+                <td th:text="${address.getBuilding()}"/>
+                <td th:text="${address.getApartments()}"/>
                 <td >
                     <a th:href="@{delete(id=${address.getAddressId()})}">
                         <span>

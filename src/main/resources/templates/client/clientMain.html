@@ -54,9 +54,9 @@
                     </a>
                 </td>
                 <td th:text="${client.getLastName()}"/>
-                <td th:utext="${client.getDateOfBirth()}"/>
-                <td th:utext="${client.getEmail()}"/>
-                <td th:utext="${client.getAddressId()}"/>
+                <td th:text="${client.getDateOfBirth()}"/>
+                <td th:text="${client.getEmail()}"/>
+                <td th:text="${client.getAddressId()}"/>
                 <td >
                     <a th:href="@{/admin/client/delete(id=${client.getClientId()})}">
                         <span>

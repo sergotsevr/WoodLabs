@@ -55,11 +55,11 @@
                 <span th:text="${product.getName()}"/>
             </a>
         </td>
-        <td th:utext="${product.getPrice()}"/>
-        <td th:utext="${product.getProductCategory()}"/>
-        <td th:utext="${product.getWeight()}"/>
-        <td th:utext="${product.getVolume()}"/>
-        <td th:utext="${product.getQuantityInStock()}"/>
+        <td th:text="${product.getPrice()}"/>
+        <td th:text="${product.getProductCategory()}"/>
+        <td th:text="${product.getWeight()}"/>
+        <td th:text="${product.getVolume()}"/>
+        <td th:text="${product.getQuantityInStock()}"/>
         <td>
             <a th:href="@{/admin/product/delete(id=${product.getProductId()})}">
                         <span>
