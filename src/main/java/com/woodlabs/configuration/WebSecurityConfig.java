@@ -37,6 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .usersByUsernameQuery("select email, password from client where email=?")
-                .authoritiesByUsernameQuery("select u.email, ur.roles from client u inner join user_role ur on u.email = ur.email where u.email=?");
+                .authoritiesByUsernameQuery("select u.email, ur.roles from client u inner join user_role ur on u.client_id = ur.client_id where u.email=?");
     }
 }
