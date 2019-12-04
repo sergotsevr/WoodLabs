@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>WoodLab</title>
@@ -30,6 +30,11 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/">Main page</a>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out"/>
+                    </form>
                 </li>
             </ul>
         </div>

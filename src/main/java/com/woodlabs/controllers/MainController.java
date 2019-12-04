@@ -43,7 +43,8 @@ public class MainController {
         }
        /// ClientDto clientDto = Mapper.toClientDto(updatedDto);
         ClientDto clientDto = updatedDto;
-        clientDto.setRoles(Collections.singleton(Role.ADMIN));
+        clientDto.setActive(true);
+        clientDto.setRoles(Collections.singleton(Role.USER));
         clientService.add(clientDto);
 
         return "redirect:/login/login";

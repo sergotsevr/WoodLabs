@@ -34,20 +34,22 @@ public class Client {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AddressId")
     private Address address;
-    private boolean active;
+    @Column
+    private Boolean active;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "client_clientId"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public String setAddressId(Integer id){
+
+
+    public String setAddressId(Integer id) {
         try {
             if (address.getAddressId() != null) {
                 address.setAddressId(id);
                 return address.getAddressId().toString();
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return "address is not specified";
         }
         return "address is not specified";
@@ -56,14 +58,15 @@ public class Client {
     public void setClientId(Integer clientId) {
         this.clientId = clientId;
     }
+
     public void setClientId(String clientId) {
         try {
             this.clientId = Integer.parseInt(clientId);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
+
     public Client() {
     }
 
