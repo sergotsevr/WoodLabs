@@ -12,7 +12,7 @@
 </div>
     <button class="btn btn-primary col-3" onclick="window.location='/admin/client'">Cancel</button>
     <div>
-        <form th:action="@{/admin/client/create}" method="post" th:object="${client}">
+        <form th:action="@{/registration}" method="post" th:object="${client}">
             <div class="form-group col-3">
                 <label for="firstName">First name</label>
                 <input class="form-control" id="firstName" name="firstName" rows="3" placeholder="Enter your first name" th:value></input>
