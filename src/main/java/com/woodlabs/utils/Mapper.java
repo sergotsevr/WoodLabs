@@ -59,6 +59,8 @@ public class Mapper {
         clientDto.setDateOfBirth(client.getDateOfBirth());
         clientDto.setEmail(client.getEmail());
         clientDto.setPassword(client.getPassword());
+        clientDto.setRoles(client.getRoles());
+        clientDto.setActive(client.getActive());
         if (client.getAddress()!=null) {
             AddressDto addressDto = toAddressDto(client.getAddress());
             clientDto.setAddressDto(addressDto);
@@ -73,6 +75,8 @@ public class Mapper {
         client.setDateOfBirth(clientDto.getDateOfBirth());
         client.setEmail(clientDto.getEmail());
         client.setPassword(clientDto.getPassword());
+        client.setActive(clientDto.getActive());
+        client.setRoles(clientDto.getRoles());
         if (clientDto.getAddressDto()!=null) {
             Address address = toAddress(clientDto.getAddressDto());
             client.setAddress(address);
