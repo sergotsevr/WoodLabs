@@ -10,7 +10,7 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-    <button class="btn btn-primary col-3" onclick="window.location='/admin/client'">Cancel</button>
+    <button class="btn btn-primary col-3" onclick="window.location='/login'">Cancel</button>
     <div>
         <form th:action="@{/registration}" method="post" th:object="${client}">
             <div class="form-group col-3">
