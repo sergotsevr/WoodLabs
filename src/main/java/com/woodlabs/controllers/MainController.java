@@ -47,6 +47,6 @@ public class MainController {
         clientDto.setRoles(Collections.singleton(Role.USER));
         clientService.add(clientDto);
 
-        return "redirect:login/login";
+        return "login/login";
     }
 }
