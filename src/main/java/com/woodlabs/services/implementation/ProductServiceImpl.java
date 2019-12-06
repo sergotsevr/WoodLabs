@@ -71,8 +71,8 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
 
-           // ProductCategory productCategory = productRepository.getCategory(product.get().getProductId());
-            log.info(product.get().getProductCategory().toString());
+            List<String> productCategory = productRepository.getCategory(product.get().getProductId());
+            log.info(productCategory.toString());
             return Mapper.toProductDto(product.get());
         }
         log.warn("No product with id = " + id);

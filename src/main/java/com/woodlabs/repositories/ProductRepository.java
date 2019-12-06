@@ -9,6 +9,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    /*@Query("SELECT name from product_category where product_category.product =(:product_id)")
-    List<String> getCategory(@Param("product_id") Integer id);*/
+    /*@Query(
+            value = "SELECT * FROM product_category ORDER BY id",
+            countQuery = "SELECT count(*) FROM product_category",
+            nativeQuery = true)*/
+    @Query(value = "SELECT * FROM product_category c WHERE c.product =(:product_id)",
+            nativeQuery = true)
+    List<String> getCategory(@Param("product_id") Integer id);
 }
