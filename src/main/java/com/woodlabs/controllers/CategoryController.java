@@ -25,6 +25,10 @@ public class CategoryController {
         model.addAttribute("productCategories", clients);
         return "productCategory/productCategoryMain";
     }
+    @GetMapping("/create")
+    public String create(){
+        return "productCategory/productCategoryCreate";
+    }
     @PostMapping("/create")
     public String create(ProductCategoryDto productCategoryDto, Model model) {
         productCategoryService.create(productCategoryDto);
