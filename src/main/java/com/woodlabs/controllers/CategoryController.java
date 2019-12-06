@@ -19,10 +19,10 @@ public class CategoryController {
     @Autowired
     ProductCategoryService productCategoryService;
 
-    @GetMapping
+    @GetMapping()
     public String main(Model model) {
         List<ProductCategoryDto> clients = productCategoryService.findAll();
-        model.addAttribute("clients", clients);
+        model.addAttribute("productCategories", clients);
         return "productCategory/productCategoryMain";
     }
     @PostMapping("/create")

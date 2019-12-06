@@ -20,31 +20,29 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/admin/client">Client</a>
+                    <a class="nav-link" href="/admin/client">Client</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/address">Address</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/product">Products</a>
+                    <a class="nav-link" href="/admin/product">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Product category</a>
+                    <a class="nav-link active" href="/admin/category">Product category</a>
                 </li>
             </ul>
         </div>
     </nav>
 </div>
-<a class="btn  btn-outline-secondary"  href="/admin/product/create" role="button">Add new product</a>
+<a class="btn  btn-outline-secondary"  href="/admin/category/create" role="button">Add new category</a>
 <table class="table table-hover table-inverse">
     <thead>
     <tr>
         <th>Name</th>
         <th>Parent Id</th>
-        <th>ProductCategory</th>
-        <th>Weight</th>
-        <th>Volume</th>
-        <th>QuantityInStock</th>
+        <th>Characteristics</th>
+        <th>Product</th>
         <th>delete</th>
     </tr>
     </thead>
@@ -56,12 +54,10 @@
             </a>
         </td>
         <td th:text="${productCategory.getParentId()}"/>
-        <td th:text="${product.getProductCategory()}"/>
-        <td th:text="${product.getWeight()}"/>
-        <td th:text="${product.getVolume()}"/>
-        <td th:text="${product.getQuantityInStock()}"/>
+        <td th:text="${productCategory.getCharacteristics()}"/>
+        <td th:text="${productCategory.getProduct()}"/>
         <td>
-            <a th:href="@{/admin/product/delete(id=${product.getProductId()})}">
+            <a th:href="@{/admin/category/delete(id=${productCategory.getProductCategoryId()})}">
                         <span>
                             delete
                         </span>
