@@ -51,7 +51,7 @@
     <tbody>
     <tr th:each="product : ${products}">
         <td>
-            <a th:href="@{productUpdate(id=${product.getProductId()})}">
+            <a th:href="@{product/productUpdate(id=${product.getProductId()})}">
                 <span th:text="${product.getName()}"/>
             </a>
         </td>

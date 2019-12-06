@@ -23,9 +23,9 @@ public class Product {
     @Digits(integer = 10, fraction = 0)
     @NotNull
     private Integer price;
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "product")
-    private List <ProductCategory> productCategory;
+    private ProductCategory productCategory;
     @Column
     @Digits(integer = 10, fraction = 0)
     private Integer weight;

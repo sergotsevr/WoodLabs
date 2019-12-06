@@ -41,7 +41,6 @@ public class MainController {
                 return "login/registration";
             }
         }
-       /// ClientDto clientDto = Mapper.toClientDto(updatedDto);
         ClientDto clientDto = updatedDto;
         clientDto.setActive(true);
         clientDto.setRoles(Collections.singleton(Role.USER));

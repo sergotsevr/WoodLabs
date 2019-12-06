@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +20,6 @@ import java.util.Optional;
 @Transactional
 @Slf4j
 public class ProductServiceImpl implements ProductService {
-
     @Autowired
     private ProductRepository productRepository;
 
@@ -33,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = Mapper.toProduct(productDto);
         if (productDto.getCategoryId() != null) {
             ProductCategory productCategory = productCategoryRepository.findById(productDto.getCategoryId()).get();
-            product.setProductCategory(Arrays.asList(productCategory));
+            product.setProductCategory(productCategory);
         }
         Product product1 = productRepository.save(product);
         return product1;
@@ -72,6 +70,9 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto findById(Integer id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
+
+           // ProductCategory productCategory = productRepository.getCategory(product.get().getProductId());
+            log.info(product.get().getProductCategory().toString());
             return Mapper.toProductDto(product.get());
         }
         log.warn("No product with id = " + id);

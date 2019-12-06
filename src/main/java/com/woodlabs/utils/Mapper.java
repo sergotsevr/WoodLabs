@@ -35,7 +35,7 @@ public class Mapper {
         if (productDto.getCategoryId() != null) {
             ProductCategory productCategory = new ProductCategory();
             productCategory.setProductCategoryId(productDto.getCategoryId());
-            product.setProductCategory(Arrays.asList(productCategory));
+            product.setProductCategory(productCategory);
         }
         return product;
     }

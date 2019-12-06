@@ -1,5 +1,6 @@
 package com.woodlabs.controllers;
 
+import com.woodlabs.dto.ClientDto;
 import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.Product;
 import com.woodlabs.services.interfaces.ProductCategoryService;
@@ -35,6 +36,12 @@ public class ProductController {
         model.addAttribute("categories", productCategoryService.findAll());
         return "product/productCreate";
     }
+    @GetMapping("/productUpdate")
+    public String updateView(@RequestParam Integer id, Model model) {
+        ProductDto productDto = productService.findById(id);
+        model.addAttribute("product", productDto);
+        return "product/productUpdate";
+    }
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute("product") ProductDto updatedDto, BindingResult result, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
        // updatedDto.setProductCategory(null);
@@ -63,33 +70,12 @@ public class ProductController {
         model.addAttribute("product", updatedDto);
         return "redirect:";
     }
+
     @GetMapping("")
     public ModelAndView main(Model model){
         List<ProductDto> productList = productService.findAll();
         model.addAttribute("products", productList);
         return new ModelAndView("product/productMain", (Map<String, Product>) model);
-    }
-
-    @PostMapping("/add")
-    public ModelAndView add(@RequestParam Map<String, String> allRequestParams, Model model) {
-        try {
-            ProductDto productDto = new ProductDto();
-            productDto.setName(allRequestParams.get("name"));
-            String price = allRequestParams.get("price");
-            productDto.setPrice(Integer.parseInt(price));
-            productDto.setProductCategory(productCategoryService.findByName(allRequestParams.get("productCategory")));
-            productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
-            productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
-            productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
-            Product product = productService.add(productDto);
-            model.addAttribute("product", product);
-            return new ModelAndView("product", (Map<String, Product>) model);
-        } catch (TransactionSystemException e) {
-            log.warn("attempt to add product with incorrect field");
-        } catch (NumberFormatException e) {
-            log.warn("attempt to add product with incorrect digital format field");
-        }
-        return new ModelAndView("main");
     }
 
     @GetMapping("/find")
