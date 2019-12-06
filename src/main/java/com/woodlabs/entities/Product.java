@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Table
@@ -23,7 +22,7 @@ public class Product {
     @Digits(integer = 10, fraction = 0)
     @NotNull
     private Integer price;
-    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product")
     private ProductCategory productCategory;
     @Column
