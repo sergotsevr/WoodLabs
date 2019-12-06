@@ -1,14 +1,20 @@
 package com.woodlabs.configuration;
 
-import javax.sql.DataSource;
-
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -24,7 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin()
                     .loginPage("/login")
-                    .loginProcessingUrl("/perform_login")
                     .permitAll()
                 .and()
                     .logout()
@@ -48,9 +53,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .usersByUsernameQuery("select email, password, active from client where email=?")
-                .authoritiesByUsernameQuery("select u.email, r.name from client u " +
-                        "inner join client_role ur on u.client_id = ur.client_id " +
-                        "inner join role r on ur.role_id = r.role_id " +
-                        "where u.email=?");
+                .authoritiesByUsernameQuery("select u.email, ur.roles from client u inner join user_role ur on u.client_id = ur.client_client_id where u.email=?");
     }
 }
