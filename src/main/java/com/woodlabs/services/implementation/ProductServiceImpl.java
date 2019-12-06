@@ -70,9 +70,10 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto findById(Integer id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
-
-            List<String> productCategory = productRepository.getCategory(product.get().getProductId());
-            log.info(productCategory.toString());
+            Optional<ProductCategory> productCategory = Optional.ofNullable(productCategoryRepository.getCategory(product.get().getProductId()));
+            if (productCategory.isPresent()){
+                product.get().setProductCategory(productCategory.get());
+            }
             return Mapper.toProductDto(product.get());
         }
         log.warn("No product with id = " + id);
