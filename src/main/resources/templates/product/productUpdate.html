@@ -59,13 +59,19 @@
         </div>
         <div class="form-group col-3">
             <label for="productCategory">productCategory</label>
-            <select class="form-control" id="productCategory" name="productCategory" th:field="*{categoryId}" th:value="${product.getProductCategory()}">
-                <!--option
-                        th:value="${category.productCategoryId}"
-                        th:text="${category.name}"/-->
+            <select class="form-control" id="productCategory" name="productCategory" th:field="*{categoryId}">
+                    <option
+                            th:value="${product.getProductCategory()}",
+
+                            th:text="${product.getProductCategory()} ? ${product.getProductCategory().toString()} : 'not specified'" />
             </select>
-<!--            <input class="form-control" id="productCategory" name="productCategory" rows="3" placeholder="productCategory"></input>-->
+            <!--th:text="${product.getProductCategory()} ? {product.getProductCategory().toString()} : 'not specified'" /-->
+            <!--input class="form-control" id="productCategory" name="productCategory" rows="3" placeholder="productCategory"></input>-->
         </div>
+        <!--div class="form-group col-3">
+            <label for="productCategory">Product Category</label>
+            <input class="form-control" id="productCategory" name="productCategory" rows="3" placeholder="productCategory" th:value="${product.getProductCategory().toString()}"></input>
+        </div-->
         <div class="form-group col-3">
             <label for="weight">weight</label>
             <input class="form-control" id="weight" name="weight" rows="3" placeholder="weight" th:value="${product.getWeight()}"></input>
