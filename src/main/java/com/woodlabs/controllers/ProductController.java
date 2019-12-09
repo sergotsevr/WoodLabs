@@ -36,12 +36,7 @@ public class ProductController {
         model.addAttribute("categories", productCategoryService.findAll());
         return "product/productCreate";
     }
-    @GetMapping("/productUpdate")
-    public String updateView(@RequestParam Integer id, Model model) {
-        ProductDto productDto = productService.findById(id);
-        model.addAttribute("product", productDto);
-        return "product/productUpdate";
-    }
+
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute("product") ProductDto updatedDto, BindingResult result, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
        // updatedDto.setProductCategory(null);
@@ -58,14 +53,6 @@ public class ProductController {
                 return "product/productMain";
             }
         }
-
-        /*try {
-            AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("AddressId")));
-            updatedDto = clientService.add(updatedDto);
-            updatedDto.setAddressDto(addressDto);
-        } catch (NumberFormatException e) {
-            log.info("attempt to write incorrect addressId for client = {}", updatedDto);
-        }*/
         productService.add(updatedDto);
         model.addAttribute("product", updatedDto);
         return "redirect:";
@@ -102,26 +89,23 @@ public class ProductController {
             return "redirect:";
         }
     }
-
+    @GetMapping("/productUpdate")
+    public String updateView(@RequestParam Integer id, Model model) {
+        ProductDto productDto = productService.findById(id);
+        model.addAttribute("product", productDto);
+        model.addAttribute("categories", productCategoryService.findAll());
+        return "product/productUpdate";
+    }
     @PostMapping("/update")
-    public ModelAndView update(@RequestParam Map<String, String> allRequestParams, Model model) {
-        try {
-            ProductDto productDto = new ProductDto();
-            productDto.setProductId(Integer.parseInt(allRequestParams.get("id")));
-            productDto.setName(allRequestParams.get("name"));
-            productDto.setPrice(Integer.parseInt(allRequestParams.get("price")));
-            productDto.setProductCategory(productCategoryService.findByName(allRequestParams.get("productCategory")));
-            productDto.setWeight(Integer.parseInt(allRequestParams.get("weight")));
-            productDto.setVolume(Integer.parseInt(allRequestParams.get("volume")));
-            productDto.setQuantityInStock(Integer.parseInt(allRequestParams.get("quantityInStock")));
-            Product product = productService.add(productDto);
-            model.addAttribute("product", product);
-            return new ModelAndView("product", (Map<String, Product>) model);
-        } catch (TransactionSystemException e) {
-            log.warn("attempt to update product with incorrect field");
-        } catch (NumberFormatException e) {
-            log.warn("attempt to update product with incorrect digital format field");
+    public String update(@Valid @ModelAttribute("product") ProductDto updatedDto, BindingResult result, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("product", updatedDto);
+            log.warn(result.getAllErrors().toString());
+            model.addAttribute(result);
+            return "product/productCreate";
         }
-        return new ModelAndView("main");
+        productService.update(updatedDto);
+        model.addAttribute("product", updatedDto);
+        return "redirect:";
     }
 }

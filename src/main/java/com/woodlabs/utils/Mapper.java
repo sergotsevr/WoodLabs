@@ -21,10 +21,7 @@ public class Mapper {
 
     public static Product toProduct(ProductDto productDto) {
         Product product = new Product();
-        try {
-            product.setProductId(productDto.getProductId());
-        }
-        catch (NullPointerException e){}
+        product.setProductId(productDto.getProductId());
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
         product.setProductCategory(productDto.getProductCategory());

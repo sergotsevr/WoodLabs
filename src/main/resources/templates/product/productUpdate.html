@@ -49,8 +49,8 @@
     <button class="btn btn-primary col-3" onclick="window.location='/admin/product'">Cancel</button>
     <form th:action="@{/admin/product/update}" method="post" th:object="${product}">
         <div class="form-group col-3">
-            <label for="Id">Id</label>
-            <input class="form-control" id="Id" name="Id" rows="3" placeholder="name" readonly th:value="${product.getProductId()}"></input>
+            <label for="productId">Id</label>
+            <input class="form-control" id="productId" name="productId" rows="3" placeholder="name" readonly th:value="${product.getProductId()}"></input>
         </div>
         <div class="form-group col-3">
             <label for="name">name</label>
@@ -64,9 +64,11 @@
             <label for="productCategory">productCategory</label>
             <select class="form-control" id="productCategory" name="productCategory" th:field="*{categoryId}">
                     <option
-                            th:value="${product.getProductCategory()}",
-
-                            th:text="${product.getProductCategory()} ? ${product.getProductCategory().toString()} : 'not specified'" />
+                            th:value="${product.getProductCategory().}",
+                            th:text="${product.getProductCategory().getProductCategoryId()} ? ${product.getProductCategory().toString()} : 'not specified'" />
+                    <option th:each="category : ${categories}"
+                        th:value="${category.getProductCategoryId()}"
+                        th:text="${category.getName()}"/>
             </select>
         </div>
         <!--div class="form-group col-3">
@@ -86,7 +88,7 @@
             <input class="form-control" id="quantityInStock" name="quantityInStock" rows="3" placeholder="quantityInStock" th:value="${product.getQuantityInStock()}"></input>
         </div>
 
-        <input type="submit" class="btn btn-primary col-3" value="Create">
+        <input type="submit" class="btn btn-primary col-3" value="Update">
     </form>
 </div>
 </body>
