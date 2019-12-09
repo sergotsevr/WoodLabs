@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -46,7 +47,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto findById(Integer id) {
-        return null;
+        Optional<Order> order =orderRepository.findById(id);
+        return modelMapper.map(order.get(), OrderDto.class);
     }
 
     @Override

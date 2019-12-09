@@ -4,6 +4,7 @@ import com.woodlabs.entities.enums.*;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int orderId;
+    private Integer orderId;
     @ManyToOne
     @JoinColumn(name = "ClientId")
     private Client client;

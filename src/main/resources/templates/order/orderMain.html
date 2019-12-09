@@ -28,16 +28,16 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/category">Product category</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/order">Orders</a>
-                </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin/order">Orders</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </div>
 
-        <a class="btn  btn-outline-secondary"  href="/admin/client/create" role="button">Add new client</a>
+        <a class="btn  btn-outline-secondary"  href="/admin/order/create" role="button">Add new order</a>
         <table class="table table-hover table-inverse">
             <thead>
             <tr>
@@ -56,8 +56,16 @@
                         <span th:text="${order.getOrderId()}"/>
                     </a>
                 </td>
-                <td th:text="${order.getClient()}"/>
-                <td th:text="${order.getAddress()}"/>
+                <td>
+                    <a th:href="@{/admin/client/clientUpdate(id=${order.getClient().getClientId()})}">
+                        <span th:text="${order.getClient().getFirstName()}"/>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/admin/address/update(addressId=${order.getAddress().getAddressId()})}">
+                        <span th:text="${order.getAddress().getCity()}"/>
+                    </a>
+                </td>
                 <td th:text="${order.getPaymentMethod()}"/>
                 <td th:text="${order.getDeliveryMethod()}"/>
                 <td >

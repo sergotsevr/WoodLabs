@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WoodLab</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="col-xs-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="../client/">Admin console</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/admin/client">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/address">Address</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/product">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/category">Product category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/order">Orders</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <button class="btn btn-primary col-3" onclick="window.location='/admin/client'">Cancel</button>
+    <form th:action="@{/admin/order/update}" method="post" th:object="${order}">
+        <div class="form-group col-3">
+            <label for="orderId">Id</label>
+            <input class="form-control" id="orderId" name="orderId" rows="3" th:value="${order.getOrderId()}" readonly></input>
+        </div>
+        <div class="form-group col-3">
+            <label for="client">Client</label>
+            <input class="form-control" id="client" name="client" rows="3" th:value="${order.getClient().getFirstName()}+' '+${order.getClient().getLastName()}+' '+${order.getClient().getClientId()}" readonly>
+        </div>
+        <div class="form-group col-3">
+            <a th:href="@{/admin/address/update(addressId=${order.getAddress().getAddressId()})}">
+                <label for="address">Address</label>
+                <input class="form-control" id="address" name="address" rows="3"  th:value="${order.getAddress().getCity()}" readonly/>
+            </a>
+            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="text-danger">Address error</span>
+        </div>
+        <
+        <!--div class="form-group  col-3">
+            <label for="dateOfBirth">Enter birthdate:</label>
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" th:value="${client.getDateOfBirth()}"/>
+            <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="text-danger">Name Error</span>
+        </div>
+        <div class="form-group  col-3">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter email" name="email" th:value="${client.getEmail()}"/>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">Name Error</span>
+        </div>
+        <div class="form-group  col-3">
+            <label for="AddressId">Address Id</label>
+            <input type="AddressId" class="form-control" id="AddressId"
+                   placeholder="AddressId" name="AddressId" th:value="${client.getAddressId()}">
+        </div>
+        <div class="form-group col-3">
+            <label for="exampleInputPassword1" >Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" th:value="${client.getPassword()}">
+        </div-->
+        <input type="submit" class="btn btn-primary col-3" value="update user"></input>
+    </form>
+</div>
+</body>
+</html>

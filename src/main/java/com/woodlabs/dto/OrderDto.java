@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class OrderDto {
 
-    private int orderId;
+    private Integer orderId;
     private Client client;
     private Address address;
     private PaymentMethod paymentMethod;

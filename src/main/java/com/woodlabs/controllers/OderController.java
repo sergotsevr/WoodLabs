@@ -1,6 +1,7 @@
 package com.woodlabs.controllers;
 
 import com.woodlabs.dto.OrderDto;
+import com.woodlabs.entities.Order;
 import com.woodlabs.services.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,4 +23,11 @@ public class OderController {
         model.addAttribute("orders", orderDtos);
         return "order/orderMain";
     }
+    @GetMapping("/update")
+    public String update(Integer id, Model model){
+        OrderDto orderDto = orderService.findById(id);
+        model.addAttribute("order", orderDto);
+        return "order/orderUpdate";
+    }
+
 }
