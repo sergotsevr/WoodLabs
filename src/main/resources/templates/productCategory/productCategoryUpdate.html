@@ -38,7 +38,7 @@
     <form th:action="@{/admin/category/update}" method="post" th:object="${category}">
         <div class="form-group col-3">
             <label for="Id">Id</label>
-            <input class="form-control" id="Id" name="Id" rows="3" placeholder="Id" th:value="${category.getProductCategoryId()}" readonly></input>
+            <input class="form-control" id="Id" name="productCategoryId" rows="3" placeholder="Id" th:value="${category.getProductCategoryId()}" readonly></input>
         </div>
         <div class="form-group col-3">
             <label for="name">Name</label>
@@ -50,11 +50,11 @@
         </div>
         <div class="form-group col-3">
             <label for="characteristics">Characteristics</label>
-            <input class="form-control" id="characteristics" name="characteristics" rows="3" placeholder="characteristics" th:value="${category.getCharacteristics}"></input>
+            <input class="form-control" id="characteristics" name="characteristics" rows="3" placeholder="characteristics"></input>
         </div>
         <div class="form-group col-3">
             <label for="product">Product</label>
-            <input class="form-control" id="product" name="product" rows="3" placeholder="product" th:value="${category.getProduct}"></input>
+            <input class="form-control" id="product" name="product" rows="3" placeholder="product" th:value="${category.getProduct()}"></input>
         </div>
         <input type="submit" class="btn btn-primary col-3" value="Update">
     </form>

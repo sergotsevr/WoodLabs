@@ -22,7 +22,7 @@ public class ProductCategory {
     private List<Characteristics> characteristics;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    Product product;
+    private Product product;
 
     @Override
     public String toString() {

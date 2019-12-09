@@ -48,7 +48,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     public ProductCategoryDto update(ProductCategoryDto productCategoryDto) {
-        return null;
+        ProductCategory productCategory = modelMapper.map(productCategoryDto, ProductCategory.class);
+        ProductCategory categoryFromDb = productCategoryRepository.save(productCategory);
+        return modelMapper.map(categoryFromDb, ProductCategoryDto.class);
     }
 
     @Override
@@ -61,7 +63,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         Optional <ProductCategory> productCategory = productCategoryRepository.findById(id);
         ProductCategoryDto productCategoryDto=null;
         if (productCategory.isPresent()) {
-            productCategoryDto = modelMapper.map(productCategory, ProductCategoryDto.class);
+            productCategoryDto = modelMapper.map(productCategory.get(), ProductCategoryDto.class);
         }
         return productCategoryDto;
     }

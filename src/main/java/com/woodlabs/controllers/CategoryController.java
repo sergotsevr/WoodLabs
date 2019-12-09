@@ -35,7 +35,9 @@ public class CategoryController {
         return "redirect:";
     }
     @GetMapping("/update")
-    public String update(){
+    public String update(Integer id, Model model){
+        ProductCategoryDto productCategoryDto = productCategoryService.findById(id);
+        model.addAttribute("category", productCategoryDto);
         return "productCategory/productCategoryUpdate";
     }
     @PostMapping("/update")

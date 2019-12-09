@@ -52,12 +52,12 @@
     <tbody>
     <tr th:each="productCategory : ${productCategories}">
         <td>
-            <a th:href="@{productCategoryUpdate(id=${productCategory.getProductCategoryId()})}">
+            <a th:href="@{/admin/category/update(id=${productCategory.getProductCategoryId()})}">
                 <span th:text="${productCategory.getName()}"/>
             </a>
         </td>
         <td th:text="${productCategory.getParentId()}"/>
-        <td th:text="${productCategory.getCharacteristics()}"/>
+        <td />
         <td th:text="${productCategory.getProduct()}"/>
         <td>
             <a th:href="@{/admin/category/delete(id=${productCategory.getProductCategoryId()})}">
