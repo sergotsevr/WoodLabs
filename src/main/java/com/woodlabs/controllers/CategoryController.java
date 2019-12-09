@@ -39,10 +39,13 @@ public class CategoryController {
        // Boolean errors=false;
         try{
             productCategoryService.deleteById(id);
+
         }
         catch (Exception e){
-            model.addAttribute("error", "product with this category still exists");
+            model.addAttribute("error", "Error deleting category with id = " + id + ". Product with this category still exists");
         }
-        return "redirect:";
+        List<ProductCategoryDto> clients = productCategoryService.findAll();
+        model.addAttribute("productCategories", clients);
+        return "productCategory/productCategoryMain";
     }
 }

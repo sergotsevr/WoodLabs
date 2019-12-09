@@ -35,7 +35,7 @@
         </div>
     </nav>
 </div>
-<div th:text="${error} ?: 'error'">
+<div th:text="${error} ? ${error} " >
 
 </div>
 <a class="btn  btn-outline-secondary" href="/admin/category/create" role="button">Add new category</a>
