@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -40,6 +41,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public void delete(ProductCategoryDto productCategoryDto) {
 
     }
+    @Override
+    public void deleteById(Integer id) {
+        productCategoryRepository.deleteById(id);
+    }
 
     @Override
     public ProductCategoryDto update(ProductCategoryDto productCategoryDto) {
@@ -53,6 +58,11 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     public ProductCategoryDto findById(Integer id) {
-        return null;
+        Optional <ProductCategory> productCategory = productCategoryRepository.findById(id);
+        ProductCategoryDto productCategoryDto=null;
+        if (productCategory.isPresent()) {
+            productCategoryDto = modelMapper.map(productCategory, ProductCategoryDto.class);
+        }
+        return productCategoryDto;
     }
 }

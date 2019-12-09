@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface ProductCategoryService {
 
-     ProductCategory findByName(String str);
+    ProductCategory findByName(String str);
+
     ProductCategoryDto create(ProductCategoryDto ProductCategoryDto);
 
     void delete(ProductCategoryDto productCategoryDto);
@@ -18,4 +19,6 @@ public interface ProductCategoryService {
     List<ProductCategoryDto> findAll();
 
     ProductCategoryDto findById(Integer id);
+
+    void deleteById(Integer id);
 }

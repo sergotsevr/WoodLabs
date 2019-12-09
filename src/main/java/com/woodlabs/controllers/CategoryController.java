@@ -34,4 +34,15 @@ public class CategoryController {
         productCategoryService.create(productCategoryDto);
         return "redirect:";
     }
+    @GetMapping("/delete")
+    public String delete(Integer id, Model model) {
+       // Boolean errors=false;
+        try{
+            productCategoryService.deleteById(id);
+        }
+        catch (Exception e){
+            model.addAttribute("error", "product with this category still exists");
+        }
+        return "redirect:";
+    }
 }

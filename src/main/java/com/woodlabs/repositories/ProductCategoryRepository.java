@@ -13,4 +13,6 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
      @Query(value = "SELECT * FROM product_category c WHERE c.product =(:product_id)",
              nativeQuery = true)
      ProductCategory getCategory(@Param("product_id") Integer id);
+
+     void deleteByProductCategoryId(Integer id);
 }
