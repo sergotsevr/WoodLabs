@@ -64,8 +64,8 @@
             <label for="productCategory">productCategory</label>
             <select class="form-control" id="productCategory" name="productCategory" th:field="*{categoryId}">
                     <option
-                            th:value="${product.getProductCategory().}",
-                            th:text="${product.getProductCategory().getProductCategoryId()} ? ${product.getProductCategory().toString()} : 'not specified'" />
+                            th:value="${product.getProductCategory().getProductCategoryId()}",
+                            th:text="${product.getProductCategory()} ? ${product.getProductCategory().toString()} : 'not specified'" />
                     <option th:each="category : ${categories}"
                         th:value="${category.getProductCategoryId()}"
                         th:text="${category.getName()}"/>
