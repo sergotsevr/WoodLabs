@@ -39,7 +39,7 @@
 </div>
 
 <div class="container">
-    <button class="btn btn-primary col-3" onclick="window.location='/admin/client'">Cancel</button>
+    <button class="btn btn-primary col-3" onclick="window.location='/admin/order'">Cancel</button>
     <form th:action="@{/admin/order/update}" method="post" th:object="${order}">
         <div class="form-group col-3">
             <label for="orderId">Id</label>
@@ -57,30 +57,55 @@
             <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="text-danger">Address error</span>
         </div>
         <div class="form-group col-3">
-            <label for="paymentMethod">Payment Method</label>
-            <input class="form-control" id="paymentMethod" name="paymentMethod" rows="3" th:value="${order.>
+            <label for="paymentMethod">Payment method</label>
+            <select class="form-control" id="paymentMethod" name="paymentMethod" >
+                <option
+                        th:value="${order.getPaymentMethod()}",
+                        th:text="${order.getPaymentMethod()} ? ${order.getPaymentMethod().toString()} : 'not specified'" />
+                <option th:each="paymentMethod : ${paymentMethods}"
+                        th:value="${paymentMethod}"
+                        th:text="${paymentMethod}"/>
+            </select>
+        </div>
+        <div class="form-group col-3">
+            <label for="deliveryMethod">Delivery method</label>
+            <select class="form-control" id="deliveryMethod" name="deliveryMethod" >
+                <option
+                        th:value="${order.getDeliveryMethod()}",
+                        th:text="${order.getDeliveryMethod()} ? ${order.getDeliveryMethod().toString()} : 'not specified'" />
+                <option th:each="deliveryMethod : ${deliveryMethods}"
+                        th:value="${deliveryMethod}"
+                        th:text="${deliveryMethod}"/>
+            </select>
+        </div>
+        <div class="form-group col-3">
+            <label for="paymentStatus">Payment status</label>
+            <select class="form-control" id="paymentStatus" name="paymentStatus" >
+                <option
+                        th:value="${order.getPaymentStatus()}",
+                        th:text="${order.getPaymentStatus()} ? ${order.getPaymentStatus().toString()} : 'not specified'" />
+                <option th:each="paymentStatus : ${paymentStatuses}"
+                        th:value="${paymentStatus}"
+                        th:text="${paymentStatus}"/>
+            </select>
+        </div>
+        <div class="form-group col-3">
+            <label for="orderStatus">Order status</label>
+            <select class="form-control" id="orderStatus" name="paymentStatus" >
+                <option
+                        th:value="${order.getOrderStatus()}",
+                        th:text="${order.getOrderStatus()} ? ${order.getOrderStatus().toString()} : 'not specified'" />
+                <option th:each="orderStatus : ${orderStatuses}"
+                        th:value="${orderStatus}"
+                        th:text="${orderStatus}"/>
+            </select>
         </div>
         <!--div class="form-group  col-3">
             <label for="dateOfBirth">Enter birthdate:</label>
             <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" th:value="${client.getDateOfBirth()}"/>
             <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="text-danger">Name Error</span>
-        </div>
-        <div class="form-group  col-3">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Enter email" name="email" th:value="${client.getEmail()}"/>
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">Name Error</span>
-        </div>
-        <div class="form-group  col-3">
-            <label for="AddressId">Address Id</label>
-            <input type="AddressId" class="form-control" id="AddressId"
-                   placeholder="AddressId" name="AddressId" th:value="${client.getAddressId()}">
-        </div>
-        <div class="form-group col-3">
-            <label for="exampleInputPassword1" >Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" th:value="${client.getPassword()}">
         </div-->
-        <input type="submit" class="btn btn-primary col-3" value="update user"></input>
+        <input type="submit" class="btn btn-primary col-3" value="update order"></input>
     </form>
 </div>
 </body>
