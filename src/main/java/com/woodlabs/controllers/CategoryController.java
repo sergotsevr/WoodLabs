@@ -34,6 +34,15 @@ public class CategoryController {
         productCategoryService.create(productCategoryDto);
         return "redirect:";
     }
+    @GetMapping("/update")
+    public String update(){
+        return "productCategory/productCategoryUpdate";
+    }
+    @PostMapping("/update")
+    public String update(ProductCategoryDto productCategoryDto, Model model) {
+        productCategoryService.update(productCategoryDto);
+        return "redirect:";
+    }
     @GetMapping("/delete")
     public String delete(Integer id, Model model) {
        // Boolean errors=false;
