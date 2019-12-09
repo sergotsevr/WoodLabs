@@ -118,7 +118,6 @@ public class ClientController {
             model.addAttribute("client", clientDto);
             return "redirect:";
         }
-        //   }
         return "client/clientUpdate";
     }
 

@@ -1,41 +1,25 @@
-package com.woodlabs.entities;
+package com.woodlabs.dto;
 
+import com.woodlabs.entities.Address;
+import com.woodlabs.entities.Client;
+import com.woodlabs.entities.Product;
 import com.woodlabs.entities.enums.DeliveryMethod;
 import com.woodlabs.entities.enums.OrderStatus;
 import com.woodlabs.entities.enums.PaymentMethod;
 import com.woodlabs.entities.enums.PaymentStatus;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "orders")
 @Data
-public class Order {
+public class OrderDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
-    @ManyToOne
-    @JoinColumn(name = "ClientId")
     private Client client;
-    @ManyToOne()
-    @JoinColumn(name = "AddressId")
     private Address address;
-    @Column
     private PaymentMethod paymentMethod;
-    @Column
     private DeliveryMethod deliveryMethod;
-
-    @ManyToMany
-    @JoinTable(name = "ordersProduct",
-            joinColumns = @JoinColumn(name = "ORDERS_ID"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
     private List<Product> goodsList;
-    @Column
     private PaymentStatus paymentStatus;
-    @Column
     private OrderStatus orderStatus;
 }

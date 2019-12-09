@@ -18,7 +18,7 @@
                     <ul class="navbar-nav mr-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="/admin/client">Client</a>
+                            <a class="nav-link" href="/admin/client">Client</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/address">Address</a>
@@ -41,27 +41,27 @@
         <table class="table table-hover table-inverse">
             <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>dateOfBirth</th>
-                <th>email</th>
-                <th>address</th>
+                <th>Id</th>
+                <th>Client</th>
+                <th>Address</th>
+                <th>paymentMethod</th>
+                <th>deliveryMethod</th>
                 <th>delete</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="client : ${clients}">
+            <tr th:each="order : ${orders}">
                 <td>
-                    <a th:href="@{/admin/client/clientUpdate(id=${client.getClientId()})}">
-                        <span th:text="${client.getFirstName()}"/>
+                    <a th:href="@{/admin/order/update(id=${order.getOrderId()})}">
+                        <span th:text="${order.getOrderId()}"/>
                     </a>
                 </td>
-                <td th:text="${client.getLastName()}"/>
-                <td th:text="${client.getDateOfBirth()}"/>
-                <td th:text="${client.getEmail()}"/>
-                <td th:text="${client.getAddressId()}"/>
+                <td th:text="${order.getClient()}"/>
+                <td th:text="${order.getAddress()}"/>
+                <td th:text="${order.getPaymentMethod()}"/>
+                <td th:text="${order.getDeliveryMethod()}"/>
                 <td >
-                    <a th:href="@{/admin/client/delete(id=${client.getClientId()})}">
+                    <a th:href="@{/admin/order/delete(id=${order.getOrderId()})}">
                         <span>
                             delete
                         </span>
