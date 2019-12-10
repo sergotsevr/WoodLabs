@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "/admin/order")
-public class OderController {
+public class OrderController {
     @Autowired
     OrderService orderService;
 
