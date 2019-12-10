@@ -102,6 +102,11 @@
                         th:text="${orderStatus}"/>
             </select>
         </div>
+        <div  class="form-group col-3">
+            <a th:href="@{/admin/order/productUpdate(id=${order.getOrderId()})}">
+                <span th:text="Products"/>
+            </a>
+        </div>
         <input type="submit" class="btn btn-primary col-3" value="update order"></input>
     </form>
 </div>

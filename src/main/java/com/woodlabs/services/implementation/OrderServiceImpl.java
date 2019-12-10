@@ -5,6 +5,7 @@ import com.woodlabs.dto.ProductCategoryDto;
 import com.woodlabs.entities.Order;
 import com.woodlabs.repositories.OrderRepository;
 import com.woodlabs.services.interfaces.OrderService;
+import com.woodlabs.utils.Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,41 +22,40 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
-    @Autowired
-    ModelMapper modelMapper;
     @Override
     public OrderDto add(OrderDto orderDto) {
-        Order order = modelMapper.map(orderDto, Order.class);
+        Order order = Mapper.toOrder(orderDto);
         Order saved = orderRepository.save(order);
-        return modelMapper.map(saved, OrderDto.class);
+        return Mapper.toOrderDto(saved);
     }
 
     @Override
     public void delete(OrderDto orderDto) {
-
+        Order order = Mapper.toOrder(orderDto);
+        orderRepository.delete(order);
     }
 
     @Override
     public OrderDto update(OrderDto orderDto) {
-            Order order = modelMapper.map(orderDto, Order.class);
+            Order order = Mapper.toOrder(orderDto);
             Order saved = orderRepository.save(order);
-            OrderDto formDb = modelMapper.map(saved, OrderDto.class);
+            OrderDto formDb = Mapper.toOrderDto(saved);
             return formDb;
     }
 
     @Override
     public List<OrderDto> findAll() {
-        return orderRepository.findAll().stream().map(e -> modelMapper.map(e, OrderDto.class)).collect(Collectors.toList());
+        return orderRepository.findAll().stream().map(e -> Mapper.toOrderDto(e)).collect(Collectors.toList());
     }
 
     @Override
     public OrderDto findById(Integer id) {
         Optional<Order> order =orderRepository.findById(id);
-        return modelMapper.map(order.get(), OrderDto.class);
+        return Mapper.toOrderDto(order.get());
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        orderRepository.deleteById(id);
     }
 }

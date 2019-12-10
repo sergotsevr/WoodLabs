@@ -2,11 +2,9 @@ package com.woodlabs.utils;
 
 import com.woodlabs.dto.AddressDto;
 import com.woodlabs.dto.ClientDto;
+import com.woodlabs.dto.OrderDto;
 import com.woodlabs.dto.ProductDto;
-import com.woodlabs.entities.Address;
-import com.woodlabs.entities.Client;
-import com.woodlabs.entities.Product;
-import com.woodlabs.entities.ProductCategory;
+import com.woodlabs.entities.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.remoting.rmi.RmiClientInterceptorUtils;
@@ -101,5 +99,30 @@ public class Mapper {
         address.setBuilding(addressDto.getBuilding());
         address.setApartments(addressDto.getApartments());
         return address;
+    }
+    public static Order toOrder(OrderDto orderDto){
+        Order order = new Order();
+        order.setOrderId(orderDto.getOrderId());
+        order.setClient(orderDto.getClient());
+        order.setAddress(orderDto.getAddress());
+        order.setPaymentMethod(orderDto.getPaymentMethod());
+        order.setDeliveryMethod(orderDto.getDeliveryMethod());
+        order.setGoodsList(orderDto.getGoodsList());
+        order.setPaymentStatus(orderDto.getPaymentStatus());
+        order.setOrderStatus(order.getOrderStatus());
+        return order;
+    }
+
+    public static OrderDto toOrderDto(Order order){
+        OrderDto orderDto = new OrderDto();
+        orderDto.setOrderId(order.getOrderId());
+        orderDto.setClient(order.getClient());
+        orderDto.setAddress(order.getAddress());
+        orderDto.setPaymentMethod(order.getPaymentMethod());
+        orderDto.setDeliveryMethod(order.getDeliveryMethod());
+        orderDto.setGoodsList(order.getGoodsList());
+        orderDto.setPaymentStatus(order.getPaymentStatus());
+        orderDto.setOrderStatus(order.getOrderStatus());
+        return orderDto;
     }
 }

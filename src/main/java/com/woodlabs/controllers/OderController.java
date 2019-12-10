@@ -1,9 +1,7 @@
 package com.woodlabs.controllers;
 
 import com.woodlabs.dto.OrderDto;
-import com.woodlabs.entities.Order;
 import com.woodlabs.entities.Product;
-import com.woodlabs.entities.ProductCategory;
 import com.woodlabs.entities.enums.DeliveryMethod;
 import com.woodlabs.entities.enums.OrderStatus;
 import com.woodlabs.entities.enums.PaymentMethod;
@@ -49,5 +47,12 @@ public class OderController {
     public String update(OrderDto orderDto, Model model){
         orderService.update(orderDto);
         return "redirect:";
+    }
+    @GetMapping("/productUpdate")
+    public String productUpdate(Integer id, Model model){
+        OrderDto orderDto = orderService.findById(id);
+        List<Product> products= orderDto.getGoodsList();
+        model.addAttribute("products", products);
+        return "order/productInOrder";
     }
 }
