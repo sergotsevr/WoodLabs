@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -53,6 +54,11 @@ public class OrderController {
         OrderDto orderDto = orderService.findById(id);
         List<Product> products= orderDto.getGoodsList();
         model.addAttribute("products", products);
+        return "order/productInOrder";
+    }
+    @PostMapping("/productUpdate")
+    public String productUpdate(Product[] products, Model model){
+        System.err.println(products[0]);
         return "order/productInOrder";
     }
 }

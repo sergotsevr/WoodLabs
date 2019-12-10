@@ -6,31 +6,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <table class="table table-hover table-inverse">
-        <thead>
-        <tr>
-            <th>test</th>
-            <th>test</th>
-            <th>test</th>
-            <th>test</th>
-            <th>test</th>
-            <th>test</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <a th:href="test">
-                    <span th:text="test"/>
-                </a>
-            </td>
-            <td th:utext="test"/>
-            <td th:utext="test"/>
-            <td th:utext="test"/>
-            <td th:utext="test"/>
-            <td th:utext="test"/>
-        </tr>
-        </tbody>
-    </table>
+    <form th:action="@{/test}" method="post" th:object="${products}">
+        <table class="table table-hover table-inverse">
+            <thead>
+            <tr>
+                <th>str</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td>
+                    <input type="text" th:name="${products}"  th:value="${products.get(products.indexOf(product)).getName()}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <input type="submit" class="btn btn-primary col-3" value="update products in order"></input>
+    </form>
 </body>
 </html>
