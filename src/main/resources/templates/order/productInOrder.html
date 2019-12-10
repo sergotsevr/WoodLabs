@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WoodLab</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+        <div class="col-xs-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+                <a class="navbar-brand" href="/admin">Admin console</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/client">Client</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/address">Address</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/product">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/category">Product category</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin/order">Orders</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <table class="table table-hover table-inverse">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Product category</th>
+                <th>Amount</th>
+                <th>delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td>
+                    <a>
+                        <span th:text="${product.getProductId()}"/>
+                    </a>
+                </td>
+                <td th:text="${product.getName()}"/>
+                <td th:text="${product.getProductCategory()}"/>
+                <td>
+                    <input type="number" name="amount" min="1" th:max="${product.getQuantityInStock()}" step="1">
+                </td>
+                <td >
+                    <a th:href="@{/admin/order/product/delete(id=${product.getProductId()})}">
+                        <span>
+                            delete
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+</body>
+</html>

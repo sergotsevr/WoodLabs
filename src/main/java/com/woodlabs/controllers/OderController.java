@@ -2,6 +2,8 @@ package com.woodlabs.controllers;
 
 import com.woodlabs.dto.OrderDto;
 import com.woodlabs.entities.Order;
+import com.woodlabs.entities.Product;
+import com.woodlabs.entities.ProductCategory;
 import com.woodlabs.entities.enums.DeliveryMethod;
 import com.woodlabs.entities.enums.OrderStatus;
 import com.woodlabs.entities.enums.PaymentMethod;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
@@ -42,5 +45,9 @@ public class OderController {
         model.addAttribute("orderStatuses", orderStatuses);
         return "order/orderUpdate";
     }
-
+    @PostMapping("/update")
+    public String update(OrderDto orderDto, Model model){
+        orderService.update(orderDto);
+        return "redirect:";
+    }
 }

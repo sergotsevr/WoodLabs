@@ -37,7 +37,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto update(OrderDto orderDto) {
-        return null;
+            Order order = modelMapper.map(orderDto, Order.class);
+            Order saved = orderRepository.save(order);
+            OrderDto formDb = modelMapper.map(saved, OrderDto.class);
+            return formDb;
     }
 
     @Override
