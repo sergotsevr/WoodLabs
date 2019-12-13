@@ -46,6 +46,8 @@
                 <th>Address</th>
                 <th>paymentMethod</th>
                 <th>deliveryMethod</th>
+                <th>Payment Status</th>
+                <th>Order Status</th>
                 <th>delete</th>
             </tr>
             </thead>
@@ -66,8 +68,11 @@
                         <span th:text="${order.getAddress().getCity()}"/>
                     </a>
                 </td>
+
                 <td th:text="${order.getPaymentMethod()}"/>
                 <td th:text="${order.getDeliveryMethod()}"/>
+                <td th:text="${order.getPaymentStatus()}"/>
+                <td th:text="${order.getOrderStatus()}"/>
                 <td >
                     <a th:href="@{/admin/order/delete(id=${order.getOrderId()})}">
                         <span>

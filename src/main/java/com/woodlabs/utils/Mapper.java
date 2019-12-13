@@ -109,7 +109,7 @@ public class Mapper {
         order.setDeliveryMethod(orderDto.getDeliveryMethod());
         order.setGoodsList(orderDto.getGoodsList());
         order.setPaymentStatus(orderDto.getPaymentStatus());
-        order.setOrderStatus(order.getOrderStatus());
+        order.setOrderStatus(orderDto.getOrderStatus());
         return order;
     }
 
