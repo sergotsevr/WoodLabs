@@ -9,7 +9,7 @@ import com.woodlabs.entities.enums.PaymentMethod;
 import com.woodlabs.entities.enums.PaymentStatus;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Map;
 
 @Data
 public class OrderDto {
@@ -19,7 +19,7 @@ public class OrderDto {
     private Address address;
     private PaymentMethod paymentMethod;
     private DeliveryMethod deliveryMethod;
-    private List<Product> goodsList;
+    private Map<Product, Integer> goodsList;
     private PaymentStatus paymentStatus;
     private OrderStatus orderStatus;
 }

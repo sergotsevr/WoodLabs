@@ -7,6 +7,7 @@ import com.woodlabs.entities.enums.OrderStatus;
 import com.woodlabs.entities.enums.PaymentMethod;
 import com.woodlabs.entities.enums.PaymentStatus;
 import com.woodlabs.services.interfaces.OrderService;
+import com.woodlabs.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,6 @@ import java.util.Map;
 public class OrderController {
     @Autowired
     OrderService orderService;
-
     @GetMapping
     public String main(Model model){
         List<OrderDto> orderDtos = orderService.findAll();
@@ -71,7 +71,7 @@ public class OrderController {
     @GetMapping("/productUpdate")
     public String productUpdate(Integer id, Model model){
         OrderDto orderDto = orderService.findById(id);
-        List<Product> products= orderDto.getGoodsList();
+        Map<Product, Integer> products= orderDto.getGoodsList();
         model.addAttribute("products", products);
         model.addAttribute("id", id);
         return "order/productInOrder";
@@ -80,7 +80,9 @@ public class OrderController {
     @RequestMapping(value = "/productUpdate", method = RequestMethod.POST)
     public String productUpdate(Model model, @RequestParam Map<String,String> allParams){
         for (Map.Entry<String, String> product : allParams.entrySet()) {
-            
+            if (Util.isNumeric(product.getKey())){
+                //product
+            }
         }
         Integer id = Integer.parseInt(allParams.get("id"));
         return "redirect:productUpdate?id="+id;

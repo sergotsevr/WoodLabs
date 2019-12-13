@@ -1,11 +1,13 @@
 package com.woodlabs.entities;
 
-import com.woodlabs.entities.enums.*;
+import com.woodlabs.entities.enums.DeliveryMethod;
+import com.woodlabs.entities.enums.OrderStatus;
+import com.woodlabs.entities.enums.PaymentMethod;
+import com.woodlabs.entities.enums.PaymentStatus;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "orders")
@@ -29,13 +31,8 @@ public class Order {
     @CollectionTable(name = "delivery_Method", joinColumns = @JoinColumn(name = "order_orderId"))
     @Enumerated(EnumType.STRING)
     private DeliveryMethod deliveryMethod;
-    @Column
-    @ManyToMany
-    @JoinTable(name = "ordersProduct",
-            joinColumns = @JoinColumn(name = "ORDERS_ID"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> goodsList;
+   
+    private Map<Product, Integer> goodsList;
     @Column
     @CollectionTable(name = "payment_Status", joinColumns = @JoinColumn(name = "order_orderId"))
     @Enumerated(EnumType.STRING)
