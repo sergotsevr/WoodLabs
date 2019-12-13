@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WoodLab</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="col-xs-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="../client/">Admin console</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/admin/client">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/address">Address</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/product">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/category">Product category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/order">Orders</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <button class="btn btn-primary col-3" onclick="window.location='/admin/order'">Cancel</button>
+    <form th:action="@{/admin/order/create}" method="post" th:object="${order}">
+        <div class="form-group col-3">
+            <label for="client">Client</label>
+            <input class="form-control" id="client" name="client" rows="3">
+        </div>
+        <div class="form-group col-3">
+            <label for="address">Address</label>
+            <input class="form-control" id="address" name="address" rows="3"/>
+        </div>
+        <div class="form-group col-3">
+            <label for="paymentMethod">Payment method</label>
+            <select class="form-control" id="paymentMethod" name="paymentMethod" >
+                <option
+                        th:value="${order.getPaymentMethod()}",
+                        th:text="${order.getPaymentMethod()} ? ${order.getPaymentMethod().toString()} : 'not specified'" />
+                <option th:each="paymentMethod : ${paymentMethods}"
+                        th:value="${paymentMethod}"
+                        th:text="${paymentMethod}"/>
+            </select>
+        </div>
+        <div class="form-group col-3">
+            <label for="deliveryMethod">Delivery method</label>
+            <select class="form-control" id="deliveryMethod" name="deliveryMethod" th:value>
+                <option
+                        th:value="${order.getDeliveryMethod()}",
+                        th:text="${order.getDeliveryMethod()} ? ${order.getDeliveryMethod().toString()} : 'not specified'" />
+                <option th:each="deliveryMethod : ${deliveryMethods}"
+                        th:value="${deliveryMethod}"
+                        th:text="${deliveryMethod}"/>
+            </select>
+        </div>
+        <div class="form-group col-3">
+            <label for="paymentStatus">Payment status</label>
+            <select class="form-control" id="paymentStatus" name="paymentStatus" >
+                <option
+                        th:value="${order.getPaymentStatus()}",
+                        th:text="${order.getPaymentStatus()} ? ${order.getPaymentStatus().toString()} : 'not specified'" />
+                <option th:each="paymentStatus : ${paymentStatuses}"
+                        th:value="${paymentStatus}"
+                        th:text="${paymentStatus}"/>
+            </select>
+        </div>
+        <div class="form-group col-3">
+            <label for="orderStatus">Order status</label>
+            <select class="form-control" id="orderStatus" name="orderStatus" >
+                <option
+                        th:value="${order.getOrderStatus()}",
+                        th:text="${order.getOrderStatus()} ? ${order.getOrderStatus().toString()} : 'not specified'" />
+                <option th:each="orderStatus : ${orderStatuses}"
+                        th:value="${orderStatus}"
+                        th:text="${orderStatus}"/>
+            </select>
+        </div>
+        <div  class="form-group col-3">
+            <a th:href="@{/admin/order/productUpdate(id=${order.getOrderId()})}">
+                <span th:text="Products"/>
+            </a>
+        </div>
+        <input type="submit" class="btn btn-primary col-3" value="update order"></input>
+    </form>
+</div>
+</body>
+</html>

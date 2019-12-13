@@ -49,6 +49,25 @@ public class OrderController {
         orderService.update(orderDto);
         return "redirect:";
     }
+    @GetMapping("/create")
+    public String create(Model model){
+        OrderDto orderDto = new OrderDto();
+        model.addAttribute("order", orderDto);
+        List<PaymentMethod> paymentMethods = Arrays.asList(PaymentMethod.values());
+        model.addAttribute("paymentMethods", paymentMethods);
+        List<DeliveryMethod> deliveryMethods = Arrays.asList(DeliveryMethod.values());
+        model.addAttribute("deliveryMethods", deliveryMethods);
+        List<PaymentStatus> paymentStatuses = Arrays.asList(PaymentStatus.values());
+        model.addAttribute("paymentStatuses", paymentStatuses);
+        List<OrderStatus> orderStatuses = Arrays.asList(OrderStatus.values());
+        model.addAttribute("orderStatuses", orderStatuses);
+        return "order/orderCreate";
+    }
+    @PostMapping("/create")
+    public String create(OrderDto orderDto, Model model){
+        orderService.add(orderDto);
+        return "redirect:";
+    }
     @GetMapping("/productUpdate")
     public String productUpdate(Integer id, Model model){
         OrderDto orderDto = orderService.findById(id);
