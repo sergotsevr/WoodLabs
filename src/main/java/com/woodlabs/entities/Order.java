@@ -29,6 +29,7 @@ public class Order {
     @CollectionTable(name = "delivery_Method", joinColumns = @JoinColumn(name = "order_orderId"))
     @Enumerated(EnumType.STRING)
     private DeliveryMethod deliveryMethod;
+    @Column
     @ManyToMany
     @JoinTable(name = "ordersProduct",
             joinColumns = @JoinColumn(name = "ORDERS_ID"),

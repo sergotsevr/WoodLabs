@@ -57,7 +57,7 @@
                 <td th:text="${product.getName()}"/>
                 <td th:text="${product.getProductCategory()}"/>
                 <td>
-                    <input type="number" name="product.amount" min="1" th:max="${product.getQuantityInStock()}" step="1">
+                    <input type="number" th:name="${product.getProductId()}" min="1" th:max="${product.getQuantityInStock()}" step="1">
                 </td>
                 <td >
                     <a th:href="@{/admin/order/product/delete(id=${product.getProductId()})}">
@@ -69,6 +69,7 @@
             </tr>
             </tbody>
         </table>
+        <input type="text" th:name="id" th:value="${id}" hidden></input>
         <input type="submit" class="btn btn-primary col-3" value="update products in order"></input>
     </form>
 </body>

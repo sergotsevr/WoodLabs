@@ -8,15 +8,15 @@ import com.woodlabs.entities.enums.PaymentMethod;
 import com.woodlabs.entities.enums.PaymentStatus;
 import com.woodlabs.services.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(path = "/admin/order")
@@ -73,11 +73,16 @@ public class OrderController {
         OrderDto orderDto = orderService.findById(id);
         List<Product> products= orderDto.getGoodsList();
         model.addAttribute("products", products);
+        model.addAttribute("id", id);
         return "order/productInOrder";
     }
-    @PostMapping("/productUpdate")
-    public String productUpdate(Product[] products, Model model){
-        System.err.println(products[0]);
-        return "order/productInOrder";
+    //@PostMapping("/productUpdate")
+    @RequestMapping(value = "/productUpdate", method = RequestMethod.POST)
+    public String productUpdate(Model model, @RequestParam Map<String,String> allParams){
+        for (Map.Entry<String, String> product : allParams.entrySet()) {
+            
+        }
+        Integer id = Integer.parseInt(allParams.get("id"));
+        return "redirect:productUpdate?id="+id;
     }
 }
