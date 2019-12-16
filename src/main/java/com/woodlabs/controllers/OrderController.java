@@ -77,7 +77,6 @@ public class OrderController {
         model.addAttribute("id", id);
         return "order/productInOrder";
     }
-    //@PostMapping("/productUpdate")
     @RequestMapping(value = "/productUpdate", method = RequestMethod.POST)
     public String productUpdate(Model model, @RequestParam Map<String,String> allParams){
         for (Map.Entry<String, String> product : allParams.entrySet()) {
@@ -87,5 +86,10 @@ public class OrderController {
         }
         Integer id = Integer.parseInt(allParams.get("id"));
         return "redirect:productUpdate?id="+id;
+    }
+    @GetMapping("/delete")
+    public String delete(Integer id, Model model){
+        orderService.deleteById(id);
+        return "redirect:";
     }
 }

@@ -5,10 +5,8 @@ import com.woodlabs.entities.enums.OrderStatus;
 import com.woodlabs.entities.enums.PaymentMethod;
 import com.woodlabs.entities.enums.PaymentStatus;
 import lombok.Data;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
