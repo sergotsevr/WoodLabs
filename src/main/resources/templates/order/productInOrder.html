@@ -48,19 +48,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product : ${products}">
+            <tr th:each="instance : ${products}">
                 <td>
                     <a>
-                        <span th:text="${product.getProductId()}"/>
+                        <span th:text="${instance.key.getProductId()}"/>
                     </a>
                 </td>
-                <td th:text="${product.getName()}"/>
-                <td th:text="${product.getProductCategory()}"/>
+                <td th:text="${instance.key.getName()}"/>
+                <td th:text="${instance.key.getProductCategory()}"/>
                 <td>
-                    <input type="number" th:name="${product.getProductId()}" min="1" th:max="${product.getQuantityInStock()}" step="1">
+                    <input type="number" th:name="${instance.key.getProductId()}" min="1" th:max="${instance.key.getQuantityInStock()}" step="1" th:value="${instance.value}">
                 </td>
                 <td >
-                    <a th:href="@{/admin/order/product/delete(id=${product.getProductId()})}">
+                    <a th:href="@{/admin/order/product/delete(id=${instance.key.getProductId()})}">
                         <span>
                             delete
                         </span>

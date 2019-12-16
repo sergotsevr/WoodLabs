@@ -5,8 +5,11 @@ import com.woodlabs.entities.enums.OrderStatus;
 import com.woodlabs.entities.enums.PaymentMethod;
 import com.woodlabs.entities.enums.PaymentStatus;
 import lombok.Data;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Entity
@@ -31,8 +34,10 @@ public class Order {
     @CollectionTable(name = "delivery_Method", joinColumns = @JoinColumn(name = "order_orderId"))
     @Enumerated(EnumType.STRING)
     private DeliveryMethod deliveryMethod;
-   
-    private Map<Product, Integer> goodsList;
+    @ElementCollection
+    @MapKeyColumn(name = "product_product_id")
+    @Column(name = "amount")
+    private Map<Product, Integer> goodsList = new LinkedHashMap<>();;
     @Column
     @CollectionTable(name = "payment_Status", joinColumns = @JoinColumn(name = "order_orderId"))
     @Enumerated(EnumType.STRING)

@@ -14,10 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(path = "/admin/order")
@@ -72,6 +69,10 @@ public class OrderController {
     public String productUpdate(Integer id, Model model){
         OrderDto orderDto = orderService.findById(id);
         Map<Product, Integer> products= orderDto.getGoodsList();
+        List<Product> productList = new ArrayList<>();
+        for (Map.Entry<Product, Integer>  entry : products.entrySet()) {
+            productList.add(entry.getKey());
+        }
         model.addAttribute("products", products);
         model.addAttribute("id", id);
         return "order/productInOrder";
