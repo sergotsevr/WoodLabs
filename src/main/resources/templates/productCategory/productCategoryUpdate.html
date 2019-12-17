@@ -49,7 +49,14 @@
         </div>
         <div class="form-group col-3">
             <label for="parentId">Parent Id</label>
-            <input class="form-control" id="parentId" name="parentId" rows="3" placeholder="parentId" th:value="${category.getParentId()}"></input>
+            <select class="form-control" id="parentId" name="parentId" th:value>
+                <option
+                        th:value="${parent.productCategoryId}",
+                        th:text="${parent} ? ${parent.name} : 'not specified'" />
+                <option th:each="productCategory : ${root}"
+                        th:value="${productCategory.productCategoryId}"
+                        th:text="${productCategory.name}"/>
+            </select>
         </div>
         <div class="form-group col-3">
             <label for="characteristics">Characteristics</label>

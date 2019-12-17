@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(path = "/admin/category")
@@ -22,8 +24,10 @@ public class CategoryController {
 
     @GetMapping()
     public String main(Model model) {
-        List<ProductCategoryDto> clients = productCategoryService.findAll();
-        model.addAttribute("productCategories", clients);
+        List<ProductCategoryDto> categories = productCategoryService.findAll();
+        model.addAttribute("productCategories", categories);
+        Map<Integer,String> parentNames = new LinkedHashMap<>();
+
         return "productCategory/productCategoryMain";
     }
     @GetMapping("/create")
@@ -45,7 +49,16 @@ public class CategoryController {
     }
     @GetMapping("/update")
     public String update(Integer id, Model model){
+        List<ProductCategoryDto> all = productCategoryService.findAll();
+        List<ProductCategoryDto> root = new ArrayList<>();
+        for (ProductCategoryDto productCategoryDto : all){
+            if (productCategoryDto.getParentId() == null){
+                root.add(productCategoryDto);
+            }
+        }
+        model.addAttribute("root", root);
         ProductCategoryDto productCategoryDto = productCategoryService.findById(id);
+        model.addAttribute("parent", productCategoryService.findById(productCategoryDto.getParentId()));
         model.addAttribute("category", productCategoryDto);
         return "productCategory/productCategoryUpdate";
     }
