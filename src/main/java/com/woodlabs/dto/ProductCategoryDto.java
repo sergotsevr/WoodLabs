@@ -11,6 +11,6 @@ public class ProductCategoryDto {
     private Integer productCategoryId;
     private String name;
     private Integer parentId;
-    private List<Characteristics> characteristics;
+    private String characteristics;
     private Product product;
 }
