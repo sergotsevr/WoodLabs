@@ -21,7 +21,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableGlobalAuthentication
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
@@ -30,8 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/", "/registration", "/admin/client/create").permitAll()
-                   .antMatchers("/admin/*").access("hasRole('ADMIN')")
-                    //.antMatchers("/admin*").hasRole("ADMIN")
+                  // .antMatchers("/admin").access("hasRole('ADMIN')")
+                   //.antMatchers("/admin/*").access("hasRole('ADMIN')")
+                    //.antMatchers("/admin/*").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -41,14 +41,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                     .permitAll();
     }
-  /*  @Bean
+   /* @Bean
     @Override
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
                         .username("1")
                         .password("1")
-                        .roles("USER")
+                        .roles("ADMIN")
                         .build();
 
         return new InMemoryUserDetailsManager(user);
