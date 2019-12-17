@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,7 +27,15 @@ public class CategoryController {
         return "productCategory/productCategoryMain";
     }
     @GetMapping("/create")
-    public String create(){
+    public String create(Model model){
+        List<ProductCategoryDto> all = productCategoryService.findAll();
+        List<ProductCategoryDto> root = new ArrayList<>();
+        for (ProductCategoryDto productCategoryDto : all){
+            if (productCategoryDto.getParentId() == null){
+                root.add(productCategoryDto);
+            }
+        }
+        model.addAttribute("root", root);
         return "productCategory/productCategoryCreate";
     }
     @PostMapping("/create")
