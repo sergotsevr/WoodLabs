@@ -1,17 +1,22 @@
 package com.woodlabs.controllers;
 
 import com.woodlabs.dto.OrderDto;
+import com.woodlabs.entities.Order;
 import com.woodlabs.entities.Product;
+import com.woodlabs.dto.ProductDto;
 import com.woodlabs.entities.enums.DeliveryMethod;
 import com.woodlabs.entities.enums.OrderStatus;
 import com.woodlabs.entities.enums.PaymentMethod;
 import com.woodlabs.entities.enums.PaymentStatus;
 import com.woodlabs.services.interfaces.OrderService;
+import com.woodlabs.services.interfaces.ProductService;
+import com.woodlabs.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +27,8 @@ import java.util.Map;
 public class OrderController {
     @Autowired
     OrderService orderService;
+    @Autowired
+    ProductService productService;
 
     @GetMapping
     public String main(Model model) {
@@ -90,7 +97,23 @@ public class OrderController {
         Integer id = Integer.parseInt(allParams.get("id"));
         return "redirect:productUpdate?id=" + id;
     }
-
+    @GetMapping("/addProductInOrder")
+    public String addProduct(Integer id, Model model, @RequestParam Map<String, String> allRequestParam){
+        List<ProductDto> productDtos = productService.findAll();
+        model.addAttribute("id", id);
+        model.addAttribute("products", productDtos);
+        return "order/addProductInOrder";
+    }
+    @PostMapping("/addProductInOrder")
+    public  String addProduct(Integer id,  Integer productDto, Integer amount, @RequestParam Map<String, String> allRequestParam, Model model){
+        OrderDto orderDto = orderService.findById(id);
+        Map<Product, Integer> products = orderDto.getGoodsList();
+        Product product = Mapper.toProduct(productService.findById(productDto));
+        products.put(product,amount);
+        orderDto.setGoodsList(products);
+        orderService.update(orderDto);
+        return "redirect:productUpdate?id="+id;
+    }
     @GetMapping("/delete")
     public String delete(Integer id, Model model) {
         orderService.deleteById(id);

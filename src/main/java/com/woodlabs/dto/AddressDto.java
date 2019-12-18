@@ -2,17 +2,12 @@ package com.woodlabs.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.Size;
-
 @Data
 public class AddressDto {
     private Integer addressId;
-    @Size(min = 3, max = 50)
     private String country;
-    @Size(min = 3, max = 50)
     private String city;
     private Integer zipCode;
-    @Size(min = 3, max = 100)
     private String street;
     private Integer building;
     private Integer apartments;

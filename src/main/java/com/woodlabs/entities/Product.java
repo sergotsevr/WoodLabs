@@ -23,7 +23,7 @@ public class Product {
     @NotNull
     private Integer price;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category")
+    @JoinColumn(name = "product")
     private ProductCategory productCategory;
     @Column
     @Digits(integer = 10, fraction = 0)

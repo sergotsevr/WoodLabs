@@ -28,23 +28,50 @@ public class ProductDto {
         this.quantityInStock = quantityInStock;
     }
 
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         String product = "ID - ";
         product = product.concat(this.productId.toString());
         product = product.concat(" навание - ");
         product = product.concat(this.name);
         product = product.concat(" цена - ");
-        product = product.concat(this.price.toString());
+        if ((this.price != null)) {
+            product = product.concat(this.price.toString());
+        }
+        else {
+            product = product.concat("not specified");
+        }
         product = product.concat(" категория - ");
-        product = product.concat(this.productCategory.toString());
+        if ((this.productCategory != null)) {
+            product = product.concat(this.productCategory.toString());
+        }
+        else {
+            product = product.concat("not specified");
+        }
+
         product = product.concat(" остаток на склае - ");
-        product = product.concat(this.quantityInStock.toString());
+        if ((this.quantityInStock != null)) {
+            product = product.concat(this.quantityInStock.toString());
+        }
+        else {
+            product = product.concat("not specified");
+        }
         product = product.concat(" объем - ");
-        product = product.concat(this.volume.toString());
+        if ((this.volume != null)) {
+            product = product.concat(this.volume.toString());
+        }
+        else {
+            product = product.concat("not specified");
+        }
         product = product.concat(" вес - ");
-        product = product.concat(this.weight.toString());
+        if ((this.weight != null)) {
+            product = product.concat(this.weight.toString());
+        }
+        else {
+            product = product.concat("not specified");
+        }
+
         return product;
     }
 }

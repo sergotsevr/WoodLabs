@@ -17,8 +17,9 @@ public class ProductCategory {
     private String name;
     @Column
     private Integer parentId;
-    @Column
-    private String characteristics;
+    @OneToMany()
+    @JoinColumn()
+    private List<Characteristics> characteristics;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;

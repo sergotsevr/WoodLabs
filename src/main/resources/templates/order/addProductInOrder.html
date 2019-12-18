@@ -36,45 +36,23 @@
                 </div>
             </nav>
         </div>
-        <form th:action="@{/admin/order/addProductInOrder?(id=${id})}" method="get">
-            <input type="text" th:id="${id}" name="id" th:value="${id}" hidden/>
-            <p><input type="submit"  class="btn btn-primary col-3" value="add product"></p>
+        <form th:action="@{/admin/order/addProductInOrder}" method="post">
+
+            <div class="form-group col-3">
+                <label for="productDto">Product</label>
+                <select class="form-control" id="productDto" name="productDto" >
+
+                    <option th:each="product : ${products}"
+                            th:value="${product.getProductId()}"
+                            th:text="${product.getName()}"/>
+                </select>
+            </div>
+            <div class="form-group col-3">
+                <label for="amount">Amount</label>
+                <input class="form-control" id="amount" name="amount" rows="3">
+            </div>
+            <input type="text" th:id="${id}" th:name="id" th:value="${id}" hidden></input>
+            <input type="submit" class="btn btn-primary col-3" value="add product in order"></input>
         </form>
-    <form th:action="@{/admin/order/productUpdate}" method="post" th:object="${products}">
-        <table class="table table-hover table-inverse">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Product</th>
-                <th>Product category</th>
-                <th>Amount</th>
-                <th>delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="instance : ${products}">
-                <td>
-                    <a>
-                        <span th:text="${instance.key.getProductId()}"/>
-                    </a>
-                </td>
-                <td th:text="${instance.key.getName()}"/>
-                <td th:text="${instance.key.getProductCategory()}"/>
-                <td>
-                    <input type="number" th:name="${instance.key.getProductId()}" min="1" th:max="${instance.key.getQuantityInStock()}" step="1" th:value="${instance.value}">
-                </td>
-                <td >
-                    <a th:href="@{/admin/order/product/delete(id=${instance.key.getProductId()})}">
-                        <span>
-                            delete
-                        </span>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <input type="text" th:id="${id}" th:name="id" th:value="${id}" hidden></input>
-        <input type="submit" class="btn btn-primary col-3" value="update products in order"></input>
-    </form>
 </body>
 </html>

@@ -7,11 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -30,36 +31,30 @@ public class AddressController {
         addressService.delete(addressDto);
         return "redirect:";
     }
-
     @GetMapping
     public String main(Model model) {
         List<AddressDto> addressDtos = addressService.findAll();
         model.addAttribute("addresses", addressDtos);
         return "address/addressMain";
     }
-
     @GetMapping("/create")
-    public String create(@Valid @ModelAttribute("address") AddressDto updatedDto, BindingResult result, Model model) {
-        model.addAttribute("address", new AddressDto());
+    public String create() {
         return "address/addressCreate";
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("address")AddressDto updatedDto, BindingResult result, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("address", updatedDto);
-            log.warn(result.getAllErrors().toString());
-            model.addAttribute(result);
-            return "address/addressCreate";
-        }
+    public String create(AddressDto updatedDto, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
+
         if (Util.isNumeric(allRequestParams.get("id"))) {
             AddressDto addressDto = addressService.findById(Integer.parseInt(allRequestParams.get("addressId")));
             if (addressDto != null) {
                 log.warn("client with id = {} already exists", allRequestParams.get("id"));
-            } else {
+            }
+            else {
                 addressService.add(updatedDto);
             }
-        } else {
+        }
+        else {
             addressService.add(updatedDto);
         }
         return "redirect:";
@@ -73,14 +68,8 @@ public class AddressController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid AddressDto updatedDto, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("address", updatedDto);
-            log.warn(result.getAllErrors().toString());
-            model.addAttribute(result);
-            return "address/addressUpdate";
-        }
-        addressService.add(updatedDto);
+    public String update(AddressDto updatedDto, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request, Model model) {
+            addressService.add(updatedDto);
         return "redirect:";
     }
 }
