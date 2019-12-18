@@ -27,7 +27,15 @@ public class CategoryController {
         List<ProductCategoryDto> categories = productCategoryService.findAll();
         model.addAttribute("productCategories", categories);
         Map<Integer,String> parentNames = new LinkedHashMap<>();
-
+        for (ProductCategoryDto productCategoryDto : categories){
+            if (productCategoryDto.getParentId()!=null){
+                parentNames.put(productCategoryDto.getProductCategoryId(),productCategoryService.findById(productCategoryDto.getParentId()).getName());
+            }
+            else {
+                parentNames.put(productCategoryDto.getProductCategoryId(), "this is the root element");
+            }
+        }
+        model.addAttribute("parentNames", parentNames);
         return "productCategory/productCategoryMain";
     }
     @GetMapping("/create")

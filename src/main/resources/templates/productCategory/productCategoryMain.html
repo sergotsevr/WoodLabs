@@ -58,7 +58,7 @@
                 <span th:text="${productCategory.getName()}"/>
             </a>
         </td>
-        <td th:text="${productCategory.getParentId()}"/>
+        <td th:text="${parentNames.get(productCategory.getProductCategoryId())}"/>
         <td th:text="${productCategory.getCharacteristics()}"/>
         <td>
             <a th:href="@{/admin/category/delete(id=${productCategory.getProductCategoryId()})}">
