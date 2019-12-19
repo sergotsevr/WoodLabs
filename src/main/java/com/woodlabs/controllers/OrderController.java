@@ -11,6 +11,7 @@ import com.woodlabs.entities.enums.PaymentStatus;
 import com.woodlabs.services.interfaces.OrderService;
 import com.woodlabs.services.interfaces.ProductService;
 import com.woodlabs.utils.Mapper;
+import com.woodlabs.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,6 +96,17 @@ public class OrderController {
     @RequestMapping(value = "/productUpdate", method = RequestMethod.POST)
     public String productUpdate(Model model, @RequestParam Map<String, String> allParams) {
         Integer id = Integer.parseInt(allParams.get("id"));
+        OrderDto orderDto = orderService.findById(id);
+        Map<Product, Integer> goodsList = orderDto.getGoodsList();
+        for (Map.Entry<String, String> entry : allParams.entrySet()) {
+            if (Util.isNumeric(entry.getKey())){
+               ProductDto productDto = productService.findById(Integer.parseInt(entry.getKey()));
+               Product product = Mapper.toProduct(productDto);
+               goodsList.put(product, Integer.parseInt(entry.getValue()));
+            }
+        }
+        orderDto.setGoodsList(goodsList);
+        orderService.update(orderDto);
         return "redirect:productUpdate?id=" + id;
     }
     @GetMapping("/addProductInOrder")
