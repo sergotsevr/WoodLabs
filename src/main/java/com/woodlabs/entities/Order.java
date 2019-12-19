@@ -35,7 +35,7 @@ public class Order {
     @ElementCollection
     @MapKeyColumn(name = "product_product_id")
     @Column(name = "amount")
-    private Map<Product, Integer> goodsList = new LinkedHashMap<>();;
+    private Map<Product, Integer> goodsList = new LinkedHashMap<>();
     @Column
     @CollectionTable(name = "payment_Status", joinColumns = @JoinColumn(name = "order_orderId"))
     @Enumerated(EnumType.STRING)

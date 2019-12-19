@@ -64,7 +64,7 @@
                     <input type="number" th:name="${instance.key.getProductId()}" min="1" th:max="${instance.key.getQuantityInStock()}" step="1" th:value="${instance.value}">
                 </td>
                 <td >
-                    <a th:href="@{/admin/order/product/delete(id=${instance.key.getProductId()})}">
+                    <a th:href="@{/admin/order/product/delete(id=${instance.key.getProductId()}, orderId=${id})}">
                         <span>
                             delete
                         </span>

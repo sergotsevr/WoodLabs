@@ -109,6 +109,19 @@ public class OrderController {
         orderService.update(orderDto);
         return "redirect:productUpdate?id=" + id;
     }
+    @GetMapping("/product/delete")
+    public  String deleteProduct(@RequestParam Map<String, String> allRequestParam){
+        OrderDto orderDto = orderService.findById(Integer.parseInt(allRequestParam.get("orderId")));
+        Map<Product, Integer> products = orderDto.getGoodsList();
+        for (Map.Entry<Product, Integer> pe : products.entrySet()) {
+            if (pe.getKey().getProductId() == Integer.parseInt(allRequestParam.get("id"))) {
+                products.remove(pe.getKey());
+            }
+        }
+        orderDto.setGoodsList(products);
+        orderService.update(orderDto);
+        return "redirect:../productUpdate?id="+Integer.parseInt(allRequestParam.get("orderId"));
+    }
     @GetMapping("/addProductInOrder")
     public String addProduct(Integer id, Model model, @RequestParam Map<String, String> allRequestParam){
         List<ProductDto> productDtos = productService.findAll();
